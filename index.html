@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atlas | Toda montanha precisa de um caminho</title>
+    <meta name="description" content="Atlas é o app de planejamento financeiro pessoal que mostra onde você está e o próximo passo do seu dinheiro: metas com data, decisões com dados e o seu futuro projetado. Teste 7 dias grátis, sem cartão.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Atlas | Toda montanha precisa de um caminho">
+    <meta property="og:description" content="O app de planejamento financeiro que mostra onde você está e o próximo passo. Metas com data, decisões com dados. Teste 7 dias grátis, sem cartão.">
+    <meta property="og:image" content="https://atlas-site-nu.vercel.app/Imagem%20de%20Fundo%204%20relatorios%202.webp">
+    <meta property="og:url" content="https://atlas-site-nu.vercel.app/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Atlas | Toda montanha precisa de um caminho">
+    <meta name="twitter:description" content="O app de planejamento financeiro que mostra onde você está e o próximo passo. Teste 7 dias grátis, sem cartão.">
+    <meta name="twitter:image" content="https://atlas-site-nu.vercel.app/Imagem%20de%20Fundo%204%20relatorios%202.webp">
         <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -508,6 +518,7 @@
                 <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 md:h-6 filter brightness-0 invert opacity-90 mt-[2px] md:mt-1"> <!-- Pequeno quadrado preto icônico do botão na referência -->
                 Começar agora
             </a>
+            <p class="mt-5 text-white/90 text-sm md:text-base font-medium text-shadow-custom inline-flex items-center gap-2"><svg class="w-4 h-4 text-atlas-beige shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>7 dias grátis, sem cartão · cancele quando quiser</p>
             
         
     
@@ -648,6 +659,24 @@
 
     
     <!-- === SEÇÃO 4: Timeline === -->
+    <!-- === FAIXA DE NUMEROS (count-up) === -->
+    <section id="section-stats" class="w-full bg-atlas-bg py-12 md:py-16 px-4 border-t border-zinc-200">
+        <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div><div class="stat-num text-4xl md:text-5xl font-bold text-atlas-blue" data-target="300" data-suffix="+">0</div><p class="text-zinc-600 text-sm md:text-base mt-1">famílias com mais clareza</p></div>
+            <div><div class="stat-num text-4xl md:text-5xl font-bold text-atlas-blue" data-target="12" data-suffix="">0</div><p class="text-zinc-600 text-sm md:text-base mt-1">ferramentas num só app</p></div>
+            <div><div class="stat-num text-4xl md:text-5xl font-bold text-atlas-blue" data-target="2" data-suffix="s">0</div><p class="text-zinc-600 text-sm md:text-base mt-1">pra saber seu score</p></div>
+            <div><div class="stat-num text-4xl md:text-5xl font-bold text-atlas-blue" data-target="7" data-suffix="">0</div><p class="text-zinc-600 text-sm md:text-base mt-1">dias grátis pra testar</p></div>
+        </div>
+        <script>
+        (function(){
+          var sec=document.getElementById('section-stats'); if(!sec) return;
+          var nums=sec.querySelectorAll('.stat-num'); var done=false;
+          function run(){ if(done)return; done=true; nums.forEach(function(el){ var t=parseInt(el.getAttribute('data-target'),10)||0; var suf=el.getAttribute('data-suffix')||''; var dur=1200,st=null; function step(ts){ if(!st)st=ts; var p=Math.min((ts-st)/dur,1); el.textContent=Math.round(p*t)+suf; if(p<1)requestAnimationFrame(step);} requestAnimationFrame(step); }); }
+          if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)run();});},{threshold:0.4}); io.observe(sec); } else { run(); }
+        })();
+        </script>
+    </section>
+
     <section id="section-4" class="w-full bg-atlas-blue flex flex-col items-center pt-16 md:pt-24 pb-20 md:pb-32 relative overflow-hidden lg:mt-0">
         
         <!-- Título -->
@@ -808,7 +837,7 @@
             <div class="grid lg:grid-cols-2 lg:gap-12 items-start">
 
                 <!-- Frase (desktop, lado esquerdo, fixa) -->
-                <div class="hidden lg:flex sticky top-0 h-[70vh] items-center">
+                <div class="hidden lg:flex sticky top-0 h-[46vh] items-center">
                     <h2 class="text-white text-4xl xl:text-6xl font-bold leading-[1.1] tracking-tight drop-shadow-xl">
                         O que acontece quando você compra o Atlas <span class="font-normal italic font-playfair text-atlas-beige">ou Não compra o atlas</span>
                     </h2>
@@ -817,7 +846,7 @@
                 <!-- Cards empilhando -->
                 <div class="flex flex-col">
 
-                    <figure class="lg:sticky lg:top-0 lg:h-[70vh] flex items-center justify-center py-3 lg:py-0">
+                    <figure class="lg:sticky lg:top-0 lg:h-[46vh] flex items-center justify-center py-3 lg:py-0">
                         <article class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8 lg:rotate-2 lg:hover:rotate-0 transition-transform duration-500">
                             <div class="flex items-center gap-3 mb-5">
                                 <span class="w-12 h-12 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center shrink-0"><i data-lucide="rocket" class="w-6 h-6"></i></span>
@@ -836,7 +865,7 @@
                         </article>
                     </figure>
 
-                    <figure class="lg:sticky lg:top-0 lg:h-[70vh] flex items-center justify-center py-3 lg:py-0">
+                    <figure class="lg:sticky lg:top-0 lg:h-[46vh] flex items-center justify-center py-3 lg:py-0">
                         <article class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8 lg:-rotate-1 lg:hover:rotate-0 transition-transform duration-500">
                             <div class="flex items-center gap-3 mb-5">
                                 <span class="w-12 h-12 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center shrink-0"><i data-lucide="shopping-cart" class="w-6 h-6"></i></span>
@@ -855,7 +884,7 @@
                         </article>
                     </figure>
 
-                    <figure class="lg:sticky lg:top-0 lg:h-[70vh] flex items-center justify-center py-3 lg:py-0">
+                    <figure class="lg:sticky lg:top-0 lg:h-[46vh] flex items-center justify-center py-3 lg:py-0">
                         <article class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8 lg:rotate-1 lg:hover:rotate-0 transition-transform duration-500">
                             <div class="flex items-center gap-3 mb-5">
                                 <span class="w-12 h-12 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center shrink-0"><i data-lucide="calculator" class="w-6 h-6"></i></span>
@@ -874,7 +903,7 @@
                         </article>
                     </figure>
 
-                    <figure class="lg:sticky lg:top-0 lg:h-[70vh] flex items-center justify-center py-3 lg:py-0">
+                    <figure class="lg:sticky lg:top-0 lg:h-[46vh] flex items-center justify-center py-3 lg:py-0">
                         <article class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8 lg:-rotate-2 lg:hover:rotate-0 transition-transform duration-500">
                             <div class="flex items-center gap-3 mb-5">
                                 <span class="w-12 h-12 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center shrink-0"><i data-lucide="book-open" class="w-6 h-6"></i></span>
@@ -893,7 +922,7 @@
                         </article>
                     </figure>
 
-                    <figure class="lg:sticky lg:top-0 lg:h-[44vh] flex items-center justify-center py-3 lg:py-0">
+                    <figure class="lg:sticky lg:top-0 lg:h-[46vh] flex items-center justify-center py-3 lg:py-0">
                         <article class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 md:p-8 lg:rotate-0 lg:hover:-rotate-1 transition-transform duration-500">
                             <div class="flex items-center gap-3 mb-5">
                                 <span class="w-12 h-12 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center shrink-0"><i data-lucide="eye" class="w-6 h-6"></i></span>
@@ -1237,20 +1266,20 @@
                         <div class="mk-viewport">
                             <div class="mk-track">
                             <div class="mk-slide">
-                                <div class="mk-ph">Salve o print como<br><b>app-home.PNG</b></div>
-                                <img src="app-home.PNG" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                                <div class="mk-ph">Salve o print como<br><b>app-home.webp</b></div>
+                                <img src="app-home.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
                             </div>
                             <div class="mk-slide">
-                                <div class="mk-ph">Salve o print como<br><b>app-organizacao.PNG</b></div>
-                                <img src="app-organizacao.PNG" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                                <div class="mk-ph">Salve o print como<br><b>app-organizacao.webp</b></div>
+                                <img src="app-organizacao.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
                             </div>
                             <div class="mk-slide">
-                                <div class="mk-ph">Salve o print como<br><b>app-montanha.PNG</b></div>
-                                <img src="app-montanha.PNG" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                                <div class="mk-ph">Salve o print como<br><b>app-montanha.webp</b></div>
+                                <img src="app-montanha.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
                             </div>
                             <div class="mk-slide">
-                                <div class="mk-ph">Salve o print como<br><b>app-simulador.PNG</b></div>
-                                <img src="app-simulador.PNG" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                                <div class="mk-ph">Salve o print como<br><b>app-simulador.webp</b></div>
+                                <img src="app-simulador.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
                             </div>
                             </div>
                         </div>
@@ -1883,9 +1912,9 @@
                 O Atlas mostra onde você está hoje, o próximo passo e o que muda se escolher um caminho diferente. Sua jornada começa aqui.
             </p>
             
-            <button class="px-10 py-5 rounded-2xl bg-atlas-green text-white text-xl md:text-2xl font-extrabold hover:bg-atlas-green/90 transition-all shadow-[0_4px_24px_0_rgba(163,230,53,0.5)] animate-heartbeat">
+            <a href="#section-8" class="inline-block px-10 py-5 rounded-2xl bg-atlas-green text-white text-xl md:text-2xl font-extrabold hover:bg-atlas-green/90 transition-all shadow-[0_8px_24px_0_rgba(30,97,62,0.45)] animate-heartbeat">
                 Começar agora!
-            </button>
+            </a>
         </div>
 
         <!-- Personagens Montanha -->
