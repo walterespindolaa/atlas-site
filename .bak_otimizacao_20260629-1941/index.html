@@ -14,11 +14,33 @@
     <meta name="twitter:title" content="Atlas | Toda montanha precisa de um caminho">
     <meta name="twitter:description" content="O app de planejamento financeiro que mostra onde você está e o próximo passo. Teste 7 dias grátis, sem cartão.">
     <meta name="twitter:image" content="https://www.useatlasapp.com/Imagem%20de%20Fundo%204%20relatorios%202.webp">
-        <link rel="stylesheet" href="atlas.css">
+        <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Parkinsans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        atlas: {
+                            blue: '#1A5E91',
+                            bg: '#FAF4E8',
+                            green: '#1E613E',
+                            red: '#A82F26',
+                            yellow: '#F2AB0C',
+                            dark: '#040C11',
+                            lightBlue: '#69AAD1',
+                            lightGreen: '#72B28F',
+                            beige: '#EFCA7F',
+                            pink: '#D37976'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
@@ -384,7 +406,7 @@
         <!-- Logo -->
         <div class="flex-shrink-0 flex justify-start items-center">
             <a href="/">
-                <img loading="lazy" decoding="async" src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas Logo" class="h-8 md:h-10">
+                <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas Logo" class="h-8 md:h-10">
             </a>
         </div>
 
@@ -419,7 +441,8 @@
             <div id="video-curtain-right" class="hidden md:block absolute top-0 right-0 w-1/2 h-full bg-black z-20 origin-right"></div>
             
             <div class="absolute inset-0 bg-[#0F172A] opacity-20 z-10"></div>
-            <video id="hero-video" class="absolute inset-0 w-full h-full object-cover" autoplay muted playsinline preload="metadata">
+            <video id="hero-video" class="absolute inset-0 w-full h-full object-cover" autoplay muted playsinline>
+                <source src="hero-atlas.webm" type="video/webm">
                 <source src="hero-atlas.mp4" type="video/mp4">
             </video>
             <script>
@@ -465,9 +488,9 @@
             <!-- Badge Superior -->
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/20 backdrop-blur-md border border-white/10 mb-8 transform hover:scale-105 transition-transform cursor-pointer">
                 <div class="flex -space-x-2">
-                    <img loading="lazy" decoding="async" class="w-6 h-6 rounded-full border border-[#1a1a1a]" src="https://i.pravatar.cc/100?img=1" alt="User">
-                    <img loading="lazy" decoding="async" class="w-6 h-6 rounded-full border border-[#1a1a1a]" src="https://i.pravatar.cc/100?img=2" alt="User">
-                    <img loading="lazy" decoding="async" class="w-6 h-6 rounded-full border border-[#1a1a1a]" src="https://i.pravatar.cc/100?img=3" alt="User">
+                    <img class="w-6 h-6 rounded-full border border-[#1a1a1a]" src="https://i.pravatar.cc/100?img=1" alt="User">
+                    <img class="w-6 h-6 rounded-full border border-[#1a1a1a]" src="https://i.pravatar.cc/100?img=2" alt="User">
+                    <img class="w-6 h-6 rounded-full border border-[#1a1a1a]" src="https://i.pravatar.cc/100?img=3" alt="User">
                 </div>
 <span class="text-white text-sm font-medium opacity-90">+100 Usuários</span>
             </div>
@@ -492,7 +515,7 @@
 
             <!-- Botão Principal -->
             <a href="#section-8" class="bg-atlas-red text-white hover:bg-atlas-red/90 shadow-lg hero-cta py-4 px-8 md:px-24 md:py-7 rounded-full font-black text-2xl md:text-5xl inline-flex items-center justify-center gap-4 md:gap-5 w-auto uppercase tracking-wide">
-                <img loading="lazy" decoding="async" src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 md:h-6 filter brightness-0 invert opacity-90 mt-[2px] md:mt-1"> <!-- Pequeno quadrado preto icônico do botão na referência -->
+                <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 md:h-6 filter brightness-0 invert opacity-90 mt-[2px] md:mt-1"> <!-- Pequeno quadrado preto icônico do botão na referência -->
                 Começar agora
             </a>
             <p class="mt-5 text-white/90 text-sm md:text-base font-medium text-shadow-custom inline-flex items-center gap-2"><svg class="w-4 h-4 text-atlas-beige shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>7 dias grátis, sem cartão · cancele quando quiser</p>
@@ -558,7 +581,7 @@
                     </p>
                 </div>
 
-                <img loading="lazy" decoding="async" src="MAC%201.webp" alt="Macbook Dashboard" class="w-full max-w-3xl relative z-10 px-4 order-3 lg:order-none mt-4 lg:mt-0">
+                <img src="MAC%201.webp" alt="Macbook Dashboard" class="w-full max-w-3xl relative z-10 px-4 order-3 lg:order-none mt-4 lg:mt-0">
 
                 <div class="order-2 lg:order-none lg:absolute lg:right-4 xl:right-12 top-[15%] p-5 border border-white/30 rounded-lg w-[90%] max-w-[320px] lg:max-w-[280px] text-left mt-0 lg:mt-0 bg-atlas-blue/80 backdrop-blur-md shadow-xl z-30">
                     <h3 class="text-white text-base font-bold mb-2 leading-tight">Veja o que muda se você<br>escolher outro caminho</h3>
@@ -570,7 +593,7 @@
 
             <!-- Base de neve imagem -->
             <div class="w-full relative -mt-8 sm:-mt-16 md:-mt-32 lg:-mt-48 xl:-mt-64 z-0 pointer-events-none">
-                <img loading="lazy" decoding="async" src="BASE%20NOVA.webp" alt="Base de neve" class="w-full h-auto object-cover min-h-[150px]">
+                <img src="BASE%20NOVA.webp" alt="Base de neve" class="w-full h-auto object-cover min-h-[150px]">
             </div>
         </div>
 
@@ -629,7 +652,7 @@
         </div>
 
         <a href="#section-8" class="bg-atlas-red text-white hover:bg-atlas-red/90 shadow-lg hero-cta py-6 md:px-24 md:py-7 rounded-full font-bold text-3xl md:text-4xl flex items-center justify-center gap-3 mt-6 md:mt-8 relative z-10 w-[90%] sm:w-auto transition-transform hover:-translate-y-1 shadow-2xl">
-            <img loading="lazy" decoding="async" src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 md:h-6 filter brightness-0 invert opacity-90 mt-[2px] md:mt-1">
+            <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 md:h-6 filter brightness-0 invert opacity-90 mt-[2px] md:mt-1">
             Começar grátis
         </a>
     </section>
@@ -929,7 +952,7 @@
         </div>
 
         <a href="#section-8" class="bg-atlas-red text-white hover:bg-atlas-red/90 shadow-lg hero-cta py-6 md:px-24 md:py-7 rounded-full font-bold text-3xl md:text-4xl flex items-center justify-center gap-3 mt-10 md:mt-24 relative z-10 w-[90%] sm:w-auto transition-transform hover:-translate-y-1 shadow-2xl">
-            <img loading="lazy" decoding="async" src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 md:h-6 filter brightness-0 invert opacity-90 mt-[2px] md:mt-1">
+            <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 md:h-6 filter brightness-0 invert opacity-90 mt-[2px] md:mt-1">
             Começar grátis
         </a>
     </section>
@@ -1240,7 +1263,7 @@
     <!-- === SECAO: VEJA O ATLAS POR DENTRO (mockup + carrossel + texto sincronizado) === -->
     <section id="section-app" class="w-full bg-atlas-blue py-16 md:py-28 px-4 relative overflow-hidden border-t border-white/10">
         <div class="absolute inset-0 z-0">
-            <img loading="lazy" decoding="async" src="BG%20AZUL.webp" alt="" aria-hidden="true" class="w-full h-full object-cover opacity-60">
+            <img src="BG%20AZUL.webp" alt="" aria-hidden="true" class="w-full h-full object-cover opacity-60">
             <div class="absolute inset-0 bg-atlas-blue/75"></div>
             <div class="absolute top-0 right-0 w-[55%] h-full bg-[#36DCF5]/20 blur-[160px] rounded-full pointer-events-none"></div>
             <div class="absolute -top-16 -left-10 w-72 h-72 rounded-full bg-white/5 blur-3xl pointer-events-none"></div>
@@ -1274,19 +1297,19 @@
                             <div class="mk-track">
                             <div class="mk-slide">
                                 <div class="mk-ph">Salve o print como<br><b>app-home.webp</b></div>
-                                <img loading="lazy" decoding="async" src="app-home.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                                <img src="app-home.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
                             </div>
                             <div class="mk-slide">
                                 <div class="mk-ph">Salve o print como<br><b>app-organizacao.webp</b></div>
-                                <img loading="lazy" decoding="async" src="app-organizacao.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                                <img src="app-organizacao.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
                             </div>
                             <div class="mk-slide">
                                 <div class="mk-ph">Salve o print como<br><b>app-montanha.webp</b></div>
-                                <img loading="lazy" decoding="async" src="app-montanha.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                                <img src="app-montanha.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
                             </div>
                             <div class="mk-slide">
                                 <div class="mk-ph">Salve o print como<br><b>app-simulador.webp</b></div>
-                                <img loading="lazy" decoding="async" src="app-simulador.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                                <img src="app-simulador.webp" alt="Tela do app Atlas" onerror="this.style.display='none'">
                             </div>
                             </div>
                         </div>
@@ -1355,7 +1378,7 @@
                 <div class="lp-screen">
                     <div id="lp-viewport" class="lp-viewport">
                         <div class="lp-ph">Salve o print do relatório como<br><b>relatorio-metodo.webp</b></div>
-                        <img loading="lazy" decoding="async" id="lp-report" class="lp-report" src="relatorio-metodo.webp" alt="Relatório do Método Atlas" onerror="this.style.display='none'">
+                        <img id="lp-report" class="lp-report" src="relatorio-metodo.webp" alt="Relatório do Método Atlas" onerror="this.style.display='none'">
                     </div>
                 </div>
                 <div class="lp-base"><div class="lp-notch"></div></div>
@@ -1409,7 +1432,7 @@
                     </h2>
                     <!-- Imagem Fornecida -->
                     <div class="w-full h-64 rounded-2xl relative overflow-hidden hidden lg:block shadow-md">
-                        <img loading="lazy" decoding="async" src="Imagem%20de%20Fundo%204%20relatorios%202.png" alt="Imagem 4 relatórios" class="w-full h-full object-cover object-center">
+                        <img src="Imagem%20de%20Fundo%204%20relatorios%202.png" alt="Imagem 4 relatórios" class="w-full h-full object-cover object-center">
                     </div>
                 </div>
             </div>
@@ -1931,7 +1954,7 @@
 
         <!-- Personagens Montanha -->
         <div class="w-full max-w-5xl mx-auto mt-16 md:mt-24 relative z-10 flex justify-center translate-y-2 md:translate-y-4">
-            <img loading="lazy" decoding="async" src="Imagem%20de%20Fundo%204%20relatorios%202.webp" alt="Jornada Atlas - O Topo da Montanha" class="w-[75%] md:w-[60%] lg:w-[65%] max-w-2xl object-contain drop-shadow-2xl mx-auto">
+            <img src="Imagem%20de%20Fundo%204%20relatorios%202.webp" alt="Jornada Atlas - O Topo da Montanha" class="w-[75%] md:w-[60%] lg:w-[65%] max-w-2xl object-contain drop-shadow-2xl mx-auto">
         </div>
 
 
@@ -1942,7 +1965,7 @@
             <div class="flex flex-col items-center">
                 <!-- Logo -->
                 <div class="mb-4 flex items-center justify-center gap-4">
-                    <img loading="lazy" decoding="async" src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas Logo" class="h-8 md:h-10 filter brightness-0 invert">
+                    <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas Logo" class="h-8 md:h-10 filter brightness-0 invert">
                     <a href="https://instagram.com/useatlasapp" target="_blank" class="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-atlas-blue transition-all">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" /></svg>
                     </a>
@@ -2260,7 +2283,7 @@
     <!-- Botão Flutuante de Assinatura -->
     <div id="floating-cta" class="fixed bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 z-[90] transition-all duration-500 opacity-0 translate-y-10 pointer-events-none">
         <a href="#section-8" class="bg-atlas-red text-white hover:bg-atlas-red/90 shadow-[0_8px_32px_rgba(200,20,30,0.5)] py-3 px-8 rounded-full font-extrabold text-lg flex items-center justify-center gap-2 whitespace-nowrap pointer-events-auto border border-white/20 transition-transform hover:-translate-y-1 uppercase tracking-wide">
-            <img loading="lazy" decoding="async" src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 filter brightness-0 invert opacity-90 mt-[2px]">
+            <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" class="h-5 filter brightness-0 invert opacity-90 mt-[2px]">
             Assinar Atlas
         </a>
     </div>
