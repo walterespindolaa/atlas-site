@@ -1203,6 +1203,101 @@
     </section>
 
     <!-- === SEÇÃO 7: A História Editorial === -->
+    <!-- === SECAO: VEJA O ATLAS POR DENTRO (mockup + carrossel) === -->
+    <section id="section-app" class="w-full bg-atlas-blue py-16 md:py-28 px-4 flex flex-col items-center relative overflow-hidden border-t border-white/10">
+        <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            <div class="absolute top-0 left-0 w-[60%] h-full bg-[#36DCF5]/30 blur-[160px] rounded-full"></div>
+        </div>
+        <div class="relative z-10 text-center mb-10 md:mb-14 max-w-2xl">
+            <h2 class="text-white text-3xl md:text-5xl font-bold tracking-tight mb-3">Veja o Atlas por dentro</h2>
+            <p class="text-white/70 text-base md:text-lg">Arraste para o lado e conheça as telas reais do app.</p>
+        </div>
+
+        <div id="mk-carousel" class="mk-stage relative z-10 flex items-center justify-center gap-4 md:gap-8">
+            <button class="mk-arrow mk-prev" aria-label="Anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+
+            <div class="mk-phone">
+                <div class="mk-viewport">
+                    <div class="mk-track">
+                        <div class="mk-slide">
+                            <div class="mk-ph">Salve o print como<br><b>app-home.png</b></div>
+                            <img src="app-home.png" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                        </div>
+                        <div class="mk-slide">
+                            <div class="mk-ph">Salve o print como<br><b>app-organizacao.png</b></div>
+                            <img src="app-organizacao.png" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                        </div>
+                        <div class="mk-slide">
+                            <div class="mk-ph">Salve o print como<br><b>app-montanha.png</b></div>
+                            <img src="app-montanha.png" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                        </div>
+                        <div class="mk-slide">
+                            <div class="mk-ph">Salve o print como<br><b>app-simulador.png</b></div>
+                            <img src="app-simulador.png" alt="Tela do app Atlas" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="mk-arrow mk-next" aria-label="Próximo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+
+        <p id="mk-caption" class="relative z-10 text-white/90 font-medium text-center mt-6 h-6"></p>
+        <div class="mk-dots relative z-10 flex gap-2 mt-3">
+            <span class="mk-dot"></span><span class="mk-dot"></span><span class="mk-dot"></span><span class="mk-dot"></span>
+        </div>
+
+        <style>
+          #mk-carousel .mk-phone{width:280px;max-width:78vw;background:#0b0b0c;border-radius:44px;padding:10px;box-shadow:inset 0 0 0 2px #3f3f46,0 40px 80px -15px rgba(0,0,0,.6);flex-shrink:0;}
+          #mk-carousel .mk-viewport{position:relative;width:100%;aspect-ratio:1196/2600;border-radius:34px;overflow:hidden;background:#fff;}
+          #mk-carousel .mk-track{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1);touch-action:pan-y;}
+          #mk-carousel .mk-slide{position:relative;min-width:100%;height:100%;}
+          #mk-carousel .mk-slide img{position:relative;z-index:2;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+          #mk-carousel .mk-ph{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;color:#64748b;font-size:13px;line-height:1.5;background:#eef2f6;}
+          #mk-carousel .mk-arrow{width:44px;height:44px;border-radius:9999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;display:none;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease;flex-shrink:0;}
+          #mk-carousel .mk-arrow:hover{background:rgba(255,255,255,.22);}
+          #mk-carousel .mk-arrow svg{width:22px;height:22px;}
+          @media(min-width:768px){ #mk-carousel .mk-arrow{display:flex;} }
+          .mk-dots .mk-dot{width:8px;height:8px;border-radius:9999px;background:rgba(255,255,255,.35);transition:all .3s ease;}
+          .mk-dots .mk-dot.active{background:#fff;width:22px;}
+        </style>
+
+        <script>
+        (function(){
+          var root=document.getElementById('mk-carousel'); if(!root) return;
+          var track=root.querySelector('.mk-track');
+          var slides=root.querySelectorAll('.mk-slide');
+          var dots=document.querySelectorAll('.mk-dots .mk-dot');
+          var cap=document.getElementById('mk-caption');
+          var captions=[
+            'Seu painel: score, fluxo e vencimentos',
+            'Organização financeira do mês',
+            'Vista da Montanha: seu patrimônio projetado',
+            'Simulador de Decisão: e se...?'
+          ];
+          var i=0,n=slides.length,auto=null,stopped=false;
+          function go(k){ i=(k+n)%n; track.style.transform='translateX(-'+(i*100)+'%)'; dots.forEach(function(d,j){d.classList.toggle('active',j===i);}); if(cap)cap.textContent=captions[i]||''; }
+          function startAuto(){ if(stopped)return; auto=setInterval(function(){go(i+1);},3000); }
+          function stopAuto(){ stopped=true; if(auto){clearInterval(auto);auto=null;} }
+          var prev=root.querySelector('.mk-prev'),next=root.querySelector('.mk-next');
+          if(prev)prev.addEventListener('click',function(){stopAuto();go(i-1);});
+          if(next)next.addEventListener('click',function(){stopAuto();go(i+1);});
+          dots.forEach(function(d,j){d.style.cursor='pointer';d.addEventListener('click',function(){stopAuto();go(j);});});
+          var x0=null;
+          track.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+          track.addEventListener('touchend',function(e){ if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40){stopAuto();go(dx<0?i+1:i-1);} x0=null; });
+          var px=null;
+          track.addEventListener('pointerdown',function(e){ if(e.pointerType==='mouse')px=e.clientX; });
+          window.addEventListener('pointerup',function(e){ if(px===null)return; var dx=e.clientX-px; if(Math.abs(dx)>50){stopAuto();go(dx<0?i+1:i-1);} px=null; });
+          go(0); startAuto();
+        })();
+        </script>
+    </section>
+
     <section id="section-7" class="w-full bg-atlas-bg py-10 md:py-40 px-6 lg:px-12 text-atlas-dark relative border-t border-zinc-200">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-24 relative">
             
