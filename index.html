@@ -766,112 +766,169 @@
             transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1);
         }
     </style>
-    <section id="section-5" class="w-full bg-atlas-blue px-4 py-20 md:py-28 relative flex flex-col items-center overflow-hidden">
-        <!-- Glow Overlay -->
-        <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
-            <div class="absolute top-0 left-0 w-[60%] h-full bg-[#36DCF5]/60 blur-[150px] rounded-full animate-glow-sweep mix-blend-screen"></div>
+    <section id="section-5" class="cin-root w-full">
+        <div class="cin-bg-glow" aria-hidden="true"></div>
+
+        <!-- HERO (frase inicial) -->
+        <div class="cin-hero">
+            <h2>O que acontece quando você compra o Atlas <span class="cin-it font-playfair">ou Não compra o atlas</span></h2>
         </div>
 
-        <h2 class="relative z-10 text-white text-3xl md:text-5xl lg:text-6xl font-bold text-center max-w-4xl leading-tight drop-shadow-2xl tracking-tight mb-10 md:mb-14">
-            O que acontece quando você compra o Atlas ou <span class="font-normal italic font-playfair text-atlas-dark">Não compra o atlas</span>
-        </h2>
-
-        <!-- Cards estilo notificacao - aparecem conforme o scroll -->
-        <div id="cmp-stack" class="relative z-10 w-full max-w-xl mx-auto">
-
-            <article class="cmp-card">
-                <span class="cmp-icon"><i data-lucide="rocket"></i></span>
-                <div class="cmp-body">
-                    <h3 class="cmp-title">O seu futuro</h3>
-                    <p class="cmp-line cmp-without"><span class="cmp-dot cmp-dot-red"></span><span class="cmp-tag cmp-tag-red">Sem Atlas</span>Parece longe e irreal</p>
-                    <p class="cmp-line cmp-with"><span class="cmp-dot cmp-dot-cyan"></span><span class="cmp-tag cmp-tag-cyan">Com Atlas</span>Tem data, meta e valor exato</p>
-                </div>
-            </article>
-
-            <article class="cmp-card">
-                <span class="cmp-icon"><i data-lucide="shopping-cart"></i></span>
-                <div class="cmp-body">
-                    <h3 class="cmp-title">Decisões de compra</h3>
-                    <p class="cmp-line cmp-without"><span class="cmp-dot cmp-dot-red"></span><span class="cmp-tag cmp-tag-red">Sem Atlas</span>Feitas no impulso ou emoção</p>
-                    <p class="cmp-line cmp-with"><span class="cmp-dot cmp-dot-cyan"></span><span class="cmp-tag cmp-tag-cyan">Com Atlas</span>Baseadas em números e realidade</p>
-                </div>
-            </article>
-
-            <article class="cmp-card">
-                <span class="cmp-icon"><i data-lucide="calculator"></i></span>
-                <div class="cmp-body">
-                    <h3 class="cmp-title">Controle de gastos</h3>
-                    <p class="cmp-line cmp-without"><span class="cmp-dot cmp-dot-red"></span><span class="cmp-tag cmp-tag-red">Sem Atlas</span>Anota por anotar, sem focar</p>
-                    <p class="cmp-line cmp-with"><span class="cmp-dot cmp-dot-cyan"></span><span class="cmp-tag cmp-tag-cyan">Com Atlas</span>Gasta sem culpa no que te faz feliz</p>
-                </div>
-            </article>
-
-            <article class="cmp-card">
-                <span class="cmp-icon"><i data-lucide="book-open"></i></span>
-                <div class="cmp-body">
-                    <h3 class="cmp-title">Aprender sobre dinheiro</h3>
-                    <p class="cmp-line cmp-without"><span class="cmp-dot cmp-dot-red"></span><span class="cmp-tag cmp-tag-red">Sem Atlas</span>Lê dicas, mas nunca aplica</p>
-                    <p class="cmp-line cmp-with"><span class="cmp-dot cmp-dot-cyan"></span><span class="cmp-tag cmp-tag-cyan">Com Atlas</span>Aprende na prática, no seu plano</p>
-                </div>
-            </article>
-
-            <article class="cmp-card">
-                <span class="cmp-icon"><i data-lucide="eye"></i></span>
-                <div class="cmp-body">
-                    <h3 class="cmp-title">Visão do dinheiro</h3>
-                    <p class="cmp-line cmp-without"><span class="cmp-dot cmp-dot-red"></span><span class="cmp-tag cmp-tag-red">Sem Atlas</span>Olha só para o que já gastou</p>
-                    <p class="cmp-line cmp-with"><span class="cmp-dot cmp-dot-cyan"></span><span class="cmp-tag cmp-tag-cyan">Com Atlas</span>Sabe exatamente o que vai gastar</p>
-                </div>
-            </article>
+        <!-- CTA (final) -->
+        <div class="cin-cta">
+            <h2>Pronto para subir a montanha?</h2>
+            <p>Comece hoje e veja o seu futuro financeiro mudar em tempo real.</p>
+            <div class="cin-cta-btns">
+                <a href="https://app.useatlasapp.com/comece" class="cin-btn-primary">Assinar Atlas</a>
+                <a href="funcionalidades.html" class="cin-btn-ghost">Ver funcionalidades</a>
+            </div>
         </div>
 
-        <!-- Botao funcionalidades (mantido) -->
-        <div class="relative z-10 mt-12 flex justify-center w-full">
-            <a href="funcionalidades.html" class="inline-flex items-center gap-3 px-8 py-4 bg-white border-2 border-atlas-blue text-atlas-blue font-bold text-lg rounded-xl hover:bg-atlas-lightBlue/10 transition-colors shadow-sm hover:shadow-md">
-                Ver lista completa de funcionalidades
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </a>
+        <!-- PALCO: card azul profundo -->
+        <div class="cin-stage">
+            <div class="cin-card">
+                <div class="cin-inner">
+
+                    <!-- ESQUERDA (desktop) / BAIXO (mobile) -->
+                    <div class="cin-left">
+                        <h3>Tudo isso resolvido na palma da mão.</h3>
+                        <p>O Atlas troca o caos do dia a dia por clareza: metas com data, decisões com dados e o seu dinheiro sob controle.</p>
+                    </div>
+
+                    <!-- CENTRO: celular + badges -->
+                    <div class="cin-center">
+                        <div class="cin-mock">
+                            <div class="cin-phone">
+                                <div class="cin-notch" aria-hidden="true"></div>
+                                <div class="cin-screen">
+                                    <div class="ph-fallback">
+                                        <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="" class="ph-logo">
+                                        <span>Atlas</span>
+                                    </div>
+                                    <img src="app-atlas.png" alt="App Atlas" class="ph-shot" onerror="this.style.display='none'">
+                                </div>
+                            </div>
+
+                            <div class="cin-badge cin-b1"><span class="ic">⚠️</span><div><p class="bt">O seu futuro</p><p class="bs">Parece longe e irreal</p></div></div>
+                            <div class="cin-badge cin-b2"><span class="ic">⚠️</span><div><p class="bt">Decisões de compra</p><p class="bs">Feitas no impulso ou emoção</p></div></div>
+                            <div class="cin-badge cin-b3"><span class="ic">⚠️</span><div><p class="bt">Controle de gastos</p><p class="bs">Anota por anotar, sem focar</p></div></div>
+                            <div class="cin-badge cin-b4"><span class="ic">⚠️</span><div><p class="bt">Aprender sobre dinheiro</p><p class="bs">Lê dicas, mas nunca aplica</p></div></div>
+                            <div class="cin-badge cin-b5"><span class="ic">⚠️</span><div><p class="bt">Visão do dinheiro</p><p class="bs">Olha só para o que já gastou</p></div></div>
+                        </div>
+                    </div>
+
+                    <!-- DIREITA (desktop) / TOPO (mobile): wordmark -->
+                    <div class="cin-right">
+                        <h2 class="cin-wordmark">ATLAS</h2>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <style>
-          #cmp-stack{display:flex;flex-direction:column;gap:1rem;}
-          #cmp-stack .cmp-card{background:#fff;border-radius:1rem;box-shadow:0 10px 25px rgba(4,12,17,.25);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;}
-          #cmp-stack .cmp-icon{flex-shrink:0;width:3rem;height:3rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;background:rgba(28,94,145,.1);color:#1C5E91;}
-          #cmp-stack .cmp-icon svg{width:1.5rem;height:1.5rem;}
-          #cmp-stack .cmp-body{min-width:0;flex:1;}
-          #cmp-stack .cmp-title{margin:0 0 .35rem;font-weight:700;font-size:1.05rem;color:#040C11;line-height:1.15;}
-          #cmp-stack .cmp-line{margin:.15rem 0;display:flex;align-items:center;flex-wrap:wrap;gap:.35rem .5rem;font-size:.9rem;line-height:1.25;}
-          #cmp-stack .cmp-without{color:#71717a;font-weight:500;}
-          #cmp-stack .cmp-with{color:#040C11;font-weight:700;}
-          #cmp-stack .cmp-dot{width:.4rem;height:.4rem;border-radius:9999px;flex-shrink:0;}
-          #cmp-stack .cmp-dot-red{background:#f43f5e;}
-          #cmp-stack .cmp-dot-cyan{background:#36DCF5;}
-          #cmp-stack .cmp-tag{font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
-          #cmp-stack .cmp-tag-red{color:#be123c;}
-          #cmp-stack .cmp-tag-cyan{color:#1C5E91;}
+          #section-5.cin-root{position:relative;width:100%;height:100vh;overflow:hidden;background:#0A101D;display:flex;align-items:center;justify-content:center;perspective:1500px;}
+          #section-5 .cin-bg-glow{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 50% at 50% 38%, rgba(54,220,245,.10), transparent 70%);}
+          #section-5 .cin-hero{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 1.25rem;will-change:transform;}
+          #section-5 .cin-hero h2{color:#fff;font-weight:800;line-height:1.06;letter-spacing:-.02em;max-width:60rem;font-size:clamp(2rem,6vw,5rem);text-shadow:0 12px 40px rgba(0,0,0,.55);}
+          #section-5 .cin-it{font-weight:400;font-style:italic;color:#8fb0cf;}
+          #section-5 .cin-cta{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 1.25rem;visibility:hidden;}
+          #section-5 .cin-cta h2{color:#fff;font-weight:800;font-size:clamp(2rem,5vw,3.75rem);margin:0 0 1rem;letter-spacing:-.02em;}
+          #section-5 .cin-cta p{color:#9fb6cf;font-size:clamp(1rem,2vw,1.2rem);max-width:34rem;margin:0 auto 2rem;line-height:1.6;}
+          #section-5 .cin-cta-btns{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
+          #section-5 .cin-btn-primary{background:#B82B26;color:#fff;font-weight:800;font-size:1.05rem;padding:1rem 2.25rem;border-radius:9999px;box-shadow:0 10px 30px rgba(184,43,38,.45);transition:transform .2s ease;}
+          #section-5 .cin-btn-primary:hover{transform:translateY(-2px);}
+          #section-5 .cin-btn-ghost{color:#fff;font-weight:700;font-size:1.05rem;padding:1rem 2rem;border-radius:9999px;border:1px solid rgba(255,255,255,.35);transition:background .2s ease;}
+          #section-5 .cin-btn-ghost:hover{background:rgba(255,255,255,.1);}
+          #section-5 .cin-stage{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;pointer-events:none;perspective:1500px;}
+          #section-5 .cin-card{position:relative;overflow:hidden;width:90vw;height:88vh;border-radius:32px;background:linear-gradient(145deg,#162C6D 0%,#0A101D 100%);box-shadow:0 40px 100px -20px rgba(0,0,0,.9), inset 0 1px 2px rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;pointer-events:auto;visibility:hidden;}
+          #section-5 .cin-inner{position:relative;width:100%;height:100%;max-width:80rem;margin:0 auto;padding:1.5rem;display:flex;flex-direction:column;justify-content:space-evenly;align-items:center;gap:1rem;}
+          #section-5 .cin-wordmark{font-weight:900;text-transform:uppercase;letter-spacing:-.04em;font-size:clamp(3rem,9vw,8rem);line-height:.9;margin:0;background:linear-gradient(180deg,#fff 0%,#A1A1AA 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 12px 24px rgba(0,0,0,.7));text-align:center;}
+          #section-5 .cin-center{position:relative;display:flex;align-items:center;justify-content:center;width:100%;}
+          #section-5 .cin-mock{position:relative;display:flex;align-items:center;justify-content:center;will-change:transform;transform-style:preserve-3d;}
+          #section-5 .cin-phone{position:relative;width:230px;height:480px;border-radius:2.6rem;background:#111;box-shadow:inset 0 0 0 2px #52525B, inset 0 0 0 6px #000, 0 40px 80px -15px rgba(0,0,0,.9);}
+          #section-5 .cin-notch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:92px;height:24px;background:#000;border-radius:9999px;z-index:6;}
+          #section-5 .cin-screen{position:absolute;inset:6px;border-radius:2.2rem;overflow:hidden;background:#26352b;}
+          #section-5 .cin-screen .ph-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;z-index:2;}
+          #section-5 .cin-screen .ph-fallback{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(180deg,#2c3b30,#1d2820);}
+          #section-5 .cin-screen .ph-logo{width:46px;height:auto;filter:brightness(0) invert(1);opacity:.9;}
+          #section-5 .cin-screen .ph-fallback span{color:#cfe3d6;font-weight:700;letter-spacing:.04em;}
+          #section-5 .cin-badge{position:absolute;display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;border-radius:1rem;background:rgba(38,16,16,.6);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 0 0 1px rgba(255,170,170,.18),0 24px 48px -12px rgba(0,0,0,.85);z-index:30;width:200px;visibility:hidden;}
+          #section-5 .cin-badge .ic{flex-shrink:0;width:34px;height:34px;border-radius:9999px;display:flex;align-items:center;justify-content:center;background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.45);font-size:15px;}
+          #section-5 .cin-badge .bt{margin:0;color:#fff;font-size:.8rem;font-weight:700;line-height:1.1;}
+          #section-5 .cin-badge .bs{margin:1px 0 0;color:#fca5a5;font-size:.7rem;line-height:1.15;}
+          #section-5 .cin-b1{top:24px;left:-46px;}
+          #section-5 .cin-b2{top:92px;right:-60px;}
+          #section-5 .cin-b3{top:250px;left:-66px;}
+          #section-5 .cin-b4{bottom:120px;right:-64px;}
+          #section-5 .cin-b5{bottom:26px;left:-26px;}
+          #section-5 .cin-left h3{margin:0;color:#fff;font-weight:700;font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.12;text-align:center;}
+          #section-5 .cin-left p{color:rgba(219,234,254,.72);margin:.75rem 0 0;line-height:1.6;text-align:center;font-size:.98rem;}
+          @media(min-width:1024px){
+            #section-5 .cin-inner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;padding:0 3rem;}
+            #section-5 .cin-left{order:1;text-align:left;max-width:22rem;}
+            #section-5 .cin-left h3{text-align:left;}
+            #section-5 .cin-left p{text-align:left;}
+            #section-5 .cin-center{order:2;}
+            #section-5 .cin-right{order:3;justify-self:end;}
+          }
+          @media(max-width:767px){
+            #section-5 .cin-left p{display:none;}
+            #section-5 .cin-badge{width:158px;padding:.5rem .65rem;}
+            #section-5 .cin-badge .bt{font-size:.72rem;}
+            #section-5 .cin-badge .bs{font-size:.64rem;}
+            #section-5 .cin-b1{top:6px;left:-18px;}
+            #section-5 .cin-b2{top:64px;right:-22px;}
+            #section-5 .cin-b3{top:300px;left:-24px;}
+            #section-5 .cin-b4{bottom:150px;right:-22px;}
+            #section-5 .cin-b5{bottom:8px;left:0;}
+          }
         </style>
 
         <script>
         (function(){
           function init(){
-            var cards=[].slice.call(document.querySelectorAll('#cmp-stack .cmp-card'));
-            if(!cards.length) return;
-            if(typeof gsap==='undefined' || typeof ScrollTrigger==='undefined'){
-              cards.forEach(function(c){c.style.opacity='1';});
+            var root=document.getElementById('section-5');
+            if(!root) return;
+            var hasGsap=(typeof gsap!=='undefined' && typeof ScrollTrigger!=='undefined');
+            if(!hasGsap){
+              gsap_fallback();
               return;
             }
             gsap.registerPlugin(ScrollTrigger);
-            cards.forEach(function(card){
-              gsap.from(card,{
-                scrollTrigger:{trigger:card,start:'top 88%',toggleActions:'play none none none'},
-                opacity:0, y:50, scale:0.96, duration:0.6, ease:'power3.out'
-              });
-            });
+            var isMobile=window.innerWidth<768;
+            gsap.set('#section-5 .cin-card',{yPercent:120,visibility:'visible'});
+            gsap.set('#section-5 .cin-mock',{autoAlpha:0});
+            gsap.set('#section-5 .cin-badge',{autoAlpha:0,visibility:'visible'});
+            gsap.set(['#section-5 .cin-left','#section-5 .cin-right'],{autoAlpha:0});
+            gsap.set('#section-5 .cin-cta',{autoAlpha:0,visibility:'visible',scale:0.85});
+            var tl=gsap.timeline({scrollTrigger:{trigger:root,start:'top top',end:'+='+(isMobile?2600:4200),pin:true,scrub:1,anticipatePin:1}});
+            tl.to('#section-5 .cin-hero',{scale:1.15,filter:'blur(14px)',autoAlpha:0.15,duration:2,ease:'power2.inOut'},0)
+              .to('#section-5 .cin-card',{yPercent:0,ease:'power3.inOut',duration:2},0)
+              .to('#section-5 .cin-card',{width:'100%',height:'100%',borderRadius:0,ease:'power3.inOut',duration:1.5})
+              .fromTo('#section-5 .cin-mock',{y:200,rotationX:35,scale:0.7,autoAlpha:0},{y:0,rotationX:0,scale:1,autoAlpha:1,ease:'expo.out',duration:2.2},'-=0.7')
+              .fromTo('#section-5 .cin-badge',{y:80,scale:0.7,autoAlpha:0},{y:0,scale:1,autoAlpha:1,ease:'back.out(1.4)',duration:1.4,stagger:0.18},'-=1.4')
+              .fromTo('#section-5 .cin-left',{x:-40,autoAlpha:0},{x:0,autoAlpha:1,ease:'power3.out',duration:1.4},'-=1.2')
+              .fromTo('#section-5 .cin-right',{x:40,autoAlpha:0,scale:0.85},{x:0,autoAlpha:1,scale:1,ease:'expo.out',duration:1.4},'<')
+              .to({},{duration:2.2})
+              .set('#section-5 .cin-hero',{autoAlpha:0})
+              .set('#section-5 .cin-cta',{autoAlpha:1})
+              .to({},{duration:1.2})
+              .to(['#section-5 .cin-mock','#section-5 .cin-badge','#section-5 .cin-left','#section-5 .cin-right'],{y:-40,scale:0.9,autoAlpha:0,ease:'power3.in',duration:1.2,stagger:0.04})
+              .to('#section-5 .cin-card',{width:(isMobile?'92vw':'85vw'),height:(isMobile?'90vh':'85vh'),borderRadius:(isMobile?'28px':'40px'),ease:'expo.inOut',duration:1.6},'pull')
+              .to('#section-5 .cin-cta',{scale:1,ease:'expo.inOut',duration:1.6},'pull')
+              .to('#section-5 .cin-card',{yPercent:-130,ease:'power3.in',duration:1.4});
+            setTimeout(function(){ScrollTrigger.refresh();},400);
+          }
+          function gsap_fallback(){
+            var c=document.querySelector('#section-5 .cin-card'); if(c) c.style.visibility='visible';
+            document.querySelectorAll('#section-5 .cin-badge').forEach(function(b){b.style.visibility='visible';});
+            var h=document.querySelector('#section-5 .cin-hero'); if(h) h.style.display='none';
           }
           if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
         })();
         </script>
     </section>
+
 
 
 
