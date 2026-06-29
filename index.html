@@ -795,28 +795,28 @@
     <!-- === NUMEROS (cards + count-up) === -->
     <section id="section-stats" class="w-full bg-atlas-bg pt-2 pb-8 md:pb-12 px-4">
         <div class="max-w-4xl mx-auto flex flex-wrap justify-center gap-3 md:gap-4">
-                <div class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow w-[170px] md:w-[200px] px-4 py-5 flex flex-col items-center justify-center text-center">
+                <div class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow w-[200px] px-4 py-4 flex flex-col items-center justify-center text-center">
                     <div class="flex items-center gap-2">
                         <i data-lucide="users" class="w-5 h-5 text-atlas-blue shrink-0"></i>
                         <span class="stat-num text-2xl md:text-3xl font-bold text-atlas-blue leading-none" data-target="300" data-suffix="+">0</span>
                     </div>
                     <p class="text-zinc-500 text-sm mt-1.5 leading-snug">famílias usam o Atlas</p>
                 </div>
-                <div class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow w-[170px] md:w-[200px] px-4 py-5 flex flex-col items-center justify-center text-center">
+                <div class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow w-[200px] px-4 py-4 flex flex-col items-center justify-center text-center">
                     <div class="flex items-center gap-2">
                         <i data-lucide="layout-grid" class="w-5 h-5 text-atlas-blue shrink-0"></i>
                         <span class="stat-num text-2xl md:text-3xl font-bold text-atlas-blue leading-none" data-target="12" data-suffix="">0</span>
                     </div>
-                    <p class="text-zinc-500 text-sm mt-1.5 leading-snug">ferramentas num só app</p>
+                    <p class="text-zinc-500 text-sm mt-1.5 leading-snug">ferramentas num app</p>
                 </div>
-                <div class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow w-[170px] md:w-[200px] px-4 py-5 flex flex-col items-center justify-center text-center">
+                <div class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow w-[200px] px-4 py-4 flex flex-col items-center justify-center text-center">
                     <div class="flex items-center gap-2">
                         <i data-lucide="clock" class="w-5 h-5 text-atlas-blue shrink-0"></i>
                         <span class="stat-num text-2xl md:text-3xl font-bold text-atlas-blue leading-none" data-target="5" data-suffix=" min">0</span>
                     </div>
                     <p class="text-zinc-500 text-sm mt-1.5 leading-snug">por dia já bastam</p>
                 </div>
-                <div class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow w-[170px] md:w-[200px] px-4 py-5 flex flex-col items-center justify-center text-center">
+                <div class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm hover:shadow-md transition-shadow w-[200px] px-4 py-4 flex flex-col items-center justify-center text-center">
                     <div class="flex items-center gap-2">
                         <i data-lucide="gift" class="w-5 h-5 text-atlas-blue shrink-0"></i>
                         <span class="stat-num text-2xl md:text-3xl font-bold text-atlas-blue leading-none" data-target="7" data-suffix="">0</span>
@@ -1362,6 +1362,59 @@
         </script>
     </section>
 
+    <!-- === SECAO: RELATORIO METODO ATLAS (notebook + auto-scroll) === -->
+    <section id="section-relatorio" class="w-full bg-atlas-dark py-16 md:py-24 px-4 relative overflow-hidden border-t border-white/10">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-1/2 bg-atlas-blue/25 blur-[160px] rounded-full pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-10 md:mb-14">
+                <p class="text-atlas-beige font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-3">Método Atlas</p>
+                <h2 class="text-white text-3xl md:text-5xl font-bold tracking-tight mb-4">O relatório que mostra o seu plano</h2>
+                <p class="text-white/70 text-base md:text-lg max-w-2xl mx-auto">Não é achismo de IA. São 5 diagnósticos completos do seu dinheiro, construídos a partir do estudo de mais de 300 planejamentos financeiros reais.</p>
+            </div>
+
+            <div id="lp-stage" class="lp-laptop">
+                <div class="lp-screen">
+                    <div id="lp-viewport" class="lp-viewport">
+                        <div class="lp-ph">Salve o print do relatório como<br><b>relatorio-metodo.webp</b></div>
+                        <img id="lp-report" class="lp-report" src="relatorio-metodo.webp" alt="Relatório do Método Atlas" onerror="this.style.display='none'">
+                    </div>
+                </div>
+                <div class="lp-base"><div class="lp-notch"></div></div>
+            </div>
+        </div>
+
+        <style>
+          #section-relatorio .lp-laptop{width:min(760px,94vw);margin:0 auto;}
+          #section-relatorio .lp-screen{background:#0b0b0c;border-radius:16px;padding:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6),inset 0 0 0 2px #2a2a2e;}
+          #section-relatorio .lp-viewport{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#fff;}
+          #section-relatorio .lp-report{position:absolute;top:0;left:0;width:100%;display:block;z-index:2;will-change:transform;}
+          #section-relatorio .lp-ph{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;color:#64748b;background:#eef2f6;font-size:13px;line-height:1.5;}
+          #section-relatorio .lp-base{position:relative;width:112%;left:-6%;height:14px;background:linear-gradient(#cfd4d9,#a7adb4);border-radius:0 0 14px 14px;box-shadow:0 10px 16px rgba(0,0,0,.4);}
+          #section-relatorio .lp-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:96px;height:7px;background:#9097a0;border-radius:0 0 8px 8px;}
+        </style>
+
+        <script>
+        (function(){
+          var img=document.getElementById('lp-report');
+          var vp=document.getElementById('lp-viewport');
+          var stage=document.getElementById('lp-stage');
+          if(!img||!vp) return;
+          var anim=null;
+          function start(){
+            var max=img.offsetHeight - vp.offsetHeight;
+            if(max<=8 || typeof img.animate!=='function') return;
+            if(anim) anim.cancel();
+            var dur=Math.min(Math.max(max*5, 14000), 32000);
+            anim=img.animate([{transform:'translateY(0)'},{transform:'translateY(-'+max+'px)'}],{duration:dur,direction:'alternate',iterations:Infinity,easing:'linear'});
+          }
+          if(img.complete && img.naturalHeight) start(); else img.addEventListener('load',start);
+          var rt;
+          window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ if(anim){anim.cancel();anim=null;} start(); },200); });
+          if(stage){ stage.addEventListener('mouseenter',function(){if(anim)anim.pause();}); stage.addEventListener('mouseleave',function(){if(anim)anim.play();}); }
+        })();
+        </script>
+    </section>
+
     <section id="section-7" class="w-full bg-atlas-bg py-10 md:py-40 px-6 lg:px-12 text-atlas-dark relative border-t border-zinc-200">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 lg:gap-24 relative">
             
@@ -1425,58 +1478,6 @@
         <!-- === SEÇÃO 8: Pricing === -->
     <!-- === SECAO DEPOIMENTOS (SUBSTITUIR pelos reais antes de publicar) === -->
     <!-- === SECAO DEPOIMENTOS (marquee infinito, estilo imagem 2) === -->
-    <!-- === SECAO: RELATORIO METODO ATLAS (notebook + auto-scroll) === -->
-    <section id="section-relatorio" class="w-full bg-atlas-dark py-16 md:py-24 px-4 relative overflow-hidden border-t border-white/10">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[70%] h-1/2 bg-atlas-blue/25 blur-[160px] rounded-full pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto relative z-10">
-            <div class="text-center mb-10 md:mb-14">
-                <p class="text-atlas-beige font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-3">Método Atlas</p>
-                <h2 class="text-white text-3xl md:text-5xl font-bold tracking-tight mb-4">O relatório que mostra o seu plano</h2>
-                <p class="text-white/70 text-base md:text-lg max-w-2xl mx-auto">Não é achismo de IA. São 5 diagnósticos completos do seu dinheiro, construídos a partir do estudo de mais de 300 planejamentos financeiros reais.</p>
-            </div>
-
-            <div id="lp-stage" class="lp-laptop">
-                <div class="lp-screen">
-                    <div id="lp-viewport" class="lp-viewport">
-                        <div class="lp-ph">Salve o print do relatório como<br><b>relatorio-metodo.webp</b></div>
-                        <img id="lp-report" class="lp-report" src="relatorio-metodo.webp" alt="Relatório do Método Atlas" onerror="this.style.display='none'">
-                    </div>
-                </div>
-                <div class="lp-base"><div class="lp-notch"></div></div>
-            </div>
-        </div>
-
-        <style>
-          #section-relatorio .lp-laptop{width:min(760px,94vw);margin:0 auto;}
-          #section-relatorio .lp-screen{background:#0b0b0c;border-radius:16px;padding:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6),inset 0 0 0 2px #2a2a2e;}
-          #section-relatorio .lp-viewport{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#fff;}
-          #section-relatorio .lp-report{position:absolute;top:0;left:0;width:100%;display:block;z-index:2;will-change:transform;}
-          #section-relatorio .lp-ph{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;color:#64748b;background:#eef2f6;font-size:13px;line-height:1.5;}
-          #section-relatorio .lp-base{position:relative;width:112%;left:-6%;height:14px;background:linear-gradient(#cfd4d9,#a7adb4);border-radius:0 0 14px 14px;box-shadow:0 10px 16px rgba(0,0,0,.4);}
-          #section-relatorio .lp-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:96px;height:7px;background:#9097a0;border-radius:0 0 8px 8px;}
-        </style>
-
-        <script>
-        (function(){
-          var img=document.getElementById('lp-report');
-          var vp=document.getElementById('lp-viewport');
-          var stage=document.getElementById('lp-stage');
-          if(!img||!vp) return;
-          var anim=null;
-          function start(){
-            var max=img.offsetHeight - vp.offsetHeight;
-            if(max<=8 || typeof img.animate!=='function') return;
-            if(anim) anim.cancel();
-            var dur=Math.min(Math.max(max*5, 14000), 32000);
-            anim=img.animate([{transform:'translateY(0)'},{transform:'translateY(-'+max+'px)'}],{duration:dur,direction:'alternate',iterations:Infinity,easing:'linear'});
-          }
-          if(img.complete && img.naturalHeight) start(); else img.addEventListener('load',start);
-          var rt;
-          window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ if(anim){anim.cancel();anim=null;} start(); },200); });
-          if(stage){ stage.addEventListener('mouseenter',function(){if(anim)anim.pause();}); stage.addEventListener('mouseleave',function(){if(anim)anim.play();}); }
-        })();
-        </script>
-    </section>
 
     <section id="section-depoimentos" class="w-full bg-atlas-bg py-16 md:py-24 relative border-t border-zinc-200 overflow-hidden">
         <div class="text-center mb-12 md:mb-16 px-4">
