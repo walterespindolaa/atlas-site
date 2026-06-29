@@ -643,7 +643,7 @@
     </div>
 
     <!-- === SEÇÃO 3 BOTTOM (Área Branca inferior) === -->
-    <section id="s3-bottom" class="w-full bg-atlas-bg flex flex-col items-center pb-12 md:pb-32 z-30 relative -mt-12 md:-mt-16 lg:-mt-24">
+    <section id="s3-bottom" class="w-full bg-atlas-bg flex flex-col items-center pb-10 md:pb-16 z-30 relative -mt-12 md:-mt-16 lg:-mt-24">
         <div class="bg-[#f0f2f5] p-8 md:p-12 rounded-2xl max-w-3xl w-[90%] mx-auto text-center relative z-10 shadow-sm -mt-16 md:-mt-16 lg:-mt-24">
             <h3 class="text-atlas-blue text-xl md:text-2xl font-bold mb-4">Aprenda enquanto planeja</h3>
             <p class="text-gray-600 text-sm md:text-base leading-relaxed font-medium">
@@ -659,6 +659,40 @@
 
     
     <!-- === SEÇÃO 4: Timeline === -->
+    <!-- === NUMEROS (cards + count-up) === -->
+    <section id="section-stats" class="w-full bg-atlas-bg pb-14 md:pb-20 px-4">
+        <div class="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <div class="bg-white rounded-2xl border border-zinc-200/70 shadow-sm p-5 md:p-6 text-center flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center mb-3"><i data-lucide="users" class="w-5 h-5"></i></div>
+                    <div class="stat-num text-3xl md:text-4xl font-bold text-atlas-dark" data-target="300" data-suffix="+">0</div>
+                    <p class="text-zinc-500 text-sm mt-1 leading-snug">famílias usam o Atlas</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-zinc-200/70 shadow-sm p-5 md:p-6 text-center flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center mb-3"><i data-lucide="layout-grid" class="w-5 h-5"></i></div>
+                    <div class="stat-num text-3xl md:text-4xl font-bold text-atlas-dark" data-target="12" data-suffix="">0</div>
+                    <p class="text-zinc-500 text-sm mt-1 leading-snug">ferramentas num só app</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-zinc-200/70 shadow-sm p-5 md:p-6 text-center flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center mb-3"><i data-lucide="clock" class="w-5 h-5"></i></div>
+                    <div class="stat-num text-3xl md:text-4xl font-bold text-atlas-dark" data-target="5" data-suffix=" min">0</div>
+                    <p class="text-zinc-500 text-sm mt-1 leading-snug">por dia já bastam</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-zinc-200/70 shadow-sm p-5 md:p-6 text-center flex flex-col items-center">
+                    <div class="w-11 h-11 rounded-full bg-atlas-blue/10 text-atlas-blue flex items-center justify-center mb-3"><i data-lucide="gift" class="w-5 h-5"></i></div>
+                    <div class="stat-num text-3xl md:text-4xl font-bold text-atlas-dark" data-target="7" data-suffix="">0</div>
+                    <p class="text-zinc-500 text-sm mt-1 leading-snug">dias grátis, sem cartão</p>
+                </div>
+        </div>
+        <script>
+        (function(){
+          var sec=document.getElementById('section-stats'); if(!sec) return;
+          var nums=sec.querySelectorAll('.stat-num'); var done=false;
+          function run(){ if(done)return; done=true; nums.forEach(function(el){ var t=parseInt(el.getAttribute('data-target'),10)||0; var suf=el.getAttribute('data-suffix')||''; var dur=1200,st=null; function step(ts){ if(!st)st=ts; var p=Math.min((ts-st)/dur,1); el.textContent=Math.round(p*t)+suf; if(p<1)requestAnimationFrame(step);} requestAnimationFrame(step); }); }
+          if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)run();});},{threshold:0.4}); io.observe(sec); } else { run(); }
+        })();
+        </script>
+    </section>
+
     <section id="section-4" class="w-full bg-atlas-blue flex flex-col items-center pt-16 md:pt-24 pb-20 md:pb-32 relative overflow-hidden lg:mt-0">
         
         <!-- Título -->
@@ -1381,150 +1415,130 @@
 
         <!-- === SEÇÃO 8: Pricing === -->
     <!-- === SECAO DEPOIMENTOS (SUBSTITUIR pelos reais antes de publicar) === -->
-    <!-- === SECAO DEPOIMENTOS (carrossel focado estilo imagem 2) === -->
+    <!-- === SECAO DEPOIMENTOS (marquee infinito, estilo imagem 2) === -->
     <section id="section-depoimentos" class="w-full bg-atlas-bg py-16 md:py-24 relative border-t border-zinc-200 overflow-hidden">
         <div class="text-center mb-12 md:mb-16 px-4">
             <h2 class="text-atlas-dark text-3xl md:text-5xl font-bold tracking-tight mb-3">Histórias de quem já está subindo</h2>
             <p class="text-zinc-500 text-base md:text-lg max-w-2xl mx-auto">Pessoas reais que trocaram o caos por clareza com o Atlas.</p>
         </div>
-        <div id="tw-carousel" class="tw-viewport relative">
-            <button class="tw-arrow tw-prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg></button>
-            <div class="tw-track">
-                <figure class="tw-card">
-                    <blockquote class="tw-quote">"Em 30 dias parei de me perder nas contas. Hoje sei exatamente quanto posso gastar sem culpa."</blockquote>
-                    <div class="tw-foot">
-                        <div class="tw-person">
-                            <div class="tw-avatar">MS</div>
-                            <div>
-                                <div class="tw-name">Mariana S.</div>
-                                <div class="tw-role">Autônoma</div>
-                            </div>
+        <div class="dp-marquee">
+            <div class="dp-track">
+                    <figure class="dp-card" style="width:360px">
+                        <blockquote class="dp-quote">"Em 30 dias parei de me perder nas contas. Hoje sei exatamente quanto posso gastar sem culpa."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">MS</div><div><div class="dp-name">Mariana S.</div><div class="dp-role">Autônoma</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
                         </div>
-                        <div class="tw-stars">★★★★★</div>
-                    </div>
-                </figure>
-                <figure class="tw-card">
-                    <blockquote class="tw-quote">"A gente brigava por dinheiro. Planejando juntos no Atlas, acabou o stress e sobrou plano."</blockquote>
-                    <div class="tw-foot">
-                        <div class="tw-person">
-                            <div class="tw-avatar">RJ</div>
-                            <div>
-                                <div class="tw-name">Rafael & Júlia</div>
-                                <div class="tw-role">Casal</div>
-                            </div>
+                    </figure>
+                    <figure class="dp-card" style="width:460px">
+                        <blockquote class="dp-quote">"A gente brigava por dinheiro. Planejando juntos no Atlas, acabou o stress e sobrou plano. Hoje é decisão a dois, sem briga."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">RJ</div><div><div class="dp-name">Rafael & Júlia</div><div class="dp-role">Casal</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
                         </div>
-                        <div class="tw-stars">★★★★★</div>
-                    </div>
-                </figure>
-                <figure class="tw-card">
-                    <blockquote class="tw-quote">"Separar a vida pessoal da empresa era um caos. O Atlas me deu clareza pra finalmente crescer."</blockquote>
-                    <div class="tw-foot">
-                        <div class="tw-person">
-                            <div class="tw-avatar">CM</div>
-                            <div>
-                                <div class="tw-name">Carlos M.</div>
-                                <div class="tw-role">Empreendedor</div>
-                            </div>
+                    </figure>
+                    <figure class="dp-card" style="width:340px">
+                        <blockquote class="dp-quote">"Separar a vida pessoal da empresa era um caos. O Atlas me deu clareza pra finalmente crescer."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">CM</div><div><div class="dp-name">Carlos M.</div><div class="dp-role">Empreendedor</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
                         </div>
-                        <div class="tw-stars">★★★★★</div>
-                    </div>
-                </figure>
-                <figure class="tw-card">
-                    <blockquote class="tw-quote">"Vi minha renda passiva projetada e entendi, pela primeira vez, o meu caminho até a liberdade."</blockquote>
-                    <div class="tw-foot">
-                        <div class="tw-person">
-                            <div class="tw-avatar">AP</div>
-                            <div>
-                                <div class="tw-name">Ana P.</div>
-                                <div class="tw-role">Começando a investir</div>
-                            </div>
+                    </figure>
+                    <figure class="dp-card" style="width:440px">
+                        <blockquote class="dp-quote">"Vi minha renda passiva projetada e entendi, pela primeira vez, o meu caminho até a liberdade financeira."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">AP</div><div><div class="dp-name">Ana P.</div><div class="dp-role">Começando a investir</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
                         </div>
-                        <div class="tw-stars">★★★★★</div>
-                    </div>
-                </figure>
-                <figure class="tw-card">
-                    <blockquote class="tw-quote">"Pela primeira vez sei pra onde meu dinheiro vai. Montei minha reserva de emergência em 4 meses."</blockquote>
-                    <div class="tw-foot">
-                        <div class="tw-person">
-                            <div class="tw-avatar">BT</div>
-                            <div>
-                                <div class="tw-name">Bruno T.</div>
-                                <div class="tw-role">Pai de família</div>
-                            </div>
+                    </figure>
+                    <figure class="dp-card" style="width:340px">
+                        <blockquote class="dp-quote">"Pela primeira vez sei pra onde meu dinheiro vai. Montei minha reserva em 4 meses."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">BT</div><div><div class="dp-name">Bruno T.</div><div class="dp-role">Pai de família</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
                         </div>
-                        <div class="tw-stars">★★★★★</div>
-                    </div>
-                </figure>
-                <figure class="tw-card">
-                    <blockquote class="tw-quote">"Parei de usar três planilhas. O Atlas junta tudo e ainda me diz qual o próximo passo."</blockquote>
-                    <div class="tw-foot">
-                        <div class="tw-person">
-                            <div class="tw-avatar">LM</div>
-                            <div>
-                                <div class="tw-name">Letícia M.</div>
-                                <div class="tw-role">Profissional liberal</div>
-                            </div>
+                    </figure>
+                    <figure class="dp-card" style="width:420px">
+                        <blockquote class="dp-quote">"Parei de usar três planilhas. O Atlas junta tudo e ainda me diz qual o próximo passo a dar."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">LM</div><div><div class="dp-name">Letícia M.</div><div class="dp-role">Profissional liberal</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
                         </div>
-                        <div class="tw-stars">★★★★★</div>
-                    </div>
-                </figure>
-                <figure class="tw-card">
-                    <blockquote class="tw-quote">"Estava endividado e perdido. Hoje tenho um plano claro e já saí do vermelho."</blockquote>
-                    <div class="tw-foot">
-                        <div class="tw-person">
-                            <div class="tw-avatar">DA</div>
-                            <div>
-                                <div class="tw-name">Diego A.</div>
-                                <div class="tw-role">Recomeçando</div>
-                            </div>
+                    </figure>
+                    <figure class="dp-card" style="width:340px">
+                        <blockquote class="dp-quote">"Estava endividado e perdido. Hoje tenho um plano claro e já saí do vermelho."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">DA</div><div><div class="dp-name">Diego A.</div><div class="dp-role">Recomeçando</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
                         </div>
-                        <div class="tw-stars">★★★★★</div>
-                    </div>
-                </figure>
+                    </figure>
+                    <figure class="dp-card" style="width:360px" aria-hidden="true">
+                        <blockquote class="dp-quote">"Em 30 dias parei de me perder nas contas. Hoje sei exatamente quanto posso gastar sem culpa."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">MS</div><div><div class="dp-name">Mariana S.</div><div class="dp-role">Autônoma</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
+                        </div>
+                    </figure>
+                    <figure class="dp-card" style="width:460px" aria-hidden="true">
+                        <blockquote class="dp-quote">"A gente brigava por dinheiro. Planejando juntos no Atlas, acabou o stress e sobrou plano. Hoje é decisão a dois, sem briga."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">RJ</div><div><div class="dp-name">Rafael & Júlia</div><div class="dp-role">Casal</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
+                        </div>
+                    </figure>
+                    <figure class="dp-card" style="width:340px" aria-hidden="true">
+                        <blockquote class="dp-quote">"Separar a vida pessoal da empresa era um caos. O Atlas me deu clareza pra finalmente crescer."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">CM</div><div><div class="dp-name">Carlos M.</div><div class="dp-role">Empreendedor</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
+                        </div>
+                    </figure>
+                    <figure class="dp-card" style="width:440px" aria-hidden="true">
+                        <blockquote class="dp-quote">"Vi minha renda passiva projetada e entendi, pela primeira vez, o meu caminho até a liberdade financeira."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">AP</div><div><div class="dp-name">Ana P.</div><div class="dp-role">Começando a investir</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
+                        </div>
+                    </figure>
+                    <figure class="dp-card" style="width:340px" aria-hidden="true">
+                        <blockquote class="dp-quote">"Pela primeira vez sei pra onde meu dinheiro vai. Montei minha reserva em 4 meses."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">BT</div><div><div class="dp-name">Bruno T.</div><div class="dp-role">Pai de família</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
+                        </div>
+                    </figure>
+                    <figure class="dp-card" style="width:420px" aria-hidden="true">
+                        <blockquote class="dp-quote">"Parei de usar três planilhas. O Atlas junta tudo e ainda me diz qual o próximo passo a dar."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">LM</div><div><div class="dp-name">Letícia M.</div><div class="dp-role">Profissional liberal</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
+                        </div>
+                    </figure>
+                    <figure class="dp-card" style="width:340px" aria-hidden="true">
+                        <blockquote class="dp-quote">"Estava endividado e perdido. Hoje tenho um plano claro e já saí do vermelho."</blockquote>
+                        <div class="dp-foot">
+                            <div class="dp-person"><div class="dp-avatar">DA</div><div><div class="dp-name">Diego A.</div><div class="dp-role">Recomeçando</div></div></div>
+                            <div class="dp-stars">★★★★★</div>
+                        </div>
+                    </figure>
             </div>
-            <button class="tw-arrow tw-next" aria-label="Próximo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
         </div>
 
         <style>
-          #tw-carousel{position:relative;width:100%;}
-          #tw-carousel .tw-track{display:flex;gap:24px;transition:transform .55s cubic-bezier(.4,0,.2,1);will-change:transform;}
-          #tw-carousel .tw-card{flex-shrink:0;width:min(460px,84vw);min-height:264px;display:flex;flex-direction:column;background:#fff;border:1px solid #e7e3da;border-radius:18px;box-shadow:0 18px 40px -18px rgba(4,12,17,.25);padding:1.75rem 1.75rem;opacity:.4;transform:scale(.92);transition:opacity .5s ease,transform .5s ease;}
-          #tw-carousel .tw-card.active{opacity:1;transform:scale(1);position:relative;z-index:10;}
-          #tw-carousel .tw-quote{margin:0;font-size:1.15rem;line-height:1.5;color:#040C11;font-weight:500;flex:1;}
-          #tw-carousel .tw-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid #eee;margin-top:1.25rem;padding-top:1.1rem;}
-          #tw-carousel .tw-person{display:flex;align-items:center;gap:.7rem;min-width:0;}
-          #tw-carousel .tw-avatar{width:42px;height:42px;border-radius:9999px;background:#1A5E91;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
-          #tw-carousel .tw-name{font-weight:700;color:#040C11;line-height:1.1;}
-          #tw-carousel .tw-role{font-size:.8rem;color:#71717a;}
-          #tw-carousel .tw-stars{color:#F2AB0C;letter-spacing:1px;flex-shrink:0;}
-          #tw-carousel .tw-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;background:#040C11;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;z-index:20;transition:background .2s ease;}
-          #tw-carousel .tw-arrow:hover{background:#1A5E91;}
-          #tw-carousel .tw-arrow svg{width:20px;height:20px;}
-          #tw-carousel .tw-prev{left:12px;} #tw-carousel .tw-next{right:12px;}
-          @media(min-width:768px){ #tw-carousel .tw-prev{left:32px;} #tw-carousel .tw-next{right:32px;} }
+          #section-depoimentos .dp-marquee{position:relative;width:100%;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);}
+          #section-depoimentos .dp-track{display:flex;gap:24px;width:max-content;animation:dp-scroll 55s linear infinite;}
+          #section-depoimentos .dp-marquee:hover .dp-track{animation-play-state:paused;}
+          #section-depoimentos .dp-card{flex-shrink:0;max-width:84vw;min-height:230px;display:flex;flex-direction:column;background:#fff;border:1px solid #e7e3da;border-radius:18px;box-shadow:0 18px 40px -20px rgba(4,12,17,.22);padding:1.6rem;}
+          #section-depoimentos .dp-quote{margin:0;font-size:1.08rem;line-height:1.5;color:#040C11;font-weight:500;flex:1;}
+          #section-depoimentos .dp-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid #eee;margin-top:1.1rem;padding-top:1rem;}
+          #section-depoimentos .dp-person{display:flex;align-items:center;gap:.7rem;min-width:0;}
+          #section-depoimentos .dp-avatar{width:42px;height:42px;border-radius:9999px;background:#1A5E91;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
+          #section-depoimentos .dp-name{font-weight:700;color:#040C11;line-height:1.1;}
+          #section-depoimentos .dp-role{font-size:.8rem;color:#71717a;}
+          #section-depoimentos .dp-stars{color:#F2AB0C;letter-spacing:1px;flex-shrink:0;}
+          @keyframes dp-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+          @media (prefers-reduced-motion: reduce){ #section-depoimentos .dp-track{animation:none;} }
         </style>
-
-        <script>
-        (function(){
-          var root=document.getElementById('tw-carousel'); if(!root) return;
-          var track=root.querySelector('.tw-track');
-          var cards=root.querySelectorAll('.tw-card');
-          var prev=root.querySelector('.tw-prev'),next=root.querySelector('.tw-next');
-          var i=Math.floor(cards.length/2),n=cards.length,auto=null,stopped=false;
-          function layout(){ var vp=root.clientWidth; var cw=cards[0].offsetWidth; var gap=parseInt(getComputedStyle(track).gap)||24; var tx=vp/2-cw/2-i*(cw+gap); track.style.transform='translateX('+tx+'px)'; cards.forEach(function(c,j){c.classList.toggle('active',j===i);}); }
-          function go(k){ i=(k+n)%n; layout(); }
-          function startAuto(){ if(stopped)return; auto=setInterval(function(){go(i+1);},5000); }
-          function stopAuto(){ stopped=true; if(auto){clearInterval(auto);auto=null;} }
-          prev.addEventListener('click',function(){stopAuto();go(i-1);});
-          next.addEventListener('click',function(){stopAuto();go(i+1);});
-          var x0=null;
-          track.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
-          track.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){stopAuto();go(dx<0?i+1:i-1);}x0=null;});
-          window.addEventListener('resize',layout);
-          window.addEventListener('load',layout);
-          layout(); startAuto();
-        })();
-        </script>
     </section>
 
     <section id="section-8" class="w-full bg-atlas-bg py-10 lg:py-32 px-4 relative border-t border-zinc-200">
