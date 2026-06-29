@@ -1430,8 +1430,8 @@
             <div id="lp-stage" class="lp-laptop">
                 <div class="lp-screen">
                     <div id="lp-viewport" class="lp-viewport">
-                        <div class="lp-ph">Salve o print do relatório como<br><b>relatorio-metodo.png</b></div>
-                        <img id="lp-report" class="lp-report" src="relatorio-metodo.png" alt="Relatório do Método Atlas" onerror="this.style.display='none'">
+                        <div class="lp-ph">Salve o print do relatório como<br><b>relatorio-metodo.webp</b></div>
+                        <img id="lp-report" class="lp-report" src="relatorio-metodo.webp" alt="Relatório do Método Atlas" onerror="this.style.display='none'">
                     </div>
                 </div>
                 <div class="lp-base"><div class="lp-notch"></div></div>
@@ -1460,7 +1460,7 @@
             if(max<=8 || typeof img.animate!=='function') return;
             if(anim) anim.cancel();
             var dur=Math.min(Math.max(max*5, 14000), 32000);
-            anim=img.animate([{transform:'translateY(0)'},{transform:'translateY(-'+max+'px)'}],{duration:dur,direction:'alternate',iterations:Infinity,easing:'ease-in-out'});
+            anim=img.animate([{transform:'translateY(0)'},{transform:'translateY(-'+max+'px)'}],{duration:dur,direction:'alternate',iterations:Infinity,easing:'linear'});
           }
           if(img.complete && img.naturalHeight) start(); else img.addEventListener('load',start);
           var rt;
