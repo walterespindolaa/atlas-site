@@ -5,25 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atlas | Toda montanha precisa de um caminho</title>
         <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Parkinsans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         atlas: {
-                            blue: '#1A5E91',
-                            bg: '#FAF4E8',
+                            blue: '#1C5E91',
+                            bg: '#FDF4E8',
                             green: '#1E613E',
-                            red: '#A82F26',
+                            red: '#B82B26',
                             yellow: '#F2AB0C',
                             dark: '#040C11',
-                            lightBlue: '#69AAD1',
+                            lightBlue: '#69A0C1',
                             lightGreen: '#72B28F',
-                            beige: '#EFCA7F',
+                            beige: '#EFCA71',
                             pink: '#D37976'
                         }
                     }
@@ -35,9 +31,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-        h1, h2, .font-display { font-family: 'Climate Crisis', 'Parkinsans', sans-serif; }
-        h3, h4, h5, h6 { font-family: 'Parkinsans', sans-serif; }
-
         @font-face {
             font-family: 'Familjen Grotesk';
             src: url('FamiljenGrotesk-VariableFont_wght.ttf') format('truetype');
@@ -46,11 +39,11 @@
         }
 
         body {
-            font-family: 'Parkinsans', sans-serif;
+            font-family: 'Familjen Grotesk', sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            background-color: #1A5E91; /* Cor de fundo base caso o vídeo falhe */
+            background-color: #1C5E91; /* Cor de fundo base caso o vídeo falhe */
         }
 
         /* Estilos personalizados para os polígonos e gradientes */
@@ -92,7 +85,7 @@
             left: 0;
             width: 100%;
             height: 60%; /* Cobre a parte inferior */
-            background: linear-gradient(to top, #1A5E91 0%, rgba(28, 94, 145, 0) 100%);
+            background: linear-gradient(to top, #1C5E91 0%, rgba(28, 94, 145, 0) 100%);
             z-index: -1;
         }
 
@@ -274,7 +267,7 @@
         }
     
         .font-playfair {
-            font-family: 'Parkinsans', sans-serif; font-style: italic; font-weight: 400;
+            font-family: 'Playfair Display', serif;
         }
 
         @keyframes glow-sweep {
@@ -1065,7 +1058,7 @@
                     <div class="p-8 pb-4">
                         <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
                             Atlas IA
-                            <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#72B28F] opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-[#72B28F]"></span></span>
+                            <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A3E635] opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-[#A3E635]"></span></span>
                         </h3>
                         <p class="text-blue-100/70 text-[15px] leading-relaxed">Pergunta como pra um amigo. Responde como um planejador. Conhece seus números.</p>
                     </div>
@@ -1548,7 +1541,7 @@
             <!-- P.S. Emocional -->
             <div class="w-full p-8 md:p-14 bg-[#F9F6F0] rounded-3xl relative overflow-hidden shadow-inner border border-[#e2dfd8] text-center flex flex-col items-center">
                 <div class="absolute top-0 right-0 w-[40%] h-[40%] bg-gradient-to-bl from-atlas-blue/20 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute bottom-0 left-0 w-[40%] h-[40%] bg-gradient-to-tr from-[#72B28F]/15 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-[40%] h-[40%] bg-gradient-to-tr from-[#A3E635]/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
                 
                 <h4 class="font-playfair italic text-4xl text-atlas-blue mb-8 font-normal">P.S.</h4>
                 <div class="space-y-6 text-lg md:text-xl text-zinc-700 leading-relaxed font-medium relative z-10 max-w-4xl mx-auto flex flex-col items-center">
@@ -1586,7 +1579,7 @@
                 O Atlas mostra onde você está hoje, o próximo passo e o que muda se escolher um caminho diferente. Sua jornada começa aqui.
             </p>
             
-            <button class="px-10 py-5 rounded-2xl bg-atlas-green text-white text-xl md:text-2xl font-extrabold hover:bg-atlas-green/90 transition-all shadow-[0_4px_24px_0_rgba(163,230,53,0.5)] animate-heartbeat">
+            <button class="px-10 py-5 rounded-2xl bg-[#A3E635] text-atlas-dark text-xl md:text-2xl font-extrabold hover:bg-[#8cdc18] transition-all shadow-[0_4px_24px_0_rgba(163,230,53,0.5)] animate-heartbeat">
                 Começar agora!
             </button>
         </div>
@@ -1595,9 +1588,6 @@
         <div class="w-full max-w-5xl mx-auto mt-16 md:mt-24 relative z-10 flex justify-center translate-y-2 md:translate-y-4">
             <img src="Imagem%20de%20Fundo%204%20relatorios%202.webp" alt="Jornada Atlas - O Topo da Montanha" class="w-[75%] md:w-[60%] lg:w-[65%] max-w-2xl object-contain drop-shadow-2xl mx-auto">
         </div>
-
-        <!-- Mascote Atlas (mochila) -->
-        <img src="Mochila%2001.png" alt="Mascote Atlas" class="hidden md:block absolute bottom-6 left-6 lg:left-20 w-24 lg:w-32 z-30 drop-shadow-xl pointer-events-none select-none animate-float">
 
     </section>
     <!-- === FOOTER === -->
