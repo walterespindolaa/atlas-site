@@ -659,24 +659,6 @@
 
     
     <!-- === SEÇÃO 4: Timeline === -->
-    <!-- === FAIXA DE NUMEROS (count-up) === -->
-    <section id="section-stats" class="w-full bg-atlas-bg py-12 md:py-16 px-4 border-t border-zinc-200">
-        <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div><div class="stat-num text-4xl md:text-5xl font-bold text-atlas-blue" data-target="300" data-suffix="+">0</div><p class="text-zinc-600 text-sm md:text-base mt-1">famílias com mais clareza</p></div>
-            <div><div class="stat-num text-4xl md:text-5xl font-bold text-atlas-blue" data-target="12" data-suffix="">0</div><p class="text-zinc-600 text-sm md:text-base mt-1">ferramentas num só app</p></div>
-            <div><div class="stat-num text-4xl md:text-5xl font-bold text-atlas-blue" data-target="2" data-suffix="s">0</div><p class="text-zinc-600 text-sm md:text-base mt-1">pra saber seu score</p></div>
-            <div><div class="stat-num text-4xl md:text-5xl font-bold text-atlas-blue" data-target="7" data-suffix="">0</div><p class="text-zinc-600 text-sm md:text-base mt-1">dias grátis pra testar</p></div>
-        </div>
-        <script>
-        (function(){
-          var sec=document.getElementById('section-stats'); if(!sec) return;
-          var nums=sec.querySelectorAll('.stat-num'); var done=false;
-          function run(){ if(done)return; done=true; nums.forEach(function(el){ var t=parseInt(el.getAttribute('data-target'),10)||0; var suf=el.getAttribute('data-suffix')||''; var dur=1200,st=null; function step(ts){ if(!st)st=ts; var p=Math.min((ts-st)/dur,1); el.textContent=Math.round(p*t)+suf; if(p<1)requestAnimationFrame(step);} requestAnimationFrame(step); }); }
-          if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)run();});},{threshold:0.4}); io.observe(sec); } else { run(); }
-        })();
-        </script>
-    </section>
-
     <section id="section-4" class="w-full bg-atlas-blue flex flex-col items-center pt-16 md:pt-24 pb-20 md:pb-32 relative overflow-hidden lg:mt-0">
         
         <!-- Título -->
@@ -1235,9 +1217,12 @@
     <!-- === SECAO: VEJA O ATLAS POR DENTRO (mockup + carrossel) === -->
     <!-- === SECAO: VEJA O ATLAS POR DENTRO (mockup + carrossel + texto sincronizado) === -->
     <section id="section-app" class="w-full bg-atlas-blue py-16 md:py-28 px-4 relative overflow-hidden border-t border-white/10">
-        <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
-            <div class="absolute top-0 right-0 w-[55%] h-full bg-[#36DCF5]/25 blur-[160px] rounded-full"></div>
-            <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="" aria-hidden="true" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[300px] opacity-[0.06] select-none">
+        <div class="absolute inset-0 z-0">
+            <img src="BG%20AZUL.webp" alt="" aria-hidden="true" class="w-full h-full object-cover opacity-60">
+            <div class="absolute inset-0 bg-atlas-blue/75"></div>
+            <div class="absolute top-0 right-0 w-[55%] h-full bg-[#36DCF5]/20 blur-[160px] rounded-full pointer-events-none"></div>
+            <div class="absolute -top-16 -left-10 w-72 h-72 rounded-full bg-white/5 blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 right-0 w-80 h-80 rounded-full bg-[#36DCF5]/10 blur-3xl pointer-events-none"></div>
         </div>
 
         <div class="max-w-6xl mx-auto relative z-10">
@@ -1247,7 +1232,7 @@
             <div id="mk-carousel" class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
                 <!-- TEXTO (muda por tela) -->
-                <div class="order-2 lg:order-1 text-center lg:text-left">
+                <div class="order-2 lg:order-1 text-center lg:text-left rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-7 md:p-9 shadow-2xl">
                     <span id="mk-kicker" class="inline-block text-atlas-lightBlue font-bold text-sm uppercase tracking-wider mb-3">Painel</span>
                     <h2 id="mk-title" class="text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-4">Tudo num lugar, em segundos</h2>
                     <p id="mk-desc" class="text-white/75 text-base md:text-lg leading-relaxed max-w-md mx-auto lg:mx-0">Score, fluxo do mês e próximos vencimentos numa tela só. Você abre o app e já sabe onde está — sem planilha, sem confusão.</p>
@@ -1396,179 +1381,150 @@
 
         <!-- === SEÇÃO 8: Pricing === -->
     <!-- === SECAO DEPOIMENTOS (SUBSTITUIR pelos reais antes de publicar) === -->
-    <!-- === SECAO DEPOIMENTOS (carrossel infinito) === -->
-    <section id="section-depoimentos" class="w-full bg-atlas-dark py-16 md:py-24 relative border-t border-white/10 overflow-hidden">
+    <!-- === SECAO DEPOIMENTOS (carrossel focado estilo imagem 2) === -->
+    <section id="section-depoimentos" class="w-full bg-atlas-bg py-16 md:py-24 relative border-t border-zinc-200 overflow-hidden">
         <div class="text-center mb-12 md:mb-16 px-4">
-            <h2 class="text-white text-3xl md:text-5xl font-bold tracking-tight mb-3">Histórias de quem já está subindo</h2>
-            <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto">Pessoas reais que trocaram o caos por clareza com o Atlas.</p>
+            <h2 class="text-atlas-dark text-3xl md:text-5xl font-bold tracking-tight mb-3">Histórias de quem já está subindo</h2>
+            <p class="text-zinc-500 text-base md:text-lg max-w-2xl mx-auto">Pessoas reais que trocaram o caos por clareza com o Atlas.</p>
         </div>
-        <div class="dp-marquee">
-            <div class="dp-track">
-                    <figure class="dp-card">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">MS</div>
+        <div id="tw-carousel" class="tw-viewport relative">
+            <button class="tw-arrow tw-prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg></button>
+            <div class="tw-track">
+                <figure class="tw-card">
+                    <blockquote class="tw-quote">"Em 30 dias parei de me perder nas contas. Hoje sei exatamente quanto posso gastar sem culpa."</blockquote>
+                    <div class="tw-foot">
+                        <div class="tw-person">
+                            <div class="tw-avatar">MS</div>
                             <div>
-                                <figcaption class="text-white font-bold leading-tight">Mariana S.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Autônoma</p>
+                                <div class="tw-name">Mariana S.</div>
+                                <div class="tw-role">Autônoma</div>
                             </div>
                         </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Em 30 dias parei de me perder nas contas. Hoje sei exatamente quanto posso gastar sem culpa."</blockquote>
-                    </figure>
-                    <figure class="dp-card">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">RJ</div>
+                        <div class="tw-stars">★★★★★</div>
+                    </div>
+                </figure>
+                <figure class="tw-card">
+                    <blockquote class="tw-quote">"A gente brigava por dinheiro. Planejando juntos no Atlas, acabou o stress e sobrou plano."</blockquote>
+                    <div class="tw-foot">
+                        <div class="tw-person">
+                            <div class="tw-avatar">RJ</div>
                             <div>
-                                <figcaption class="text-white font-bold leading-tight">Rafael & Júlia</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Casal</p>
+                                <div class="tw-name">Rafael & Júlia</div>
+                                <div class="tw-role">Casal</div>
                             </div>
                         </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"A gente brigava por dinheiro. Planejando juntos no Atlas, acabou o stress e sobrou plano."</blockquote>
-                    </figure>
-                    <figure class="dp-card">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">CM</div>
+                        <div class="tw-stars">★★★★★</div>
+                    </div>
+                </figure>
+                <figure class="tw-card">
+                    <blockquote class="tw-quote">"Separar a vida pessoal da empresa era um caos. O Atlas me deu clareza pra finalmente crescer."</blockquote>
+                    <div class="tw-foot">
+                        <div class="tw-person">
+                            <div class="tw-avatar">CM</div>
                             <div>
-                                <figcaption class="text-white font-bold leading-tight">Carlos M.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Empreendedor</p>
+                                <div class="tw-name">Carlos M.</div>
+                                <div class="tw-role">Empreendedor</div>
                             </div>
                         </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Separar a vida pessoal da empresa era um caos. O Atlas me deu clareza pra finalmente crescer."</blockquote>
-                    </figure>
-                    <figure class="dp-card">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">AP</div>
+                        <div class="tw-stars">★★★★★</div>
+                    </div>
+                </figure>
+                <figure class="tw-card">
+                    <blockquote class="tw-quote">"Vi minha renda passiva projetada e entendi, pela primeira vez, o meu caminho até a liberdade."</blockquote>
+                    <div class="tw-foot">
+                        <div class="tw-person">
+                            <div class="tw-avatar">AP</div>
                             <div>
-                                <figcaption class="text-white font-bold leading-tight">Ana P.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Começando a investir</p>
+                                <div class="tw-name">Ana P.</div>
+                                <div class="tw-role">Começando a investir</div>
                             </div>
                         </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Vi minha renda passiva projetada e entendi, pela primeira vez, o meu caminho até a liberdade."</blockquote>
-                    </figure>
-                    <figure class="dp-card">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">BT</div>
+                        <div class="tw-stars">★★★★★</div>
+                    </div>
+                </figure>
+                <figure class="tw-card">
+                    <blockquote class="tw-quote">"Pela primeira vez sei pra onde meu dinheiro vai. Montei minha reserva de emergência em 4 meses."</blockquote>
+                    <div class="tw-foot">
+                        <div class="tw-person">
+                            <div class="tw-avatar">BT</div>
                             <div>
-                                <figcaption class="text-white font-bold leading-tight">Bruno T.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Pai de família</p>
+                                <div class="tw-name">Bruno T.</div>
+                                <div class="tw-role">Pai de família</div>
                             </div>
                         </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Pela primeira vez sei pra onde meu dinheiro vai. Montei minha reserva de emergência em 4 meses."</blockquote>
-                    </figure>
-                    <figure class="dp-card">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">LM</div>
+                        <div class="tw-stars">★★★★★</div>
+                    </div>
+                </figure>
+                <figure class="tw-card">
+                    <blockquote class="tw-quote">"Parei de usar três planilhas. O Atlas junta tudo e ainda me diz qual o próximo passo."</blockquote>
+                    <div class="tw-foot">
+                        <div class="tw-person">
+                            <div class="tw-avatar">LM</div>
                             <div>
-                                <figcaption class="text-white font-bold leading-tight">Letícia M.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Profissional liberal</p>
+                                <div class="tw-name">Letícia M.</div>
+                                <div class="tw-role">Profissional liberal</div>
                             </div>
                         </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Parei de usar três planilhas. O Atlas junta tudo e ainda me diz qual o próximo passo."</blockquote>
-                    </figure>
-                    <figure class="dp-card">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">DA</div>
+                        <div class="tw-stars">★★★★★</div>
+                    </div>
+                </figure>
+                <figure class="tw-card">
+                    <blockquote class="tw-quote">"Estava endividado e perdido. Hoje tenho um plano claro e já saí do vermelho."</blockquote>
+                    <div class="tw-foot">
+                        <div class="tw-person">
+                            <div class="tw-avatar">DA</div>
                             <div>
-                                <figcaption class="text-white font-bold leading-tight">Diego A.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Recomeçando</p>
+                                <div class="tw-name">Diego A.</div>
+                                <div class="tw-role">Recomeçando</div>
                             </div>
                         </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Estava endividado e perdido. Hoje tenho um plano claro e já saí do vermelho."</blockquote>
-                    </figure>
-                    <figure class="dp-card" aria-hidden="true">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">MS</div>
-                            <div>
-                                <figcaption class="text-white font-bold leading-tight">Mariana S.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Autônoma</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Em 30 dias parei de me perder nas contas. Hoje sei exatamente quanto posso gastar sem culpa."</blockquote>
-                    </figure>
-                    <figure class="dp-card" aria-hidden="true">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">RJ</div>
-                            <div>
-                                <figcaption class="text-white font-bold leading-tight">Rafael & Júlia</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Casal</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"A gente brigava por dinheiro. Planejando juntos no Atlas, acabou o stress e sobrou plano."</blockquote>
-                    </figure>
-                    <figure class="dp-card" aria-hidden="true">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">CM</div>
-                            <div>
-                                <figcaption class="text-white font-bold leading-tight">Carlos M.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Empreendedor</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Separar a vida pessoal da empresa era um caos. O Atlas me deu clareza pra finalmente crescer."</blockquote>
-                    </figure>
-                    <figure class="dp-card" aria-hidden="true">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">AP</div>
-                            <div>
-                                <figcaption class="text-white font-bold leading-tight">Ana P.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Começando a investir</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Vi minha renda passiva projetada e entendi, pela primeira vez, o meu caminho até a liberdade."</blockquote>
-                    </figure>
-                    <figure class="dp-card" aria-hidden="true">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">BT</div>
-                            <div>
-                                <figcaption class="text-white font-bold leading-tight">Bruno T.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Pai de família</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Pela primeira vez sei pra onde meu dinheiro vai. Montei minha reserva de emergência em 4 meses."</blockquote>
-                    </figure>
-                    <figure class="dp-card" aria-hidden="true">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">LM</div>
-                            <div>
-                                <figcaption class="text-white font-bold leading-tight">Letícia M.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Profissional liberal</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Parei de usar três planilhas. O Atlas junta tudo e ainda me diz qual o próximo passo."</blockquote>
-                    </figure>
-                    <figure class="dp-card" aria-hidden="true">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 rounded-full bg-atlas-blue text-white flex items-center justify-center font-bold shrink-0">DA</div>
-                            <div>
-                                <figcaption class="text-white font-bold leading-tight">Diego A.</figcaption>
-                                <p class="text-atlas-lightBlue text-xs">Recomeçando</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-0.5 text-atlas-yellow text-sm" aria-label="5 estrelas">★★★★★</div>
-                        <blockquote class="text-white/90 text-[15px] leading-relaxed">"Estava endividado e perdido. Hoje tenho um plano claro e já saí do vermelho."</blockquote>
-                    </figure>
+                        <div class="tw-stars">★★★★★</div>
+                    </div>
+                </figure>
             </div>
+            <button class="tw-arrow tw-next" aria-label="Próximo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
         </div>
 
         <style>
-          #section-depoimentos .dp-marquee{position:relative;width:100%;-webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);}
-          #section-depoimentos .dp-track{display:flex;gap:1.25rem;width:max-content;animation:dp-scroll 60s linear infinite;}
-          #section-depoimentos .dp-marquee:hover .dp-track{animation-play-state:paused;}
-          #section-depoimentos .dp-card{width:330px;flex-shrink:0;display:flex;flex-direction:column;gap:1rem;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);border-radius:1rem;padding:1.5rem;}
-          @keyframes dp-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-          @media (prefers-reduced-motion: reduce){ #section-depoimentos .dp-track{animation:none;} }
+          #tw-carousel{position:relative;width:100%;}
+          #tw-carousel .tw-track{display:flex;gap:24px;transition:transform .55s cubic-bezier(.4,0,.2,1);will-change:transform;}
+          #tw-carousel .tw-card{flex-shrink:0;width:min(460px,84vw);min-height:264px;display:flex;flex-direction:column;background:#fff;border:1px solid #e7e3da;border-radius:18px;box-shadow:0 18px 40px -18px rgba(4,12,17,.25);padding:1.75rem 1.75rem;opacity:.4;transform:scale(.92);transition:opacity .5s ease,transform .5s ease;}
+          #tw-carousel .tw-card.active{opacity:1;transform:scale(1);position:relative;z-index:10;}
+          #tw-carousel .tw-quote{margin:0;font-size:1.15rem;line-height:1.5;color:#040C11;font-weight:500;flex:1;}
+          #tw-carousel .tw-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid #eee;margin-top:1.25rem;padding-top:1.1rem;}
+          #tw-carousel .tw-person{display:flex;align-items:center;gap:.7rem;min-width:0;}
+          #tw-carousel .tw-avatar{width:42px;height:42px;border-radius:9999px;background:#1A5E91;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
+          #tw-carousel .tw-name{font-weight:700;color:#040C11;line-height:1.1;}
+          #tw-carousel .tw-role{font-size:.8rem;color:#71717a;}
+          #tw-carousel .tw-stars{color:#F2AB0C;letter-spacing:1px;flex-shrink:0;}
+          #tw-carousel .tw-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:12px;background:#040C11;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;z-index:20;transition:background .2s ease;}
+          #tw-carousel .tw-arrow:hover{background:#1A5E91;}
+          #tw-carousel .tw-arrow svg{width:20px;height:20px;}
+          #tw-carousel .tw-prev{left:12px;} #tw-carousel .tw-next{right:12px;}
+          @media(min-width:768px){ #tw-carousel .tw-prev{left:32px;} #tw-carousel .tw-next{right:32px;} }
         </style>
+
+        <script>
+        (function(){
+          var root=document.getElementById('tw-carousel'); if(!root) return;
+          var track=root.querySelector('.tw-track');
+          var cards=root.querySelectorAll('.tw-card');
+          var prev=root.querySelector('.tw-prev'),next=root.querySelector('.tw-next');
+          var i=Math.floor(cards.length/2),n=cards.length,auto=null,stopped=false;
+          function layout(){ var vp=root.clientWidth; var cw=cards[0].offsetWidth; var gap=parseInt(getComputedStyle(track).gap)||24; var tx=vp/2-cw/2-i*(cw+gap); track.style.transform='translateX('+tx+'px)'; cards.forEach(function(c,j){c.classList.toggle('active',j===i);}); }
+          function go(k){ i=(k+n)%n; layout(); }
+          function startAuto(){ if(stopped)return; auto=setInterval(function(){go(i+1);},5000); }
+          function stopAuto(){ stopped=true; if(auto){clearInterval(auto);auto=null;} }
+          prev.addEventListener('click',function(){stopAuto();go(i-1);});
+          next.addEventListener('click',function(){stopAuto();go(i+1);});
+          var x0=null;
+          track.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+          track.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){stopAuto();go(dx<0?i+1:i-1);}x0=null;});
+          window.addEventListener('resize',layout);
+          window.addEventListener('load',layout);
+          layout(); startAuto();
+        })();
+        </script>
     </section>
 
     <section id="section-8" class="w-full bg-atlas-bg py-10 lg:py-32 px-4 relative border-t border-zinc-200">
