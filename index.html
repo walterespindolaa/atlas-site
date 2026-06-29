@@ -439,7 +439,7 @@
               (function(){
                 var v=document.getElementById('hero-video');
                 if(!v) return;
-                var RATE=0.6; /* velocidade do hero (1 = normal, 0.6 = mais lento) */
+                var RATE=1.0; /* lentidao ja embutida no video; 1 = normal */
                 function slow(){ try{ v.playbackRate=RATE; }catch(e){} }
                 v.addEventListener('loadedmetadata', slow);
                 v.addEventListener('play', slow);
