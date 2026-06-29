@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Backups locais (não enviar ao repositório)
+.bak_pre_local/
