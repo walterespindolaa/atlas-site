@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1002140935906851');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1002140935906851&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <title>Atlas | Toda montanha precisa de um caminho</title>
     <meta name="description" content="Atlas é o app de planejamento financeiro pessoal que mostra onde você está e o próximo passo do seu dinheiro: metas com data, decisões com dados e o seu futuro projetado. Teste 7 dias grátis, sem cartão.">
     <meta property="og:type" content="website">
@@ -1113,14 +1132,15 @@
                         </h3>
                         <p class="text-blue-100/70 text-[15px] leading-relaxed">Pergunta como pra um amigo. Responde como um planejador. Conhece seus números.</p>
                     </div>
-                    <!-- Glow Animation -->
-                    <div class="relative w-full border-t border-white/10 h-48 overflow-hidden flex items-center justify-center mt-4">
-                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(54,124,245,0.4)_0%,transparent_70%)]"></div>
-                        <div class="relative group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute inset-0 animate-ping rounded-full bg-atlas-blue opacity-30 duration-1000"></div>
-                            <div class="w-14 h-14 bg-gradient-to-tr from-atlas-blue to-blue-400 rounded-full shadow-[0_0_40px_rgba(54,124,245,0.8)] flex items-center justify-center relative z-10">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <!-- Mini chat (mostra o que a IA faz) -->
+                    <div class="relative w-full border-t border-white/10 h-48 overflow-hidden mt-4 p-5 flex flex-col justify-center gap-3">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(54,124,245,0.18)_0%,transparent_70%)]"></div>
+                        <div class="relative self-end max-w-[82%] bg-white/10 text-blue-50 text-[13px] leading-snug rounded-2xl rounded-br-md px-3.5 py-2">Posso trocar de carro ainda esse ano?</div>
+                        <div class="relative self-start max-w-[88%] flex items-end gap-2">
+                            <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-atlas-blue to-blue-400 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(54,124,245,0.6)]">
+                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             </div>
+                            <div class="bg-atlas-blue text-white text-[13px] leading-snug rounded-2xl rounded-bl-md px-3.5 py-2">Dá — mas atrasa sua meta em <span class="font-bold text-[#8FE3B0]">4 meses</span>. Melhor a partir de setembro.</div>
                         </div>
                     </div>
                 </div>
@@ -2305,6 +2325,30 @@
                 }
             });
         });
+    </script>
+
+    <!-- Meta Pixel - Eventos de conversao nos CTAs -->
+    <script>
+    (function(){
+        function fire(ev, params){ if(window.fbq){ fbq('track', ev, params || {}); } }
+        document.addEventListener('click', function(e){
+            var a = e.target.closest ? e.target.closest('a[href*="app.useatlasapp.com"]') : null;
+            if(!a) return;
+            var href = a.getAttribute('href') || '';
+            // A LP dispara ViewContent (intencao/retargeting). Os eventos "fortes"
+            // (InitiateCheckout, CompleteRegistration, Purchase, Subscribe) sao disparados
+            // dentro do app app.useatlasapp.com, para nao duplicar contagem.
+            if(href.indexOf('/comece') > -1){
+                fire('ViewContent', { content_name:'trial', content_category:'trial' });
+            } else if(href.indexOf('/comprar/essencial') > -1){
+                fire('ViewContent', { currency:'BRL', value:15.90, content_name:'Essencial', content_category:'plano', content_ids:['essencial'] });
+            } else if(href.indexOf('/comprar/pro') > -1){
+                fire('ViewContent', { currency:'BRL', value:24.90, content_name:'Pro', content_category:'plano', content_ids:['pro'] });
+            } else if(href.indexOf('/comprar/elite') > -1){
+                fire('ViewContent', { currency:'BRL', value:32.90, content_name:'Elite', content_category:'plano', content_ids:['elite'] });
+            }
+        }, true);
+    })();
     </script>
 </body>
 </html>
