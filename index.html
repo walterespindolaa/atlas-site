@@ -25,15 +25,18 @@
     <title>Atlas | App de Planejamento Financeiro Pessoal</title>
     <meta name="description" content="Atlas é o app de planejamento financeiro pessoal que mostra onde você está e o próximo passo do seu dinheiro: metas com data, decisões com dados e o seu futuro projetado. Teste 7 dias grátis, sem cartão.">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Atlas | Toda montanha precisa de um caminho">
+    <meta property="og:title" content="Atlas | App de Planejamento Financeiro Pessoal">
     <meta property="og:description" content="O app de planejamento financeiro que mostra onde você está e o próximo passo. Metas com data, decisões com dados. Teste 7 dias grátis, sem cartão.">
     <meta property="og:image" content="https://www.useatlasapp.com/Imagem%20de%20Fundo%204%20relatorios%202.webp">
     <meta property="og:url" content="https://www.useatlasapp.com/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Atlas | Toda montanha precisa de um caminho">
+    <meta name="twitter:title" content="Atlas | App de Planejamento Financeiro Pessoal">
     <meta name="twitter:description" content="O app de planejamento financeiro que mostra onde você está e o próximo passo. Teste 7 dias grátis, sem cartão.">
     <meta name="twitter:image" content="https://www.useatlasapp.com/Imagem%20de%20Fundo%204%20relatorios%202.webp">
         <link rel="canonical" href="https://www.useatlasapp.com/">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[
       {"@type":"Organization","name":"Atlas","url":"https://www.useatlasapp.com/","logo":"https://www.useatlasapp.com/export_2026-06-04T03_26_23-606Z/Group%201_1x.webp"},
@@ -350,59 +353,6 @@
         }
 
         </style>
-
-    <!-- Dynamic Favicon -->
-    <script>
-        (function() {
-            function updateFavicon() {
-                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                const img = new Image();
-                img.crossOrigin = "Anonymous";
-                
-                img.onload = function() {
-                    canvas.width = img.width || 32;
-                    canvas.height = img.height || 32;
-                    
-                    if (isDark) {
-                        // In dark mode, we want a white logo. The original is black.
-                        ctx.filter = 'brightness(0) invert(1)';
-                    } else {
-                        // In light mode, we want a black logo.
-                        ctx.filter = 'brightness(0)';
-                    }
-                    
-                    ctx.drawImage(img, 0, 0);
-                    
-                    let link = document.querySelector("link[rel*='icon']");
-                    if (!link) {
-                        link = document.createElement('link');
-                        link.rel = 'icon';
-                        document.head.appendChild(link);
-                    }
-                    link.type = 'image/png';
-                    try {
-                        link.href = canvas.toDataURL('image/png');
-                    } catch (e) {
-                        console.error("Favicon canvas taint error", e);
-                        // Fallback to direct image
-                        link.href = img.src;
-                    }
-                };
-                // Using raw.githubusercontent.com for proper CORS headers
-                img.src = "export_2026-06-04T03_26_23-606Z/Group%201_1x.webp";
-            }
-
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", updateFavicon);
-            } else {
-                updateFavicon();
-            }
-            
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
-        })();
-    </script>
 </head>
 <body>
     <!-- Navbar -->
