@@ -5,4 +5,8 @@
   <url><loc>https://www.useatlasapp.com/suporte</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.useatlasapp.com/blog</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://www.useatlasapp.com/blog/planejamento-financeiro-pessoal</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.useatlasapp.com/blog/reserva-de-emergencia</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.useatlasapp.com/blog/como-sair-das-dividas</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.useatlasapp.com/blog/planilha-ou-aplicativo-financeiro</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.useatlasapp.com/blog/financas-do-casal</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
