@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas | A Subida: toda montanha precisa de um caminho</title>
+<meta name="description" content="Um tour pela montanha do seu dinheiro: da base ao cume. O Atlas mostra onde você está, o próximo passo e o que muda se escolher um caminho diferente. 7 dias grátis, sem cartão.">
+
+<!--
+════════════════════════════════════════════════════════════════════
+ ATLAS — LP "A SUBIDA" · scroll = subir a montanha (vídeo scrubbed)
+ O fundo é o vídeo da montanha em A. Conforme o usuário rola,
+ a câmera sobe da base ao cume. Cada seção é um acampamento.
+ Base → Peso (dor) → Mapa (solução) → Equipamento (ferramentas)
+ → Guia (história) → Cordada (prova) → Escolha (planos) → CUME.
+════════════════════════════════════════════════════════════════════
+-->
+
+<meta name="theme-color" content="#0B1A30">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1002140935906851');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1002140935906851&ev=PageView&noscript=1"/></noscript>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --blue:#1A5E91; --deep:#0B1A30; --ink:#040C11;
+  --light:#69AAD1; --beige:#EFCA7F; --bg:#FAF4E8;
+  --red:#A82F26; --red-h:#c23a30; --white:#fff;
+  --cream:#FFE9BD; /* destaque legível sobre céu claro */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{font-family:'Parkinsans',sans-serif;color:#fff;background:var(--deep);overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400}
+
+/* ════ FUNDO: a montanha (vídeo scrubbed pelo scroll) ════ */
+#montanha{position:fixed;inset:0;width:100vw;height:100vh;object-fit:cover;z-index:-3;background:#0B1A30}
+#veu{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,rgba(4,12,17,.12) 30%,rgba(4,12,17,.6) 100%);opacity:.9}
+#veu-solid{position:fixed;inset:0;z-index:-2;pointer-events:none;background:rgba(4,12,17,.38);opacity:0}
+/* nuvens flutuando por cima do vídeo */
+.nuvem{position:fixed;z-index:-1;pointer-events:none;filter:blur(30px);opacity:.5;border-radius:50%;background:rgba(255,255,255,.5)}
+.n1{width:44vw;height:12vw;top:16%;left:-20vw;animation:deriva 60s linear infinite}
+.n2{width:34vw;height:9vw;top:58%;left:-30vw;animation:deriva 85s linear infinite 12s}
+.n3{width:52vw;height:13vw;top:80%;left:-25vw;animation:deriva 70s linear infinite 30s}
+@keyframes deriva{to{transform:translateX(190vw)}}
+
+/* ════ HUD de altitude ════ */
+#hud{position:fixed;left:26px;top:50%;transform:translateY(-50%);z-index:120;display:flex;flex-direction:column;gap:0;user-select:none}
+#hud .alt{font-size:13px;font-weight:800;color:var(--beige);letter-spacing:.06em;margin-bottom:14px;background:rgba(4,12,17,.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);padding:8px 12px;border-radius:10px;white-space:nowrap}
+#hud .trilho{position:relative;margin-left:12px;display:flex;flex-direction:column;gap:26px;padding:6px 0}
+#hud .trilho::before{content:"";position:absolute;left:4px;top:0;bottom:0;width:1.5px;background:rgba(255,255,255,.22)}
+#hud .trilho .fio{position:absolute;left:4px;top:0;width:1.5px;height:0;background:var(--beige)}
+#hud .camp{position:relative;display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600;color:rgba(255,255,255,.55);cursor:pointer;transition:color .3s}
+#hud .camp i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);border:1.5px solid transparent;transition:all .3s;flex-shrink:0}
+#hud .camp.on{color:#fff}
+#hud .camp.on i{background:var(--beige);box-shadow:0 0 12px rgba(239,202,127,.8);transform:scale(1.3)}
+#hud .camp span{opacity:0;transform:translateX(-6px);transition:all .3s;background:rgba(4,12,17,.6);backdrop-filter:blur(6px);padding:4px 10px;border-radius:8px;white-space:nowrap}
+#hud .camp.on span,#hud:hover .camp span{opacity:1;transform:none}
+@media(max-width:900px){#hud{left:auto;right:12px;top:auto;bottom:78px;transform:none}#hud .trilho{display:none}#hud .alt{margin:0;font-size:11.5px;padding:7px 11px}}
+
+/* ════ nav ════ */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1120px,94%);display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:rgba(4,12,17,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:100px;z-index:150}
+nav img{height:30px}
+.nav-cta{background:var(--red);font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:100px;transition:transform .2s,background .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--red-h);transform:translateY(-2px)}
+
+/* ════ tipografia / componentes ════ */
+.wrap{max-width:1100px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--beige);background:rgba(4,12,17,.5);backdrop-filter:blur(8px);border:1px solid rgba(239,202,127,.35);border-radius:100px;padding:9px 18px;margin-bottom:26px}
+.kicker b{color:#fff;font-weight:800}
+h1{font-size:clamp(38px,6.4vw,76px);font-weight:800;line-height:1.05;letter-spacing:-.02em;text-shadow:0 2px 6px rgba(4,12,17,.75),0 8px 40px rgba(4,12,17,.65)}
+h2{font-size:clamp(28px,4.6vw,50px);font-weight:800;line-height:1.12;letter-spacing:-.01em;text-shadow:0 2px 6px rgba(4,12,17,.75),0 6px 32px rgba(4,12,17,.65)}
+.lead{font-size:clamp(16px,2vw,19.5px);line-height:1.65;color:rgba(255,255,255,.95);text-shadow:0 1px 4px rgba(4,12,17,.8),0 4px 20px rgba(4,12,17,.6)}
+.destaque-serif{color:var(--cream);text-shadow:0 2px 8px rgba(4,12,17,.85),0 8px 38px rgba(4,12,17,.75)}
+.hl{background:linear-gradient(90deg,#FFE9BD,#FFD98A,#FFE9BD);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;animation:hue 4.5s linear infinite;filter:drop-shadow(0 2px 3px rgba(4,12,17,.6)) drop-shadow(0 8px 26px rgba(4,12,17,.5))}
+@keyframes hue{to{background-position:200% center}}
+.glass{background:rgba(4,12,17,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.14);border-radius:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:var(--red);color:#fff;font-weight:800;border-radius:100px;padding:20px 46px;font-size:clamp(17px,2.2vw,22px);transition:transform .25s,box-shadow .25s,background .25s;box-shadow:0 12px 36px rgba(168,47,38,.5);position:relative;overflow:hidden;text-transform:uppercase;letter-spacing:.03em}
+.btn:hover{transform:translateY(-3px) scale(1.02);background:var(--red-h);box-shadow:0 18px 48px rgba(168,47,38,.65)}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:sheen 3.6s ease-in-out infinite}
+@keyframes sheen{0%,60%{left:-80%}100%{left:130%}}
+.micro{margin-top:15px;font-size:13.5px;color:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.check{width:15px;height:15px;flex-shrink:0}
+
+/* reveals */
+.rv{opacity:0;transform:translateY(44px)}
+.rv-l{opacity:0;transform:translateX(-54px)}
+.rv-r{opacity:0;transform:translateX(54px)}
+.rv-s{opacity:0;transform:scale(.86)}
+
+/* ════ seções (acampamentos) ════ */
+section{position:relative;min-height:100vh;display:flex;align-items:center;padding:16vh 0}
+#zona{background:linear-gradient(180deg,rgba(4,12,17,0) 0%,rgba(4,12,17,.68) 2.2%,rgba(4,12,17,.72) 50%,rgba(4,12,17,.68) 97%,rgba(4,12,17,0) 100%)}
+
+/* BASE */
+#base{min-height:100svh;text-align:center;flex-direction:column;justify-content:center;padding-top:20vh}
+#base .badge{display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:100px;background:rgba(4,12,17,.45);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.16);font-size:13.5px;font-weight:500;margin-bottom:30px}
+#base .badge .avs{display:flex}
+#base .badge .avs img{width:25px;height:25px;border-radius:50%;border:2px solid rgba(255,255,255,.6);object-fit:cover;margin-left:-9px}
+#base .badge .avs img:first-child{margin-left:0}
+#base .sub{margin:26px auto 34px;max-width:620px}
+.hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.hint .rato{width:24px;height:38px;border:2px solid rgba(255,255,255,.7);border-radius:14px;position:relative}
+.hint .rato::before{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:3px;height:8px;border-radius:3px;background:var(--beige);animation:roda 1.8s ease-in-out infinite}
+@keyframes roda{0%{opacity:1;transform:translate(-50%,0)}70%{opacity:0;transform:translate(-50%,12px)}100%{opacity:0}}
+
+/* PESO (dores) */
+#peso .cena{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center}
+#peso .mascote{position:relative}
+#peso .mascote img{filter:drop-shadow(0 24px 44px rgba(0,0,0,.5))}
+#peso .mascote .balao{position:absolute;top:-34px;right:-16px;background:#fff;color:var(--ink);font-size:13px;font-weight:700;padding:10px 16px;border-radius:16px 16px 16px 4px;box-shadow:0 12px 30px rgba(0,0,0,.35);transform:rotate(3deg)}
+.pesos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.peso-chip{display:flex;align-items:flex-start;gap:14px;background:#fff;border-radius:16px;padding:18px 20px;font-size:14px;line-height:1.5;font-weight:600;color:var(--blue);box-shadow:0 14px 34px rgba(4,12,17,.3)}
+.peso-chip .ic{flex-shrink:0;width:36px;height:36px;border-radius:11px;background:rgba(26,94,145,.1);color:var(--blue);display:flex;align-items:center;justify-content:center}
+.peso-chip .ic svg{width:19px;height:19px}
+.peso-total{margin-top:26px;text-align:center;font-size:clamp(19px,2.6vw,26px);font-weight:700;text-shadow:0 3px 18px rgba(0,0,0,.6)}
+.peso-total .serif{color:var(--beige);font-size:1.12em}
+@media(max-width:860px){#peso .cena{grid-template-columns:1fr}#peso .mascote{max-width:210px;margin:0 auto}.pesos{grid-template-columns:1fr}}
+
+/* MAPA */
+#mapa{text-align:center}
+.perguntas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px;text-align:left}
+.pergunta{padding:28px 26px;transition:transform .3s,border-color .3s}
+.pergunta:hover{transform:translateY(-6px);border-color:rgba(239,202,127,.55)}
+.pergunta .num{font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--beige);display:block;margin-bottom:14px}
+.pergunta h3{font-size:19px;font-weight:700;margin-bottom:10px}
+.pergunta p{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.82)}
+@media(max-width:860px){.perguntas{grid-template-columns:1fr}}
+
+/* EQUIPAMENTO */
+#equip .mac-wrap{margin:50px auto 0;max-width:720px;position:relative}
+#equip .mac-wrap img{filter:drop-shadow(0 40px 80px rgba(0,0,0,.55))}
+
+/* showcase: mockup de celular + texto ao lado */
+.showcase{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(28px,5vw,64px);align-items:center;margin-top:60px}
+.showcase.invertido .phone-col{order:2}
+.phone-col{display:flex;justify-content:center}
+.phone{width:min(300px,74vw);aspect-ratio:9/19;border-radius:42px;background:#0d1620;border:9px solid #0d1620;outline:1px solid rgba(255,255,255,.18);box-shadow:0 44px 90px rgba(4,12,17,.6);overflow:hidden;position:relative}
+.phone::before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:36%;height:20px;background:#0d1620;border-radius:11px;z-index:3}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top;image-rendering:auto;transform:translateZ(0)}
+.phone::after{content:"";position:absolute;inset:0;border-radius:32px;box-shadow:inset 0 0 24px rgba(0,0,0,.35);pointer-events:none}
+.show-txt .tag{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--beige);background:rgba(4,12,17,.55);backdrop-filter:blur(8px);border:1px solid rgba(239,202,127,.35);border-radius:100px;padding:6px 14px;margin-bottom:16px}
+.show-txt h3{font-size:clamp(22px,2.9vw,30px);font-weight:800;line-height:1.15;margin-bottom:12px;text-shadow:0 2px 6px rgba(4,12,17,.75),0 6px 28px rgba(4,12,17,.6)}
+.show-txt>p{font-size:15.5px;line-height:1.65;color:rgba(255,255,255,.94);text-shadow:0 1px 4px rgba(4,12,17,.8);margin-bottom:18px}
+.show-txt ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.show-txt li{display:flex;gap:11px;align-items:flex-start;font-size:14px;line-height:1.5;color:rgba(255,255,255,.92);text-shadow:0 1px 4px rgba(4,12,17,.8)}
+.show-txt li svg{width:17px;height:17px;color:var(--beige);flex-shrink:0;margin-top:2px;filter:drop-shadow(0 1px 3px rgba(4,12,17,.7))}
+@media(max-width:820px){.showcase{grid-template-columns:1fr}.showcase.invertido .phone-col{order:0}}
+
+.gear{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:26px}
+.gear-card{padding:26px;overflow:hidden;transition:transform .3s,border-color .3s}
+.gear-card:hover{transform:translateY(-5px);border-color:rgba(239,202,127,.5)}
+.gear-card .tag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--beige);background:rgba(239,202,127,.12);border:1px solid rgba(239,202,127,.3);border-radius:100px;padding:5px 12px;margin-bottom:14px}
+.gear-card h3{font-size:19px;font-weight:700;margin-bottom:8px}
+.gear-card p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.82)}
+.gear-card img{border-radius:14px;margin-top:16px;box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.score-mini{margin-top:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px}
+.score-mini .sc{font-size:38px;font-weight:800;color:var(--beige)}
+.score-mini .bar{height:7px;border-radius:100px;background:rgba(255,255,255,.14);margin-top:9px;overflow:hidden}
+.score-mini .bar b{display:block;height:100%;width:0;border-radius:100px;background:linear-gradient(90deg,var(--light),var(--beige))}
+.chat{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+.chat .m{max-width:90%;padding:11px 15px;border-radius:15px;font-size:13px;line-height:1.5}
+.chat .q{align-self:flex-end;background:var(--blue);border-bottom-right-radius:4px}
+.chat .a{align-self:flex-start;background:rgba(255,255,255,.94);color:var(--ink);border-bottom-left-radius:4px}
+.gear-card.full{grid-column:1/-1}
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.mini{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 15px;transition:transform .25s,border-color .25s,background .25s}
+.mini:hover{transform:translateY(-4px);border-color:rgba(239,202,127,.5);background:rgba(255,255,255,.09)}
+.mini .ic{width:34px;height:34px;border-radius:10px;background:rgba(239,202,127,.14);color:var(--beige);display:flex;align-items:center;justify-content:center;margin-bottom:11px}
+.mini .ic svg{width:17px;height:17px}
+.mini b{display:block;font-size:13.5px;margin-bottom:4px;color:#fff}
+.mini span{font-size:12px;line-height:1.45;color:rgba(255,255,255,.72);display:block}
+@media(max-width:760px){.gear{grid-template-columns:1fr}.mini-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.mini-grid{grid-template-columns:1fr}}
+
+/* MÉTODO ATLAS */
+.relatorios{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:46px}
+.rel{padding:24px 20px;position:relative;transition:transform .3s,border-color .3s}
+.rel:hover{transform:translateY(-6px);border-color:rgba(239,202,127,.55)}
+.rel .n{font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--beige);display:block;margin-bottom:12px}
+.rel h3{font-size:16.5px;font-weight:800;line-height:1.25;margin-bottom:4px}
+.rel .papel{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);display:block;margin-bottom:10px}
+.rel p{font-size:13px;line-height:1.55;color:rgba(255,255,255,.82)}
+#metodo .prova-img{max-width:820px;margin:44px auto 0;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 40px 90px rgba(4,12,17,.55)}
+#metodo .prova-img img{width:100%;max-height:380px;object-fit:cover;object-position:top}
+@media(max-width:1020px){.relatorios{grid-template-columns:repeat(2,1fr)}.rel:last-child{grid-column:1/-1}}
+@media(max-width:560px){.relatorios{grid-template-columns:1fr}}
+
+/* ATLAS NEGÓCIOS */
+#negocios .pj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:46px}
+.pj{padding:26px 24px;transition:transform .3s,border-color .3s}
+.pj:hover{transform:translateY(-5px);border-color:rgba(105,170,209,.6)}
+.pj .ic{width:40px;height:40px;border-radius:12px;background:rgba(105,170,209,.16);color:var(--light);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.pj .ic svg{width:20px;height:20px}
+.pj h3{font-size:16.5px;font-weight:800;margin-bottom:7px}
+.pj p{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.82)}
+.selo-plano{display:inline-flex;align-items:center;gap:7px;margin-top:30px;font-size:12.5px;font-weight:700;color:var(--beige);background:rgba(4,12,17,.55);border:1px solid rgba(239,202,127,.35);border-radius:100px;padding:8px 16px}
+@media(max-width:860px){#negocios .pj-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){#negocios .pj-grid{grid-template-columns:1fr}}
+
+/* GUIA */
+#guia .card{max-width:720px;margin:0 auto;padding:clamp(30px,5vw,54px)}
+#guia .card p{font-size:clamp(15.5px,1.9vw,17.5px);line-height:1.8;color:rgba(255,255,255,.9);margin-bottom:18px}
+#guia .destaque{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(21px,3vw,28px);color:var(--beige);border-left:3px solid var(--beige);padding-left:20px;margin:26px 0}
+
+/* CORDADA (depoimentos) */
+#cordada{flex-direction:column;justify-content:center}
+.marquee{width:100vw;display:flex;overflow:hidden;margin-top:46px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.track{display:flex;gap:16px;padding-right:16px;animation:roll 44s linear infinite;flex-shrink:0}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes roll{to{transform:translateX(-100%)}}
+.dp{width:320px;flex-shrink:0;background:rgba(4,12,17,.62);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.13);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:13px}
+.dp .stars{color:#FFCE6A;font-size:14px;letter-spacing:2px}
+.dp q{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.94);quotes:"“" "”"}
+.dp .who{display:flex;align-items:center;gap:11px;margin-top:auto}
+.dp .who .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--light),var(--blue));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.dp .who b{display:block;font-size:13.5px}
+.dp .who span{font-size:12px;color:rgba(255,255,255,.6)}
+
+/* ESCOLHA (planos) */
+#escolha{flex-direction:column;justify-content:center}
+.planos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px;width:100%;max-width:1060px}
+.plano{padding:30px 26px;display:flex;flex-direction:column;transition:transform .3s}
+.plano:hover{transform:translateY(-6px)}
+.plano h3{font-size:21px;font-weight:800}
+.plano .para{font-size:13px;color:rgba(255,255,255,.7);margin:5px 0 18px}
+.plano .preco{font-size:38px;font-weight:800;line-height:1}
+.plano .preco small{font-size:14px;font-weight:500;color:rgba(255,255,255,.65)}
+.plano .dia{font-size:12px;color:var(--beige);margin-top:5px}
+.plano ul{list-style:none;margin:22px 0 26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:11px;text-align:left}
+.plano li{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.92);display:flex;gap:10px;text-align:left;align-items:flex-start}
+.plano li::before{content:"✓";color:var(--beige);font-weight:800;flex-shrink:0;line-height:1.5}
+.plano .pcta{margin-top:auto;text-align:center;border:1.5px solid rgba(255,255,255,.4);border-radius:100px;padding:14px;font-weight:700;font-size:14px;transition:background .2s}
+.plano .pcta:hover{background:rgba(255,255,255,.1)}
+.plano.destaque{border:2px solid var(--beige);background:linear-gradient(180deg,rgba(239,202,127,.14),rgba(4,12,17,.6));position:relative;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.plano.destaque .pcta{background:var(--red);border-color:var(--red);box-shadow:0 10px 28px rgba(168,47,38,.5)}
+.plano.destaque .pcta:hover{background:var(--red-h)}
+.pop{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--beige);color:var(--ink);font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;white-space:nowrap}
+.risco{margin-top:34px;max-width:760px;padding:24px 30px;display:flex;gap:20px;align-items:center;text-align:left}
+.risco .selo{flex-shrink:0;width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 30% 25%,var(--light),var(--blue) 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;animation:pulse 3s ease-in-out infinite}
+.risco .selo b{font-size:26px;line-height:1}
+.risco .selo span{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.risco p{font-size:14px;line-height:1.65;color:rgba(255,255,255,.9)}
+@media(max-width:900px){.planos{grid-template-columns:1fr;max-width:400px}.plano.destaque{order:-1}.risco{flex-direction:column;text-align:center}}
+
+/* CUME */
+#cume{flex-direction:column;justify-content:center;text-align:center;min-height:110vh}
+#cume .celebra{width:min(440px,74vw);margin:8px auto 0;filter:drop-shadow(0 30px 60px rgba(0,0,0,.45))}
+#cume h2{font-size:clamp(34px,5.6vw,62px)}
+.confete{position:absolute;width:9px;height:9px;border-radius:2px;opacity:0;pointer-events:none}
+.ps{max-width:600px;margin:56px auto 0;text-align:left;padding:28px 30px;border-left:3px solid var(--beige)}
+.ps h4{font-family:'Instrument Serif',serif;font-style:italic;font-size:21px;color:var(--beige);margin-bottom:12px}
+.ps p{font-size:14.5px;line-height:1.75;color:rgba(255,255,255,.9);margin-bottom:12px}
+.ps p:last-child{margin-bottom:0}
+
+/* FAQ (acima das nuvens — céu claro) */
+#faq{background:linear-gradient(180deg,rgba(250,244,232,0) 0%,var(--bg) 7%,var(--bg) 100%);color:var(--ink);min-height:auto;padding:18vh 0 90px;display:block}
+#faq h2{color:var(--ink);text-shadow:none;text-align:center}
+#faq .lead{color:#57626d;text-shadow:none;text-align:center;max-width:560px;margin:16px auto 0}
+.faq-list{max-width:740px;margin:44px auto 0;display:flex;flex-direction:column;gap:11px}
+.qa{background:#fff;border:1px solid #e8dfc9;border-radius:16px;overflow:hidden;transition:border-color .3s;box-shadow:0 6px 20px rgba(26,94,145,.05)}
+.qa[open]{border-color:var(--blue)}
+.qa summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;font-weight:700;font-size:15.5px;color:var(--ink)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";font-size:23px;font-weight:400;color:var(--blue);transition:transform .3s;flex-shrink:0}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa .ans{padding:0 24px 22px;font-size:14.5px;line-height:1.7;color:#4a5560}
+#faq .fim{text-align:center;margin-top:60px}
+footer{background:var(--bg);color:#8a8271;text-align:center;font-size:12.5px;padding:30px 20px 100px}
+footer img{height:24px;margin:0 auto 12px;opacity:.7}
+
+/* sticky mobile */
+#sticky{position:fixed;bottom:0;left:0;right:0;z-index:160;background:rgba(4,12,17,.85);backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.12);padding:10px 14px;display:none;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .4s}
+#sticky.show{transform:none}
+#sticky .t{font-size:12px;line-height:1.3}
+#sticky .t b{display:block;font-size:13.5px}
+#sticky a{background:var(--red);font-weight:700;font-size:13.5px;padding:11px 18px;border-radius:100px;white-space:nowrap}
+@media(max-width:760px){#sticky{display:flex}}
+
+/* ═══ MOBILE: imersão total ═══ */
+@media(max-width:768px){
+  section{min-height:auto;padding:13vh 0}
+  #base{min-height:100svh;padding-top:16vh}
+  .wrap{padding:0 18px}
+  nav{top:10px;padding:8px 14px}
+  nav img{height:26px}
+  .nav-cta{font-size:12.5px;padding:9px 16px}
+  .kicker{font-size:10.5px;padding:8px 14px;margin-bottom:18px;letter-spacing:.14em}
+  h1{font-size:clamp(34px,10vw,44px)}
+  h2{font-size:clamp(26px,7.6vw,34px)}
+  .lead{font-size:15.5px}
+  .btn{width:100%;max-width:420px;padding:18px 22px;font-size:17px}
+  .micro{font-size:12.5px}
+  #base .badge{font-size:12px;padding:8px 14px;margin-bottom:22px}
+  .hint{bottom:88px}
+  .nuvem{display:none}
+  .pesos{gap:10px}
+  .peso-chip{padding:15px 16px;font-size:13.5px}
+  #peso .mascote .balao{right:auto;left:50%;transform:translateX(-50%) rotate(-2deg);top:-40px;white-space:nowrap}
+  .pergunta{padding:22px 20px}
+  .showcase{gap:22px;margin-top:44px}
+  .show-txt h3{font-size:22px}
+  .show-txt>p{font-size:14.5px}
+  .show-txt li{font-size:13.5px}
+  .gear-card{padding:22px}
+  .relatorios{gap:10px}
+  .rel{padding:20px 18px}
+  #metodo .prova-img{border-radius:14px}
+  .pj{padding:22px 20px}
+  #guia .card{padding:26px 20px}
+  .dp{width:280px;padding:20px}
+  .plano{padding:26px 22px}
+  .risco{padding:22px}
+  #cume .celebra{width:min(340px,80vw)}
+  .ps{padding:22px 20px;margin-top:56px}
+  .qa summary{padding:17px 18px;font-size:14.5px}
+  .qa .ans{padding:0 18px 18px;font-size:13.5px}
+  footer{padding-bottom:110px}
+}
+</style>
+</head>
+<body>
+
+<!-- fundo -->
+<video id="montanha" muted playsinline preload="auto" poster="poster-hero.jpg">
+  <source src="hero-scrub.mp4" type="video/mp4">
+</video>
+<div id="veu"></div>
+<div id="veu-solid"></div>
+<div class="nuvem n1"></div><div class="nuvem n2"></div><div class="nuvem n3"></div>
+
+<!-- HUD altitude -->
+<div id="hud">
+  <div class="alt"><i data-lucide="mountain" style="width:13px;height:13px;vertical-align:-2px"></i> <span id="altura">0</span> m</div>
+  <div class="trilho">
+    <div class="fio" id="fio"></div>
+    <a class="camp" data-alvo="base"><i></i><span>Base · Início</span></a>
+    <a class="camp" data-alvo="peso"><i></i><span>Acamp. 1 · O Peso</span></a>
+    <a class="camp" data-alvo="mapa"><i></i><span>Acamp. 2 · O Mapa</span></a>
+    <a class="camp" data-alvo="equip"><i></i><span>Acamp. 3 · O Equipamento</span></a>
+    <a class="camp" data-alvo="metodo"><i></i><span>Acamp. 4 · O Método</span></a>
+    <a class="camp" data-alvo="negocios"><i></i><span>Acamp. 5 · Negócios PJ</span></a>
+    <a class="camp" data-alvo="guia"><i></i><span>Acamp. 6 · O Guia</span></a>
+    <a class="camp" data-alvo="cordada"><i></i><span>Acamp. 7 · A Cordada</span></a>
+    <a class="camp" data-alvo="escolha"><i></i><span>Última subida · Planos</span></a>
+    <a class="camp" data-alvo="cume"><i></i><span>O Cume</span></a>
+  </div>
+</div>
+
+<nav>
+  <a href="#base"><img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas"></a>
+  <a class="nav-cta" href="https://app.useatlasapp.com/auth">Testar 7 dias grátis</a>
+</nav>
+
+<!-- ════ BASE · 0m ════ -->
+<section id="base">
+  <div class="wrap">
+    <div class="badge" data-h><span class="avs"><img src="user-1.png" alt=""><img src="user-2.png" alt=""><img src="user-3.png" alt=""></span>+100 famílias já estão subindo</div>
+    <h1 data-h>Toda montanha precisa<br>de um <span class="hl">caminho.</span></h1>
+    <p class="lead sub" data-h>Essa montanha é a sua vida financeira. Hoje você está na base: o dinheiro entra, some, e ninguém te explica por quê.<br><b>Role a página e suba com a gente.</b> Lá de cima, a vista é outra.</p>
+    <div data-h>
+      <a class="btn" href="https://app.useatlasapp.com/auth">Começar a subida</a>
+      <p class="micro"><svg class="check" viewBox="0 0 20 20" fill="#EFCA7F"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>7 dias grátis · Sem cartão · Cancele quando quiser</p>
+    </div>
+  </div>
+  <div class="hint" data-h>role pra subir<div class="rato"></div></div>
+</section>
+
+<div id="zona"><!-- banda escura contínua sobre o vídeo -->
+<!-- ════ ACAMPAMENTO 1 · O PESO (dor) ════ -->
+<section id="peso">
+  <div class="wrap">
+    <div class="kicker rv">Acampamento 1 · <b>450 m</b></div>
+    <h2 class="rv" style="max-width:700px">O que te impede de subir não é o salário.<br>É o <span class="serif destaque-serif">peso invisível</span> na mochila.</h2>
+    <div class="cena" style="margin-top:44px">
+      <div class="mascote rv-l">
+        <img src="mochila-mascote.webp" alt="Mochila Atlas">
+        <div class="balao">Uff… tá pesada, hein?</div>
+      </div>
+      <div>
+        <p class="lead rv">Abre a mochila. Olha o que você vem carregando montanha acima, todos os meses:</p>
+        <div class="pesos">
+          <div class="peso-chip rv"><span class="ic"><i data-lucide="wallet"></i></span>Vê o dinheiro entrar, mas no fim do mês nunca sobra. E você não sabe dizer por quê.</div>
+          <div class="peso-chip rv"><span class="ic"><i data-lucide="cloud-fog"></i></span>Zero noção de como vai estar sua vida daqui a 5, 10, 30 anos.</div>
+          <div class="peso-chip rv"><span class="ic"><i data-lucide="piggy-bank"></i></span>Quer guardar pra viagem, casa, aposentadoria… mas não sabe por onde começar.</div>
+          <div class="peso-chip rv"><span class="ic"><i data-lucide="smartphone"></i></span>Consome conteúdo de finanças no Instagram e continua exatamente no mesmo lugar.</div>
+          <div class="peso-chip rv"><span class="ic"><i data-lucide="layers"></i></span>Finanças espalhadas em 3 planilhas, 2 apps e um "depois eu anoto".</div>
+          <div class="peso-chip rv"><span class="ic"><i data-lucide="trending-down"></i></span>Medo de investir errado. Então não investe em nada, e o dinheiro fica parado no tempo.</div>
+        </div>
+        <p class="peso-total rv">Você não precisa ganhar mais.<br>Você precisa <span class="serif">carregar menos dúvida.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ACAMPAMENTO 2 · O MAPA (solução) ════ -->
+<section id="mapa">
+  <div class="wrap">
+    <div class="kicker rv">Acampamento 2 · <b>900 m</b></div>
+    <h2 class="rv">Nenhum alpinista sobe sem mapa.<br><span class="serif destaque-serif">Por que você sobe sem o seu?</span></h2>
+    <p class="lead rv" style="max-width:640px;margin:24px auto 0">App de controle de gastos olha pra trás e te mostra onde você errou. O Atlas é outra coisa: é um <b>mapa do seu futuro</b>. Ele responde as três perguntas que nenhuma planilha respondeu pra você até hoje.</p>
+    <div class="perguntas">
+      <div class="pergunta glass rv"><span class="num">PERGUNTA 01</span><h3>Onde eu estou?</h3><p>O Atlas Score resume sua vida financeira em um número que se atualiza a cada decisão. Em 2 segundos você sabe sua posição na montanha.</p></div>
+      <div class="pergunta glass rv"><span class="num">PERGUNTA 02</span><h3>Qual o próximo passo?</h3><p>Em vez de 40 gráficos confusos, um plano claro: o que fazer este mês pra sua meta ter nome, valor e data.</p></div>
+      <div class="pergunta glass rv"><span class="num">PERGUNTA 03</span><h3>E se eu escolher outra trilha?</h3><p>Guardar R$ 500 em vez de R$ 300 muda sua aposentadoria em anos. O Atlas mostra isso em números reais, calculados com os seus dados.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ACAMPAMENTO 3 · O EQUIPAMENTO (ferramentas) ════ -->
+<section id="equip">
+  <div class="wrap">
+    <div class="kicker rv">Acampamento 3 · <b>1.400 m</b></div>
+    <h2 class="rv" style="max-width:720px">Seu equipamento de subida:<br><span class="serif destaque-serif">12 ferramentas, um sistema.</span></h2>
+    <p class="lead rv" style="max-width:600px;margin-top:20px">Cada ferramenta responde uma pergunta real da sua vida. Nos 7 dias grátis, você usa todas.</p>
+
+    <div class="mac-wrap rv-s"><img src="MAC%201.webp" alt="Painel do Atlas no Macbook"></div>
+
+    <!-- showcase 1 · Painel -->
+    <div class="showcase">
+      <div class="phone-col rv-l"><div class="phone"><img src="app-home-mock.webp" alt="Painel do Atlas no celular" loading="lazy"></div></div>
+      <div class="show-txt rv-r">
+        <span class="tag"><i data-lucide="layout-dashboard" style="width:13px;height:13px"></i>Painel</span>
+        <h3>Tudo num lugar, em segundos</h3>
+        <p>Você abre o app e já sabe onde está. Sem planilha, sem 40 gráficos, sem confusão.</p>
+        <ul>
+          <li><i data-lucide="check"></i>Atlas Score e fluxo do mês numa tela só</li>
+          <li><i data-lucide="check"></i>Próximos vencimentos antes de virarem juros</li>
+          <li><i data-lucide="check"></i>Modo casal: visão Pessoa 1, Pessoa 2 ou Casal num clique</li>
+          <li><i data-lucide="check"></i>5 minutos por dia bastam, o resto o sistema faz sozinho</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- showcase 2 · Vista da Montanha -->
+    <div class="showcase invertido">
+      <div class="phone-col rv-r"><div class="phone"><img src="app-montanha-mock.webp" alt="Vista da Montanha: projeção de patrimônio" loading="lazy"></div></div>
+      <div class="show-txt rv-l">
+        <span class="tag"><i data-lucide="mountain" style="width:13px;height:13px"></i>Vista da Montanha</span>
+        <h3>Veja o cume antes de chegar nele</h3>
+        <p>Seu patrimônio projetado pra vida inteira, reagindo em tempo real a cada escolha que você simula.</p>
+        <ul>
+          <li><i data-lucide="check"></i>Ajuste renda, aposentadoria e inflação e veja a curva reagir na hora</li>
+          <li><i data-lucide="check"></i>Objetivos de vida (viagem, casa, filho) marcados no gráfico, com data</li>
+          <li><i data-lucide="check"></i>Aposentadoria com valor e data, e não uma promessa vaga</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- showcase 3 · Simulador -->
+    <div class="showcase">
+      <div class="phone-col rv-l"><div class="phone"><img src="app-simulador-mock.webp" alt="Simulador de Decisão do Atlas" loading="lazy"></div></div>
+      <div class="show-txt rv-r">
+        <span class="tag"><i data-lucide="scale" style="width:13px;height:13px"></i>Simulador de Decisão</span>
+        <h3>Teste a trilha antes de pisar nela</h3>
+        <p>Comprar a casa? Trocar o carro? Consórcio ou financiamento? Decida com fórmulas reais, não com achismo.</p>
+        <ul>
+          <li><i data-lucide="check"></i>Juros compostos, PMT, custo de oportunidade e regra dos 4%</li>
+          <li><i data-lucide="check"></i>8 cenários prontos, incluindo Consórcio x Financiamento, com análise por IA</li>
+          <li><i data-lucide="check"></i>O impacto de cada escolha em 10, 20 e 30 anos, antes de assinar qualquer contrato</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- showcase 4 · Organização -->
+    <div class="showcase invertido">
+      <div class="phone-col rv-r"><div class="phone"><img src="app-organizacao-mock.webp" alt="Organização de gastos no Atlas" loading="lazy"></div></div>
+      <div class="show-txt rv-l">
+        <span class="tag"><i data-lucide="list-checks" style="width:13px;height:13px"></i>Organização</span>
+        <h3>Cada gasto vira uma decisão consciente</h3>
+        <p>Aqui ninguém te manda cortar o cafezinho. Você alinha os gastos com o que realmente importa pra você.</p>
+        <ul>
+          <li><i data-lucide="check"></i>Categorias que revelam seus valores: alimentação, educação, lazer</li>
+          <li><i data-lucide="check"></i>8 abas de controle: orçamento, receitas, fixas, variáveis, parcelas, dívidas e economias</li>
+          <li><i data-lucide="check"></i>Gaste sem culpa no que te faz feliz, dentro de um limite que você definiu</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gear" style="margin-top:60px">
+      <div class="gear-card glass rv-l">
+        <span class="tag">Atlas Score</span>
+        <h3>Seu altímetro financeiro</h3>
+        <p>Um número, calculado sobre 7 pilares da sua vida financeira, que sobe a cada boa decisão. Chega de "será que estou indo bem?".</p>
+        <div class="score-mini"><span style="font-size:11px;color:rgba(255,255,255,.6)">Atlas Score atual</span><div class="sc"><span data-count="850">0</span> <small style="font-size:13px;color:#7ee0a3">+25 pts</small></div><div class="bar"><b data-bar="85"></b></div></div>
+      </div>
+      <div class="gear-card glass rv-r">
+        <span class="tag">Atlas IA</span>
+        <h3>O guia que conhece seus números</h3>
+        <p>Pergunte qualquer coisa sobre o seu dinheiro. A resposta vem do seu plano real, não de teoria genérica.</p>
+        <div class="chat">
+          <div class="m q">Posso trocar de carro ainda esse ano?</div>
+          <div class="m a">Dá, mas atrasa sua meta da casa em 4 meses. Melhor a partir de setembro. Quer ver o cenário?</div>
+        </div>
+      </div>
+      <div class="gear-card glass full rv">
+        <span class="tag">E ainda</span>
+        <h3>Tudo que uma expedição completa precisa</h3>
+        <div class="mini-grid">
+          <div class="mini"><span class="ic"><i data-lucide="banknote"></i></span><b>Fluxo de Caixa + Bancos</b><span>Lançamentos, bancos e extratos num só lugar, com importação OFX.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="users"></i></span><b>Acesso compartilhado</b><span>Um acesso extra incluso pra subir a dois, no mesmo plano e sem dividir senha.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="trending-up"></i></span><b>Investimentos + Proventos</b><span>Carteira viva. Descubra quando sua renda passiva vai te libertar.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="sunrise"></i></span><b>Aposentadoria: 3 Respostas</b><span>Quanto você precisa, quanto falta e quando chega lá. Três cenários calculados.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="target"></i></span><b>Objetivos de Vida mapeados</b><span>Viagem, casa, filho: cada meta com nome, valor e prazo no seu plano.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="calculator"></i></span><b>Calculadoras Express</b><span>Respostas rápidas pra dúvidas do dia a dia, sem abrir planilha.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="calendar-days"></i></span><b>Calendário de pagamentos</b><span>Próximos vencimentos numa tela só. Nunca mais juros por esquecimento.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="bell-ring"></i></span><b>Notificações inteligentes</b><span>O Atlas te avisa do que importa antes de acontecer.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="upload"></i></span><b>Importações</b><span>Traga seus dados de planilhas e extratos sem digitar tudo de novo.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="smartphone"></i></span><b>Web + Celular (PWA)</b><span>Instale no celular como app e leve o mesmo plano no bolso, sempre sincronizado.</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="graduation-cap"></i></span><b>Plano da Liberdade</b><span>33 aulas em 8 módulos: o método em vídeo (Elite).</span></div>
+          <div class="mini"><span class="ic"><i data-lucide="messages-square"></i></span><b>Comunidade</b><span>Suba em cordada: troque experiências com quem está no mesmo caminho.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ACAMPAMENTO 4 · O MÉTODO (5 relatórios) ════ -->
+<section id="metodo">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker rv">Acampamento 4 · <b>1.700 m</b></div>
+    <h2 class="rv" style="max-width:780px;margin:0 auto">O Método Atlas: 5 relatórios<br>que valem uma <span class="serif destaque-serif">consultoria inteira.</span></h2>
+    <p class="lead rv" style="max-width:640px;margin:22px auto 0">Isso aqui nenhum outro app tem. São os diagnósticos nascidos de mais de 300 planejamentos de famílias reais, agora gerados sobre os seus dados. Quatro deles escritos por IA treinada no método. Você recebe, lê e sabe exatamente o que fazer.</p>
+
+    <div class="relatorios">
+      <div class="rel glass rv"><span class="n">01</span><h3>Base da Montanha</h3><span class="papel">O diagnóstico</span><p>Onde você está de verdade: patrimônio, dívidas, hábitos e os pontos cegos que você não enxerga sozinho.</p></div>
+      <div class="rel glass rv"><span class="n">02</span><h3>Estratégia de Subida</h3><span class="papel">O plano</span><p>Seu planejamento 360°: o que fazer, em que ordem, com números e prazos. O caminho desenhado.</p></div>
+      <div class="rel glass rv"><span class="n">03</span><h3>Controle da Jornada</h3><span class="papel">O acompanhamento</span><p>O raio-x do período: o que funcionou, o que fugiu do plano e onde ajustar antes que vire problema.</p></div>
+      <div class="rel glass rv"><span class="n">04</span><h3>Guia da Jornada</h3><span class="papel">O conselheiro</span><p>Orientações práticas sobre as suas próximas decisões, como um planejador de bolso que já leu tudo sobre você.</p></div>
+      <div class="rel glass rv"><span class="n">05</span><h3>Vista da Montanha</h3><span class="papel">A projeção viva</span><p>O único que não é documento: é a tela onde o seu futuro reage em tempo real a cada escolha.</p></div>
+    </div>
+
+    <div class="prova-img rv-s"><img src="relatorio-metodo-topo.webp" alt="Relatório do Método Atlas" loading="lazy"></div>
+    <div class="rv" style="margin-top:36px">
+      <a class="btn" href="https://app.useatlasapp.com/auth" style="font-size:17px;padding:17px 36px">Quero meu diagnóstico</a>
+      <p class="micro">Seus primeiros relatórios saem ainda na primeira semana, dentro dos 7 dias grátis</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ACAMPAMENTO 5 · ATLAS NEGÓCIOS (PJ) ════ -->
+<section id="negocios">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker rv">Acampamento 5 · <b>2.100 m</b></div>
+    <h2 class="rv" style="max-width:760px;margin:0 auto">Vive de PJ? Então essa parada<br>é <span class="serif destaque-serif">obrigatória.</span></h2>
+    <p class="lead rv" style="max-width:620px;margin:22px auto 0">Autônomo, MEI ou dono de empresa: você sabe o caos que é misturar a conta da empresa com a da casa. O Atlas Negócios separa os dois mundos e mostra como um alimenta o outro.</p>
+
+    <div class="pj-grid">
+      <div class="pj glass rv"><span class="ic"><i data-lucide="building-2"></i></span><h3>Múltiplas empresas</h3><p>Mais de um CNPJ? Cada empresa com seu financeiro próprio, e você vendo tudo consolidado.</p></div>
+      <div class="pj glass rv"><span class="ic"><i data-lucide="shuffle"></i></span><h3>Regras de alocação</h3><p>Defina quanto do que entra vira pró-labore, reserva e reinvestimento. O Atlas aplica a regra sozinho.</p></div>
+      <div class="pj glass rv"><span class="ic"><i data-lucide="calendar-clock"></i></span><h3>Previsão de caixa + simulador</h3><p>Veja o caixa dos próximos meses antes de decidir contratar, comprar equipamento ou aumentar a retirada.</p></div>
+      <div class="pj glass rv"><span class="ic"><i data-lucide="users"></i></span><h3>Receita por cliente</h3><p>Prevista vs. confirmada, cliente a cliente. Você descobre quem realmente sustenta o seu negócio.</p></div>
+      <div class="pj glass rv"><span class="ic"><i data-lucide="arrow-right-left"></i></span><h3>Histórico PJ → PF</h3><p>Cada transferência registrada. O que é da empresa e o que é seu, sem mistura e sem susto no imposto.</p></div>
+      <div class="pj glass rv"><span class="ic"><i data-lucide="activity"></i></span><h3>Score de saúde da empresa</h3><p>Como o Atlas Score, mas pro seu negócio: um número que diz se a empresa está saudável ou pedindo socorro.</p></div>
+    </div>
+
+    <span class="selo-plano rv"><i data-lucide="check" style="width:15px;height:15px"></i>Incluso no plano Pro, junto com todo o resto</span>
+  </div>
+</section>
+
+<!-- ════ ACAMPAMENTO 6 · O GUIA (história) ════ -->
+<section id="guia">
+  <div class="wrap">
+    <div style="text-align:center"><div class="kicker rv">Acampamento 6 · <b>2.400 m</b></div></div>
+    <h2 class="rv" style="text-align:center;margin-bottom:40px">Todo bom guia<br><span class="serif destaque-serif">já se perdeu uma vez.</span></h2>
+    <div class="card glass rv">
+      <p>Cresci em uma pousada no litoral de Santa Catarina. Meus pais tocaram o negócio por 25 anos. Trabalharam muito, sem nunca ter um planejamento. Em 2020, no segundo mês da pandemia, a pousada fechou.</p>
+      <p class="destaque">"E agora? Estamos fazendo certo?"</p>
+      <p>Era a minha vez de responder. Comecei a criar um sistema. Primeiro pra mim e minha esposa. Depois pra família, pros amigos, até chegar a mais de 300 planejamentos financeiros de famílias reais.</p>
+      <p>Esse sistema virou o Atlas. Ele não diz o que fazer: mostra onde você está, o próximo passo e o que muda se seguir um caminho diferente.</p>
+      <p style="font-weight:800;color:#fff">É o mapa que meus pais não tiveram quando mais precisaram.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ACAMPAMENTO 5 · A CORDADA (prova social) ════ -->
+<section id="cordada">
+  <div class="wrap" style="text-align:center">
+    <div class="kicker rv">Acampamento 7 · <b>2.600 m</b></div>
+    <h2 class="rv">Ninguém sobe sozinho.<br><span class="serif destaque-serif">Conheça quem já está na corda.</span></h2>
+    <p class="lead rv" style="max-width:520px;margin:18px auto 0">Pessoas reais que trocaram o caos por clareza. <span style="color:#FFCE6A;letter-spacing:2px">★★★★★</span></p>
+  </div>
+  <div class="marquee rv">
+    <div class="track">
+      <div class="dp"><span class="stars">★★★★★</span><q>Em 30 dias parei de me perder nas contas. Hoje sei exatamente quanto posso gastar sem culpa.</q><div class="who"><span class="av">M</span><div><b>Mariana S.</b><span>Autônoma</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>A gente brigava por dinheiro. Planejando juntos no Atlas, acabou o stress e sobrou plano. Hoje é decisão a dois, sem briga.</q><div class="who"><span class="av">R</span><div><b>Rafael &amp; Júlia</b><span>Casal</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Separar a vida pessoal da empresa era um caos. O Atlas me deu clareza pra finalmente crescer.</q><div class="who"><span class="av">C</span><div><b>Carlos M.</b><span>Empreendedor</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Vi minha renda passiva projetada e entendi, pela primeira vez, o meu caminho até a liberdade financeira.</q><div class="who"><span class="av">A</span><div><b>Ana P.</b><span>Começando a investir</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Pela primeira vez sei pra onde meu dinheiro vai. Montei minha reserva em 4 meses.</q><div class="who"><span class="av">B</span><div><b>Bruno T.</b><span>Pai de família</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Parei de usar três planilhas. O Atlas junta tudo e ainda me diz qual o próximo passo a dar.</q><div class="who"><span class="av">L</span><div><b>Letícia M.</b><span>Profissional liberal</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Estava endividado e perdido. Hoje tenho um plano claro e já saí do vermelho.</q><div class="who"><span class="av">D</span><div><b>Diego A.</b><span>Recomeçando</span></div></div></div>
+    </div>
+    <div class="track" aria-hidden="true">
+      <div class="dp"><span class="stars">★★★★★</span><q>Em 30 dias parei de me perder nas contas. Hoje sei exatamente quanto posso gastar sem culpa.</q><div class="who"><span class="av">M</span><div><b>Mariana S.</b><span>Autônoma</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>A gente brigava por dinheiro. Planejando juntos no Atlas, acabou o stress e sobrou plano. Hoje é decisão a dois, sem briga.</q><div class="who"><span class="av">R</span><div><b>Rafael &amp; Júlia</b><span>Casal</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Separar a vida pessoal da empresa era um caos. O Atlas me deu clareza pra finalmente crescer.</q><div class="who"><span class="av">C</span><div><b>Carlos M.</b><span>Empreendedor</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Vi minha renda passiva projetada e entendi, pela primeira vez, o meu caminho até a liberdade financeira.</q><div class="who"><span class="av">A</span><div><b>Ana P.</b><span>Começando a investir</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Pela primeira vez sei pra onde meu dinheiro vai. Montei minha reserva em 4 meses.</q><div class="who"><span class="av">B</span><div><b>Bruno T.</b><span>Pai de família</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Parei de usar três planilhas. O Atlas junta tudo e ainda me diz qual o próximo passo a dar.</q><div class="who"><span class="av">L</span><div><b>Letícia M.</b><span>Profissional liberal</span></div></div></div>
+      <div class="dp"><span class="stars">★★★★★</span><q>Estava endividado e perdido. Hoje tenho um plano claro e já saí do vermelho.</q><div class="who"><span class="av">D</span><div><b>Diego A.</b><span>Recomeçando</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ ÚLTIMA SUBIDA · A ESCOLHA (oferta) ════ -->
+<section id="escolha">
+  <div class="wrap" style="text-align:center;display:flex;flex-direction:column;align-items:center">
+    <div class="kicker rv">Última subida · <b>2.800 m</b></div>
+    <h2 class="rv">Escolha o seu ritmo de subida.</h2>
+    <p class="lead rv" style="max-width:600px;margin:20px auto 0">Todos começam igual: <b>7 dias grátis com acesso completo, sem cartão.</b> Você só escolhe o plano depois de ver o seu mapa pronto.</p>
+
+    <div class="planos">
+      <div class="plano glass rv">
+        <h3>Essencial</h3><p class="para">Pra começar a enxergar.</p>
+        <div class="preco">R$ 15,90<small>/mês</small></div><div class="dia">≈ R$ 0,53 por dia</div>
+        <ul><li>Controle financeiro do dia a dia</li><li>Análises básicas + Atlas Score</li><li>Acesso à comunidade</li></ul>
+        <a class="pcta" href="https://app.useatlasapp.com/auth">Começar 7 dias grátis</a>
+      </div>
+      <div class="plano glass destaque rv">
+        <span class="pop"><i data-lucide="star" style="width:12px;height:12px;vertical-align:-1px"></i> Mais escolhido</span>
+        <h3>Pro</h3><p class="para">Pra planejar o futuro de verdade.</p>
+        <div class="preco">R$ 24,90<small>/mês</small></div><div class="dia">≈ R$ 0,83 por dia, menos que um café</div>
+        <ul><li>Tudo do Essencial</li><li>Planejamento de longo prazo + cenários</li><li>Método Atlas: 5 relatórios de diagnóstico</li><li>Atlas IA + Simulador de decisão</li><li>Atlas Negócios (PF + PJ) e importações</li><li>Acesso compartilhado incluso</li></ul>
+        <a class="pcta" href="https://app.useatlasapp.com/auth">Começar 7 dias grátis</a>
+      </div>
+      <div class="plano glass rv">
+        <h3>Elite</h3><p class="para">Pra maestria financeira.</p>
+        <div class="preco">R$ 32,90<small>/mês</small></div><div class="dia">≈ R$ 1,10 por dia</div>
+        <ul><li>Tudo do Pro</li><li>Plano da Liberdade: 33 aulas</li><li>Cursos avançados de educação financeira</li><li>Suporte prioritário</li><li>Prioridade em novas features</li></ul>
+        <a class="pcta" href="https://app.useatlasapp.com/auth">Começar 7 dias grátis</a>
+      </div>
+    </div>
+
+    <div class="risco glass rv">
+      <div class="selo"><b>7</b><span>dias grátis<br>risco zero</span></div>
+      <p><b>O risco é todo nosso, como deve ser.</b> Você entra sem cadastrar cartão, então não existe "esqueci de cancelar e fui cobrado". Se em 7 dias o Atlas não te der mais clareza do que você teve nos últimos anos, é só fechar a aba. E se assinar e mudar de ideia: cancela em 2 cliques, sem multa, mantendo acesso até o fim do ciclo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ O CUME ════ -->
+<section id="cume">
+  <div class="wrap">
+    <div class="kicker rv">O Cume · <b>2.870 m</b> <i data-lucide="flag" style="width:13px;height:13px;color:#ff7b72"></i></div>
+    <h2 class="rv">Você chegou.<br><span class="serif destaque-serif">Agora imagina isso com o seu dinheiro.</span></h2>
+    <img class="celebra rv-s" id="celebra" src="Imagem%20de%20Fundo%204%20relatorios%202.webp" alt="Dois alpinistas comemorando no topo da montanha Atlas">
+    <p class="lead rv" style="max-width:560px;margin:10px auto 0">Essa sensação de olhar pra trás e ver o caminho inteiro, e de olhar pra frente sabendo exatamente o próximo passo: é isso que o Atlas entrega todos os dias. Daqui a um ano você vai estar um ano mais velho, com mapa ou sem mapa. <b>A única coisa que muda é essa escolha.</b></p>
+    <div class="rv" style="margin-top:38px">
+      <a class="btn" href="https://app.useatlasapp.com/auth" style="font-size:clamp(18px,2.8vw,25px);padding:23px 50px">Quero ver meu mapa: 7 dias grátis</a>
+      <p class="micro"><svg class="check" viewBox="0 0 20 20" fill="#EFCA7F"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>Sem cartão · 5 minutos pra configurar · Cancele quando quiser</p>
+    </div>
+    <div class="ps glass rv">
+      <h4>P.S. do guia pra você</h4>
+      <p>Se você subiu até aqui, é porque alguma coisa ressoou. Talvez o cansaço de não saber pra onde o dinheiro vai. Talvez aquela viagem, aquela casa, aquela aposentadoria que você adia porque "será que dá?".</p>
+      <p>O Atlas não é a resposta. É o caminho. Os 7 dias grátis existem pra você descobrir se ele serve pra você. Sem risco, sem compromisso e sem cartão.</p>
+      <p><b>Você não precisa decidir agora se vai usar o Atlas pelos próximos 10 anos. Só precisa decidir se vale testar por 7 dias.</b></p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /zona -->
+
+<!-- ════ ACIMA DAS NUVENS · FAQ ════ -->
+<section id="faq">
+  <div class="wrap">
+    <h2 class="rv">Perguntas ao guia</h2>
+    <p class="lead rv">As dúvidas mais comuns de quem está prestes a começar a subida.</p>
+    <div class="faq-list rv">
+      <details class="qa"><summary>Como funciona o teste grátis de 7 dias?</summary><p class="ans">Você se cadastra só com e-mail e recebe acesso completo a todas as ferramentas (exceto os cursos do Elite) por 7 dias. Os planos só aparecem dentro da plataforma quando o teste termina. Sem cartão, sem cobrança automática, sem pegadinha.</p></details>
+      <details class="qa"><summary>Não tenho tempo pra mais um app…</summary><p class="ans">Por isso o Atlas foi feito pra 5 minutos por dia: você abre, o painel já diz onde você está e qual o próximo passo. O sistema trabalha em segundo plano. E sendo sincero: quem não tem tempo é exatamente quem mais precisa de um mapa pronto.</p></details>
+      <details class="qa"><summary>Já tentei planilha e outros apps. Nunca dura.</summary><p class="ans">Porque eles só olham pro passado, e ninguém aguenta anotar gasto por culpa. O Atlas te dá o motivo pra continuar: você vê seu futuro mudando em tempo real a cada decisão. Quando o esforço tem placar, o jogo muda.</p></details>
+      <details class="qa"><summary>Não entendo nada de finanças. Serve pra mim?</summary><p class="ans">É o público que o Atlas mais transforma. Você não precisa saber nada antes: o app mostra onde você está e o próximo passo, sem jargão, e você aprende na prática, dentro do seu próprio plano.</p></details>
+      <details class="qa"><summary>R$ 24,90 cabe no meu bolso?</summary><p class="ans">São R$ 0,83 por dia. Um único gasto por impulso evitado no mês já paga o ano inteiro. E você só decide depois dos 7 dias grátis, vendo o que o Atlas encontrou no seu dinheiro.</p></details>
+      <details class="qa"><summary>Já tenho contador / assessor. O Atlas substitui?</summary><p class="ans">Não. Ele complementa. Seu contador cuida do imposto, seu assessor da carteira. O Atlas é o sistema que conecta tudo na sua vida pessoal e mostra o quadro completo.</p></details>
+      <details class="qa"><summary>Posso usar com meu parceiro ou parceira?</summary><p class="ans">Sim, em todos os planos. Você convida por e-mail, cada um tem seu próprio acesso (sem dividir senha) e ambos veem o mesmo plano. Finanças a dois, sem briga.</p></details>
+      <details class="qa"><summary>E se eu quiser cancelar?</summary><p class="ans">Direto nas configurações, em 2 cliques. Sem multa, sem ligação, sem burocracia. Você mantém o acesso até o fim do ciclo já pago.</p></details>
+    </div>
+    <div class="fim rv">
+      <a class="btn" href="https://app.useatlasapp.com/auth">Começar a subida agora</a>
+      <p class="micro" style="color:#6b6354;text-shadow:none">7 dias grátis · Sem cartão · Cancele quando quiser</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas" style="filter:brightness(.4) sepia(.3)">
+  <p>© 2026 Atlas. Todos os direitos reservados. · CNPJ: 59.816.277/0001-30</p>
+</footer>
+
+<div id="sticky">
+  <div class="t"><b>7 dias grátis</b>sem cartão · cancele quando quiser</div>
+  <a href="https://app.useatlasapp.com/auth">Começar</a>
+</div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+lucide.createIcons();
+const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ═══ 1. VÍDEO SCRUBBED: scroll = subir a montanha ═══ */
+const vid = document.getElementById('montanha');
+/* no celular usa a versão vertical (9:16), mais leve e enquadrada no pico */
+if (matchMedia('(max-width:768px)').matches){
+  const s = vid.querySelector('source');
+  s.src = 'hero-scrub-mobile.mp4';
+  vid.poster = 'poster-hero-mobile.jpg';
+  vid.load();
+}
+let alvoT = 0, atualT = 0, dur = 10;
+vid.addEventListener('loadedmetadata', () => { dur = vid.duration; vid.pause(); vid.currentTime = 0; });
+vid.pause();
+
+/* progresso da subida: do topo da página até o centro do CUME */
+ScrollTrigger.create({
+  trigger: document.body, start: 'top top',
+  endTrigger: '#cume', end: 'center center',
+  scrub: true,
+  onUpdate(self){
+    alvoT = self.progress * (dur - 0.06);
+    /* HUD altitude */
+    const alt = Math.round(self.progress * 2870);
+    document.getElementById('altura').textContent = alt.toLocaleString('pt-BR');
+    document.getElementById('fio').style.height = (self.progress * 100) + '%';
+  }
+});
+
+/* loop suave (lerp) — evita o scrub "travado" */
+(function anima(){
+  atualT += (alvoT - atualT) * 0.09;
+  if (Math.abs(alvoT - atualT) > 0.005 && vid.readyState >= 2){
+    try{ vid.currentTime = atualT; }catch(e){}
+  }
+  requestAnimationFrame(anima);
+})();
+
+/* ═══ 2. HUD: acampamento ativo + clique navega ═══ */
+document.querySelectorAll('#hud .camp').forEach(c => {
+  const alvo = document.getElementById(c.dataset.alvo);
+  c.addEventListener('click', () => alvo.scrollIntoView({behavior:'smooth'}));
+  ScrollTrigger.create({
+    trigger: alvo, start: 'top 55%', end: 'bottom 45%',
+    onToggle(self){ c.classList.toggle('on', self.isActive); }
+  });
+});
+
+/* ═══ 4. Entradas do hero ═══ */
+gsap.fromTo('[data-h]',{opacity:0,y:34},{opacity:1,y:0,duration:1,ease:'power3.out',stagger:.13,delay:.2});
+
+/* ═══ 5. Reveals genéricos ═══ */
+document.querySelectorAll('.rv').forEach(el=>gsap.to(el,{opacity:1,y:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}}));
+document.querySelectorAll('.rv-l').forEach(el=>gsap.to(el,{opacity:1,x:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%'}}));
+document.querySelectorAll('.rv-r').forEach(el=>gsap.to(el,{opacity:1,x:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%'}}));
+document.querySelectorAll('.rv-s').forEach(el=>gsap.to(el,{opacity:1,scale:1,duration:1.1,ease:'back.out(1.4)',scrollTrigger:{trigger:el,start:'top 85%'}}));
+
+/* pesos caem na mochila */
+gsap.utils.toArray('.peso-chip').forEach((chip,i)=>{
+  gsap.fromTo(chip,{opacity:0,y:-46,rotate:i%2?4:-4},{opacity:1,y:0,rotate:0,duration:.7,ease:'bounce.out',
+    scrollTrigger:{trigger:chip,start:'top 88%'},delay:(i%2)*.08});
+});
+
+/* mascote balança */
+gsap.to('#peso .mascote img',{rotate:2.5,y:-8,duration:2.4,ease:'sine.inOut',yoyo:true,repeat:-1});
+
+/* contadores + barra do score */
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const fim=+el.dataset.count;
+  ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:()=>{
+    gsap.fromTo(el,{innerText:0},{innerText:fim,duration:1.8,ease:'power2.out',snap:{innerText:1}});
+  }});
+});
+document.querySelectorAll('[data-bar]').forEach(el=>{
+  ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:()=>gsap.to(el,{width:el.dataset.bar+'%',duration:1.5,ease:'power3.out'})});
+});
+
+/* ═══ 6. CUME: celebração + confete ═══ */
+ScrollTrigger.create({trigger:'#cume',start:'top 55%',once:true,onEnter:()=>{
+  const cores=['#EFCA7F','#A82F26','#69AAD1','#fff','#7ee0a3'];
+  const alvo=document.getElementById('cume');
+  for(let i=0;i<44;i++){
+    const c=document.createElement('span');c.className='confete';
+    c.style.background=cores[i%cores.length];
+    c.style.left=(20+Math.random()*60)+'%';c.style.top='38%';
+    alvo.appendChild(c);
+    gsap.fromTo(c,{opacity:1,x:0,y:0,rotate:0},{
+      opacity:0,
+      x:(Math.random()-.5)*440,
+      y:120+Math.random()*380,
+      rotate:Math.random()*720-360,
+      duration:1.8+Math.random()*1.4,
+      ease:'power1.out',delay:Math.random()*.35,
+      onComplete:()=>c.remove()
+    });
+  }
+  gsap.fromTo('#celebra',{y:14},{y:0,duration:1.6,ease:'sine.inOut',yoyo:true,repeat:3});
+}});
+
+/* ═══ 7. sticky mobile ═══ */
+const sticky=document.getElementById('sticky');
+window.addEventListener('scroll',()=>{
+  sticky && sticky.classList.toggle('show',document.documentElement.scrollTop>innerHeight*1.1);
+},{passive:true});
+
+/* fecha outros FAQs */
+document.querySelectorAll('.qa summary').forEach(s=>{
+  s.addEventListener('click',()=>{
+    document.querySelectorAll('.qa[open]').forEach(o=>{if(o!==s.parentElement)o.removeAttribute('open')});
+  });
+});
+
+/* ═══ 8. reduced motion: desliga tudo, mostra conteúdo ═══ */
+if(reduzido){
+  ScrollTrigger.getAll().forEach(t=>t.kill());
+  document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s,[data-h]').forEach(el=>{el.style.opacity=1;el.style.transform='none'});
+}
+</script>
+</body>
+</html>
