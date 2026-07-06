@@ -33,9 +33,9 @@ fbq('init','1002140935906851');fbq('track','PageView');
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script defer src="https://unpkg.com/lucide@latest"></script>
 
 <style>
 :root{
@@ -364,13 +364,17 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
   .qa summary{padding:17px 18px;font-size:14.5px}
   .qa .ans{padding:0 18px 18px;font-size:13.5px}
   footer{padding-bottom:110px}
+  .glass,.dp,.kicker,#base .badge,.show-txt .tag{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .glass{background:rgba(6,15,24,.88)}
+  .dp{background:rgba(6,15,24,.9)}
+  .kicker,#base .badge,.show-txt .tag{background:rgba(4,12,17,.8)}
 }
 </style>
 </head>
 <body>
 
 <!-- fundo -->
-<video id="montanha" muted playsinline preload="auto" poster="poster-hero.jpg">
+<video id="montanha" muted playsinline preload="metadata" poster="poster-hero.jpg">
   <source src="hero-scrub.mp4" type="video/mp4">
 </video>
 <div id="veu"></div>
@@ -770,6 +774,7 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
 </div>
 
 <script>
+window.addEventListener('DOMContentLoaded', function(){
 gsap.registerPlugin(ScrollTrigger);
 lucide.createIcons();
 const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -804,7 +809,7 @@ ScrollTrigger.create({
 /* loop suave (lerp) — evita o scrub "travado" */
 (function anima(){
   atualT += (alvoT - atualT) * 0.09;
-  if (Math.abs(alvoT - atualT) > 0.005 && vid.readyState >= 2){
+  if (Math.abs(alvoT - atualT) > 0.02 && vid.readyState >= 2){
     try{ vid.currentTime = atualT; }catch(e){}
   }
   requestAnimationFrame(anima);
@@ -917,6 +922,7 @@ if(reduzido){
   ScrollTrigger.getAll().forEach(t=>t.kill());
   document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s,[data-h]').forEach(el=>{el.style.opacity=1;el.style.transform='none'});
 }
+});
 </script>
 </body>
 </html>
