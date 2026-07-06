@@ -1,12 +1,4 @@
 {
   "name": "atlas",
-  "cleanUrls": true,
-  "redirects": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "lp.useatlasapp.com" }],
-      "destination": "/lpteste",
-      "permanent": false
-    }
-  ]
+  "cleanUrls": true
 }
