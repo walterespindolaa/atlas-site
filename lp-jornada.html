@@ -72,7 +72,11 @@ a{text-decoration:none;color:inherit}
 #hud .camp.on i{background:var(--beige);box-shadow:0 0 12px rgba(239,202,127,.8);transform:scale(1.3)}
 #hud .camp span{opacity:0;transform:translateX(-6px);transition:all .3s;background:rgba(4,12,17,.6);backdrop-filter:blur(6px);padding:4px 10px;border-radius:8px;white-space:nowrap}
 #hud .camp.on span,#hud:hover .camp span{opacity:1;transform:none}
-@media(max-width:900px){#hud{left:auto;right:12px;top:auto;bottom:78px;transform:none}#hud .trilho{display:none}#hud .alt{margin:0;font-size:11.5px;padding:7px 11px}}
+@media(max-width:900px){
+#hud{left:auto;right:14px;top:auto;bottom:calc(92px + env(safe-area-inset-bottom));transform:none}
+#hud .trilho{display:none}
+#hud .alt{margin:0;font-size:12.5px;padding:9px 13px;background:rgba(4,12,17,.78);border:1px solid rgba(239,202,127,.55);box-shadow:0 8px 24px rgba(0,0,0,.45)}
+}
 
 /* ════ nav ════ */
 #topnav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1120px,94%);display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:rgba(4,12,17,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:100px;z-index:150}
