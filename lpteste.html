@@ -221,7 +221,7 @@ section{position:relative;min-height:auto;display:flex;align-items:center;paddin
 .rel-viewport img{position:absolute;top:0;left:0;width:100%;display:block;will-change:transform}
 .rel-base{position:relative;width:112%;left:-6%;height:14px;background:linear-gradient(#cfd4d9,#a7adb4);border-radius:0 0 14px 14px;box-shadow:0 10px 16px rgba(0,0,0,.4)}
 .rel-base i{position:absolute;top:0;left:50%;transform:translateX(-50%);width:96px;height:7px;background:#9097a0;border-radius:0 0 8px 8px;display:block}
-@media(max-width:768px){
+@media(max-width:820px){
   .rel-viewport{aspect-ratio:3/4;border-radius:10px}
   .rel-screen{border-radius:22px;padding:8px}
   .rel-base{display:none}
@@ -327,10 +327,34 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
 #sticky .t{font-size:12px;line-height:1.3}
 #sticky .t b{display:block;font-size:13.5px}
 #sticky a{background:var(--red);font-weight:700;font-size:13.5px;padding:11px 18px;border-radius:100px;white-space:nowrap}
-@media(max-width:760px){#sticky{display:flex}}
+@media(max-width:820px){#sticky{display:flex}}
 
-/* ═══ MOBILE: imersão total ═══ */
-@media(max-width:768px){
+/* ═══ TABLET (iPad retrato grande / paisagem estreita) ═══ */
+@media(min-width:821px) and (max-width:1080px){
+  .wrap{padding:0 36px}
+  h1{font-size:clamp(40px,6vw,58px)}
+  .showcase{gap:36px}
+  .phone{width:min(260px,40vw)}
+  .relatorios{grid-template-columns:repeat(3,1fr)}
+  .rel:nth-child(4),.rel:nth-child(5){grid-column:span 1}
+  .planos{gap:12px}
+  .plano{padding:26px 20px}
+  #peso .cena{gap:28px;grid-template-columns:220px 1fr}
+}
+
+/* ═══ CELULAR DEITADO (paisagem baixa) ═══ */
+@media(max-height:500px) and (orientation:landscape){
+  #base{padding-top:14vh}
+  h1{font-size:36px}
+  #base .sub{margin:14px auto 20px;font-size:15px}
+  .btn{padding:14px 32px;font-size:16px}
+  .hint{display:none}
+  #base .badge{margin-bottom:16px}
+  #sticky{display:none}
+}
+
+/* ═══ MOBILE: imersão total (celulares e iPad retrato pequeno) ═══ */
+@media(max-width:820px){
   section{min-height:auto;padding:7vh 0}
   #base{min-height:100svh;padding-top:15vh;padding-bottom:4vh}
   .wrap{padding:0 18px}
@@ -376,6 +400,18 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
   .glass{background:rgba(6,15,24,.88)}
   .dp{background:rgba(6,15,24,.9)}
   .kicker,#base .badge,.show-txt .tag{background:rgba(4,12,17,.8)}
+}
+@media(max-width:380px){
+  h1{font-size:31px}
+  h2{font-size:24px}
+  .lead{font-size:14.5px}
+  .wrap{padding:0 14px}
+  #peso .cena{grid-template-columns:88px 1fr;gap:10px}
+  #peso .mascote{max-width:88px}
+  .btn{font-size:15.5px;padding:16px 18px}
+  #sticky .t{font-size:11px}
+  #sticky .t b{font-size:12.5px}
+  .plano .preco{font-size:33px}
 }
 </style>
 </head>
@@ -791,7 +827,9 @@ const reduzido = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ═══ 1. VÍDEO SCRUBBED: scroll = subir a montanha ═══ */
 const vid = document.getElementById('montanha');
 /* no celular usa a versão vertical (9:16), mais leve e enquadrada no pico */
-if (matchMedia('(max-width:768px)').matches){
+const usaVertical = matchMedia('(max-width:820px)').matches ||
+  (matchMedia('(orientation: portrait)').matches && window.innerWidth <= 1024);
+if (usaVertical){
   const s = vid.querySelector('source');
   s.src = 'hero-scrub-mobile.mp4';
   vid.poster = 'poster-hero-mobile.jpg';
