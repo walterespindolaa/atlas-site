@@ -89,7 +89,8 @@ a{text-decoration:none;color:inherit}
 .nav-dir{display:flex;align-items:center;gap:18px}
 .nav-entrar{font-size:14px;font-weight:600;transition:color .2s}
 .nav-entrar:hover{color:var(--beige)}
-@media(max-width:960px){.nav-links,.nav-entrar{display:none}}
+.nav-precos{display:none;font-size:14px;font-weight:700;color:var(--beige)}
+@media(max-width:960px){.nav-links,.nav-entrar{display:none}.nav-precos{display:block}}
 .nav-cta{background:var(--red);font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:100px;transition:transform .2s,background .2s;white-space:nowrap}
 .nav-cta:hover{background:var(--red-h);transform:translateY(-2px)}
 
@@ -410,8 +411,9 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
     <a href="suporte.html">Suporte</a>
   </div>
   <div class="nav-dir">
+    <a class="nav-precos" href="#escolha">Preços</a>
     <a class="nav-entrar" href="https://app.useatlasapp.com/auth">Entrar</a>
-    <a class="nav-cta" href="https://app.useatlasapp.com/auth">Testar 7 dias grátis</a>
+    <a class="nav-cta" href="https://app.useatlasapp.com/comece">Testar 7 dias grátis</a>
   </div>
 </nav>
 
@@ -422,7 +424,7 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
     <h1 data-h>Toda montanha precisa<br>de um <span class="hl">caminho.</span></h1>
     <p class="lead sub" data-h>Essa montanha é a sua vida financeira. Hoje você está na base: o dinheiro entra, some, e ninguém te explica por quê.<br><b>Role a página e suba com a gente.</b> Lá de cima, a vista é outra.</p>
     <div data-h>
-      <a class="btn" href="https://app.useatlasapp.com/auth">Começar a subida</a>
+      <a class="btn" href="#escolha">Começar a subida</a>
       <p class="micro"><svg class="check" viewBox="0 0 20 20" fill="#EFCA7F"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>7 dias grátis · Sem cartão · Cancele quando quiser</p>
     </div>
   </div>
@@ -601,7 +603,7 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
       <div class="rel-base"><i></i></div>
     </div>
     <div class="rv" style="margin-top:36px">
-      <a class="btn" href="https://app.useatlasapp.com/auth" style="font-size:17px;padding:17px 36px">Quero meu diagnóstico</a>
+      <a class="btn" href="https://app.useatlasapp.com/comece" style="font-size:17px;padding:17px 36px">Quero meu diagnóstico</a>
       <p class="micro">Seus primeiros relatórios saem ainda na primeira semana, dentro dos 7 dias grátis</p>
     </div>
   </div>
@@ -676,33 +678,33 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
   <div class="wrap" style="text-align:center;display:flex;flex-direction:column;align-items:center">
     <div class="kicker rv">Última subida · <b>2.800 m</b></div>
     <h2 class="rv">Escolha o seu ritmo de subida.</h2>
-    <p class="lead rv" style="max-width:600px;margin:20px auto 0">Todos começam igual: <b>7 dias grátis com acesso completo, sem cartão.</b> Você só escolhe o plano depois de ver o seu mapa pronto.</p>
+    <p class="lead rv" style="max-width:600px;margin:20px auto 0">Assine direto e comece agora, ou <b>teste 7 dias grátis antes, sem cartão</b>. Sem pegadinha: os preços estão todos aqui embaixo.</p>
 
     <div class="planos">
       <div class="plano glass rv">
         <h3>Essencial</h3><p class="para">Pra começar a enxergar.</p>
         <div class="preco">R$ 15,90<small>/mês</small></div><div class="dia">≈ R$ 0,53 por dia</div>
         <ul><li>Controle financeiro do dia a dia</li><li>Análises básicas + Atlas Score</li><li>Acesso à comunidade</li></ul>
-        <a class="pcta" href="https://app.useatlasapp.com/auth">Começar 7 dias grátis</a>
+        <a class="pcta" href="https://app.useatlasapp.com/comprar/essencial">Assinar Essencial</a>
       </div>
       <div class="plano glass destaque rv">
         <span class="pop"><i data-lucide="star" style="width:12px;height:12px;vertical-align:-1px"></i> Mais escolhido</span>
         <h3>Pro</h3><p class="para">Pra planejar o futuro de verdade.</p>
         <div class="preco">R$ 24,90<small>/mês</small></div><div class="dia">≈ R$ 0,83 por dia, menos que um café</div>
         <ul><li>Tudo do Essencial</li><li>Planejamento de longo prazo + cenários</li><li>Método Atlas: 5 relatórios de diagnóstico</li><li>Atlas IA + Simulador de decisão</li><li>Atlas Negócios (PF + PJ) e importações</li><li>Acesso compartilhado incluso</li></ul>
-        <a class="pcta" href="https://app.useatlasapp.com/auth">Começar 7 dias grátis</a>
+        <a class="pcta" href="https://app.useatlasapp.com/comprar/pro">Assinar Pro</a>
       </div>
       <div class="plano glass rv">
         <h3>Elite</h3><p class="para">Pra maestria financeira.</p>
         <div class="preco">R$ 32,90<small>/mês</small></div><div class="dia">≈ R$ 1,10 por dia</div>
         <ul><li>Tudo do Pro</li><li>Plano da Liberdade: 33 aulas</li><li>Cursos avançados de educação financeira</li><li>Suporte prioritário</li><li>Prioridade em novas features</li></ul>
-        <a class="pcta" href="https://app.useatlasapp.com/auth">Começar 7 dias grátis</a>
+        <a class="pcta" href="https://app.useatlasapp.com/comprar/elite">Assinar Elite</a>
       </div>
     </div>
 
     <div class="risco glass rv">
       <div class="selo"><i data-lucide="shield-check"></i><b>7 dias</b><span>grátis</span></div>
-      <p><b>O risco é todo nosso, como deve ser.</b> Você entra sem cadastrar cartão, então não existe "esqueci de cancelar e fui cobrado". Se em 7 dias o Atlas não te der mais clareza do que você teve nos últimos anos, é só fechar a aba. E se assinar e mudar de ideia: cancela em 2 cliques, sem multa, mantendo acesso até o fim do ciclo.</p>
+      <p><b>O risco é todo nosso, como deve ser.</b> Você entra sem cadastrar cartão, então não existe "esqueci de cancelar e fui cobrado". Se em 7 dias o Atlas não te der mais clareza do que você teve nos últimos anos, é só fechar a aba. E se assinar e mudar de ideia: cancela em 2 cliques, sem multa, mantendo acesso até o fim do ciclo. <a href="https://app.useatlasapp.com/comece" style="color:var(--beige);font-weight:700;text-decoration:underline">Prefere testar antes? Comece os 7 dias grátis</a>.</p>
     </div>
   </div>
 </section>
@@ -715,7 +717,7 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
     <img class="celebra rv-s" id="celebra" src="Imagem%20de%20Fundo%204%20relatorios%202.webp" alt="Dois alpinistas comemorando no topo da montanha Atlas">
     <p class="lead rv" style="max-width:560px;margin:10px auto 0">Essa sensação de olhar pra trás e ver o caminho inteiro, e de olhar pra frente sabendo exatamente o próximo passo: é isso que o Atlas entrega todos os dias. Daqui a um ano você vai estar um ano mais velho, com mapa ou sem mapa. <b>A única coisa que muda é essa escolha.</b></p>
     <div class="rv" style="margin-top:38px">
-      <a class="btn" href="https://app.useatlasapp.com/auth" style="font-size:clamp(18px,2.8vw,25px);padding:23px 50px">Quero ver meu mapa: 7 dias grátis</a>
+      <a class="btn" href="https://app.useatlasapp.com/comece" style="font-size:clamp(18px,2.8vw,25px);padding:23px 50px">Quero ver meu mapa: 7 dias grátis</a>
       <p class="micro"><svg class="check" viewBox="0 0 20 20" fill="#EFCA7F"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>Sem cartão · 5 minutos pra configurar · Cancele quando quiser</p>
     </div>
     <div class="ps glass rv">
@@ -745,7 +747,7 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
       <details class="qa"><summary>E se eu quiser cancelar?</summary><p class="ans">Direto nas configurações, em 2 cliques. Sem multa, sem ligação, sem burocracia. Você mantém o acesso até o fim do ciclo já pago.</p></details>
     </div>
     <div class="fim rv">
-      <a class="btn" href="https://app.useatlasapp.com/auth">Começar a subida agora</a>
+      <a class="btn" href="https://app.useatlasapp.com/comece">Começar a subida agora</a>
       <p class="micro" style="color:#6b6354;text-shadow:none">7 dias grátis · Sem cartão · Cancele quando quiser</p>
     </div>
   </div>
@@ -770,7 +772,7 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
 
 <div id="sticky">
   <div class="t"><b>7 dias grátis</b>sem cartão · cancele quando quiser</div>
-  <a href="https://app.useatlasapp.com/auth">Começar</a>
+  <a href="https://app.useatlasapp.com/comece">Começar</a>
 </div>
 
 <script>
