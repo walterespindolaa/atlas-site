@@ -197,8 +197,13 @@ section{position:relative;min-height:auto;display:flex;align-items:center;paddin
 .rel h3{font-size:16.5px;font-weight:800;line-height:1.25;margin-bottom:4px}
 .rel .papel{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--light);display:block;margin-bottom:10px}
 .rel p{font-size:13px;line-height:1.55;color:rgba(255,255,255,.82)}
-#metodo .prova-img{max-width:820px;margin:44px auto 0;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 40px 90px rgba(4,12,17,.55)}
-#metodo .prova-img img{width:100%;max-height:380px;object-fit:cover;object-position:top}
+.rel-laptop{width:min(780px,94vw);margin:46px auto 0}
+.rel-screen{background:#0b0b0c;border-radius:16px;padding:12px;box-shadow:0 40px 90px rgba(4,12,17,.6),inset 0 0 0 2px #2a2a2e}
+.rel-viewport{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#fff}
+.rel-viewport img{position:absolute;top:0;left:0;width:100%;display:block;will-change:transform}
+.rel-base{position:relative;width:112%;left:-6%;height:14px;background:linear-gradient(#cfd4d9,#a7adb4);border-radius:0 0 14px 14px;box-shadow:0 10px 16px rgba(0,0,0,.4)}
+.rel-base i{position:absolute;top:0;left:50%;transform:translateX(-50%);width:96px;height:7px;background:#9097a0;border-radius:0 0 8px 8px;display:block}
+@media(max-width:768px){.rel-viewport{aspect-ratio:4/5}}
 @media(max-width:1020px){.relatorios{grid-template-columns:repeat(2,1fr)}.rel:last-child{grid-column:1/-1}}
 @media(max-width:560px){.relatorios{grid-template-columns:1fr}}
 
@@ -548,7 +553,10 @@ footer img{height:24px;margin:0 auto 12px;opacity:.7}
       <div class="rel glass rv"><span class="n">05</span><h3>Vista da Montanha</h3><span class="papel">A projeção viva</span><p>O único que não é documento: é a tela onde o seu futuro reage em tempo real a cada escolha.</p></div>
     </div>
 
-    <div class="prova-img rv-s"><img src="relatorio-metodo-topo.webp" alt="Relatório do Método Atlas" loading="lazy"></div>
+    <div class="rel-laptop rv-s" id="rel-stage">
+      <div class="rel-screen"><div class="rel-viewport" id="rel-viewport"><img id="rel-img" src="relatorio-metodo.webp" alt="Relatório do Método Atlas" loading="lazy" decoding="async"></div></div>
+      <div class="rel-base"><i></i></div>
+    </div>
     <div class="rv" style="margin-top:36px">
       <a class="btn" href="https://app.useatlasapp.com/auth" style="font-size:17px;padding:17px 36px">Quero meu diagnóstico</a>
       <p class="micro">Seus primeiros relatórios saem ainda na primeira semana, dentro dos 7 dias grátis</p>
@@ -811,6 +819,23 @@ ScrollTrigger.create({trigger:'#cume',start:'top 55%',once:true,onEnter:()=>{
   }
   gsap.fromTo('#celebra',{y:14},{y:0,duration:1.6,ease:'sine.inOut',yoyo:true,repeat:3});
 }});
+
+/* ═══ relatório rolando sozinho na moldura ═══ */
+(function(){
+  const img=document.getElementById('rel-img'), vp=document.getElementById('rel-viewport'), stage=document.getElementById('rel-stage');
+  if(!img||!vp) return;
+  let anim=null;
+  function start(){
+    const max=img.offsetHeight - vp.offsetHeight;
+    if(max<=8 || typeof img.animate!=='function') return;
+    if(anim) anim.cancel();
+    const dur=Math.min(Math.max(max*5,14000),32000);
+    anim=img.animate([{transform:'translateY(0)'},{transform:'translateY(-'+max+'px)'}],{duration:dur,direction:'alternate',iterations:Infinity,easing:'linear'});
+  }
+  if(img.complete && img.naturalHeight) start(); else img.addEventListener('load',start);
+  let rt; window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(anim){anim.cancel();anim=null}start()},200)});
+  if(stage){stage.addEventListener('mouseenter',()=>anim&&anim.pause());stage.addEventListener('mouseleave',()=>anim&&anim.play())}
+})();
 
 /* ═══ 7. sticky mobile ═══ */
 const sticky=document.getElementById('sticky');
