@@ -79,6 +79,13 @@ a{text-decoration:none;color:inherit}
 /* ════ nav ════ */
 nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1120px,94%);display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:rgba(4,12,17,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:100px;z-index:150}
 nav img{height:30px}
+.nav-links{display:flex;gap:26px;font-size:14px;font-weight:500}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:var(--beige)}
+.nav-dir{display:flex;align-items:center;gap:18px}
+.nav-entrar{font-size:14px;font-weight:600;transition:color .2s}
+.nav-entrar:hover{color:var(--beige)}
+@media(max-width:960px){.nav-links,.nav-entrar{display:none}}
 .nav-cta{background:var(--red);font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:100px;transition:transform .2s,background .2s;white-space:nowrap}
 .nav-cta:hover{background:var(--red-h);transform:translateY(-2px)}
 
@@ -374,7 +381,18 @@ footer img{height:24px;margin:0 auto 12px;opacity:.7}
 
 <nav>
   <a href="#base"><img src="export_2026-06-04T03_26_23-606Z/Group%201_1x.webp" alt="Atlas"></a>
-  <a class="nav-cta" href="https://app.useatlasapp.com/auth">Testar 7 dias grátis</a>
+  <div class="nav-links">
+    <a href="#guia">Sobre</a>
+    <a href="#escolha">Preços</a>
+    <a href="funcionalidades.html">Funcionalidades</a>
+    <a href="#faq">FAQ</a>
+    <a href="/blog">Blog</a>
+    <a href="suporte.html">Suporte</a>
+  </div>
+  <div class="nav-dir">
+    <a class="nav-entrar" href="https://app.useatlasapp.com/auth">Entrar</a>
+    <a class="nav-cta" href="https://app.useatlasapp.com/auth">Testar 7 dias grátis</a>
+  </div>
 </nav>
 
 <!-- ════ BASE · 0m ════ -->
@@ -851,6 +869,17 @@ document.querySelectorAll('.qa summary').forEach(s=>{
     document.querySelectorAll('.qa[open]').forEach(o=>{if(o!==s.parentElement)o.removeAttribute('open')});
   });
 });
+
+/* ═══ Pixel: funil de retenção + CTA ═══ */
+if (typeof fbq === 'function'){
+  [['peso','Acamp1_Peso'],['mapa','Acamp2_Mapa'],['equip','Acamp3_Equipamento'],['metodo','Acamp4_Metodo'],['negocios','Acamp5_NegociosPJ'],['cordada','Acamp7_Depoimentos'],['escolha','Planos'],['cume','Cume']].forEach(([id,nome])=>{
+    const el=document.getElementById(id);
+    if(el) ScrollTrigger.create({trigger:el,start:'top 60%',once:true,onEnter:()=>fbq('trackCustom','LP_Secao',{secao:nome})});
+  });
+  document.querySelectorAll('a[href*="app.useatlasapp.com"]').forEach(a=>{
+    a.addEventListener('click',()=>fbq('track','InitiateCheckout',{content_name:'lp_subida'}));
+  });
+}
 
 /* ═══ 8. reduced motion: desliga tudo, mostra conteúdo ═══ */
 if(reduzido){
