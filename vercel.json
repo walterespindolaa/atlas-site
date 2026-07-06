@@ -1,11 +1,12 @@
 {
   "name": "atlas",
   "cleanUrls": true,
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
       "has": [{ "type": "host", "value": "lp.useatlasapp.com" }],
-      "destination": "/lpteste.html"
+      "destination": "/lpteste",
+      "permanent": false
     }
   ]
 }
