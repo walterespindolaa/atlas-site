@@ -105,11 +105,11 @@ h2{font-size:clamp(28px,4.6vw,50px);font-weight:800;line-height:1.12;letter-spac
 .rv-s{opacity:0;transform:scale(.86)}
 
 /* ════ seções (acampamentos) ════ */
-section{position:relative;min-height:100vh;display:flex;align-items:center;padding:16vh 0}
+section{position:relative;min-height:auto;display:flex;align-items:center;padding:10vh 0}
 #zona{background:linear-gradient(180deg,rgba(4,12,17,0) 0%,rgba(4,12,17,.68) 2.2%,rgba(4,12,17,.72) 50%,rgba(4,12,17,.68) 97%,rgba(4,12,17,0) 100%)}
 
 /* BASE */
-#base{min-height:100svh;text-align:center;flex-direction:column;justify-content:center;padding-top:20vh}
+#base{min-height:100svh;text-align:center;flex-direction:column;justify-content:center;padding-top:18vh}
 #base .badge{display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:100px;background:rgba(4,12,17,.45);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.16);font-size:13.5px;font-weight:500;margin-bottom:30px}
 #base .badge .avs{display:flex}
 #base .badge .avs img{width:25px;height:25px;border-radius:50%;border:2px solid rgba(255,255,255,.6);object-fit:cover;margin-left:-9px}
@@ -261,7 +261,7 @@ section{position:relative;min-height:100vh;display:flex;align-items:center;paddi
 @media(max-width:900px){.planos{grid-template-columns:1fr;max-width:400px}.plano.destaque{order:-1}.risco{flex-direction:column;text-align:center}}
 
 /* CUME */
-#cume{flex-direction:column;justify-content:center;text-align:center;min-height:110vh}
+#cume{flex-direction:column;justify-content:center;text-align:center;padding:14vh 0}
 #cume .celebra{width:min(440px,74vw);margin:8px auto 0;filter:drop-shadow(0 30px 60px rgba(0,0,0,.45))}
 #cume h2{font-size:clamp(34px,5.6vw,62px)}
 .confete{position:absolute;width:9px;height:9px;border-radius:2px;opacity:0;pointer-events:none}
@@ -296,8 +296,8 @@ footer img{height:24px;margin:0 auto 12px;opacity:.7}
 
 /* ═══ MOBILE: imersão total ═══ */
 @media(max-width:768px){
-  section{min-height:auto;padding:13vh 0}
-  #base{min-height:100svh;padding-top:16vh}
+  section{min-height:auto;padding:7vh 0}
+  #base{min-height:100svh;padding-top:15vh;padding-bottom:4vh}
   .wrap{padding:0 18px}
   nav{top:10px;padding:8px 14px}
   nav img{height:26px}
@@ -309,7 +309,8 @@ footer img{height:24px;margin:0 auto 12px;opacity:.7}
   .btn{width:100%;max-width:420px;padding:18px 22px;font-size:17px}
   .micro{font-size:12.5px}
   #base .badge{font-size:12px;padding:8px 14px;margin-bottom:22px}
-  .hint{bottom:88px}
+  .hint{position:static;transform:none;animation:none;margin:26px auto 0;flex-direction:row;gap:8px;justify-content:center}
+  .hint .rato{width:18px;height:30px;border-radius:11px}
   .nuvem{display:none}
   .pesos{gap:10px}
   .peso-chip{padding:15px 16px;font-size:13.5px}
