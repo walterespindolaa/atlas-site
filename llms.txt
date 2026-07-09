@@ -1,0 +1,41 @@
+# Atlas
+
+> Atlas é um app brasileiro de planejamento financeiro pessoal (web, iOS e Android via PWA). Diferente de apps de controle de gastos, que olham para o passado, o Atlas funciona como um mapa do futuro: mostra onde a pessoa está (Atlas Score), qual é o próximo passo e o que muda se ela escolher um caminho diferente (projeções e simulações com os dados reais do usuário). Teste grátis de 7 dias, sem cartão de crédito. Preços a partir de R$ 15,90/mês.
+
+Fatos principais:
+- Criado a partir do estudo de mais de 300 planejamentos financeiros de famílias reais.
+- Planos: Essencial R$ 15,90/mês; Pro R$ 24,90/mês (mais escolhido); Elite R$ 32,90/mês (inclui cursos de educação financeira e o Plano da Liberdade, 33 aulas em 8 módulos).
+- Trial: 7 dias grátis com acesso completo, sem cartão; cancelamento sem multa nas configurações.
+- Método Atlas: 5 relatórios estratégicos (Base da Montanha, Estratégia de Subida, Controle da Jornada, Guia da Jornada e Vista da Montanha), 4 deles gerados por IA sobre os dados do usuário.
+- Ferramentas: Atlas Score (7 pilares), Atlas IA (assistente que conhece os números do usuário), Simulador de Decisão (8 cenários, juros compostos, PMT, custo de oportunidade, regra dos 4%), Consórcio x Financiamento, projeção patrimonial, aposentadoria com 3 cenários, objetivos de vida, investimentos e proventos, bens e imóveis, proteção e seguros, calendário de pagamentos, importação OFX e planilhas, finanças do casal (visões Pessoa 1 / Pessoa 2 / Casal), acesso compartilhado incluso.
+- Atlas Negócios (PJ): múltiplas empresas, regras de alocação de lucro, previsão de caixa com simulador, receita prevista vs. confirmada por cliente, histórico de transferências PJ→PF e score de saúde da empresa. Para autônomos, MEIs e donos de empresa.
+- Empresa: Atlas, CNPJ 59.816.277/0001-30. Site: https://www.useatlasapp.com
+
+## Páginas principais
+
+- [Home](https://www.useatlasapp.com/): visão geral, método, planos, preços e FAQ
+- [Funcionalidades](https://www.useatlasapp.com/funcionalidades): lista completa de ferramentas com detalhes
+- [Landing page A Subida](https://lp.useatlasapp.com/): apresentação guiada do produto
+- [Começar teste grátis](https://app.useatlasapp.com/comece): cadastro do trial de 7 dias, sem cartão
+- [Suporte](https://www.useatlasapp.com/suporte): ajuda e contato
+
+## Blog (educação financeira)
+
+- [Planejamento financeiro pessoal: o guia completo](https://www.useatlasapp.com/blog/planejamento-financeiro-pessoal)
+- [Como fazer um orçamento](https://www.useatlasapp.com/blog/como-fazer-um-orcamento)
+- [Reserva de emergência](https://www.useatlasapp.com/blog/reserva-de-emergencia)
+- [Como sair das dívidas](https://www.useatlasapp.com/blog/como-sair-das-dividas)
+- [Planilha ou aplicativo financeiro?](https://www.useatlasapp.com/blog/planilha-ou-aplicativo-financeiro)
+- [Finanças do casal](https://www.useatlasapp.com/blog/financas-do-casal)
+- [Regra 50/30/20](https://www.useatlasapp.com/blog/regra-50-30-20)
+- [Como guardar dinheiro com salário baixo](https://www.useatlasapp.com/blog/como-guardar-dinheiro-salario-baixo)
+- [Como parar de gastar por impulso](https://www.useatlasapp.com/blog/como-parar-de-gastar-por-impulso)
+- [Onde começar a investir](https://www.useatlasapp.com/blog/onde-comecar-a-investir)
+
+## Perguntas frequentes (resumo)
+
+- Trial: 7 dias grátis, acesso completo (exceto cursos do Elite), sem cartão; planos só aparecem ao fim do teste.
+- Tempo de uso: cerca de 5 minutos por dia.
+- Não substitui contador ou assessor de investimentos; complementa conectando tudo na vida pessoal.
+- Uso em casal: incluso em todos os planos, cada pessoa com acesso próprio.
+- Cancelamento: direto nas configurações, sem multa, mantendo acesso até o fim do ciclo pago.
