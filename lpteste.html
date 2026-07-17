@@ -89,8 +89,13 @@ a{text-decoration:none;color:inherit}
 .nav-dir{display:flex;align-items:center;gap:18px}
 .nav-entrar{font-size:14px;font-weight:600;transition:color .2s}
 .nav-entrar:hover{color:var(--beige)}
-.nav-precos{display:none;font-size:14px;font-weight:700;color:var(--beige)}
-@media(max-width:960px){.nav-links,.nav-entrar{display:none}.nav-precos{display:block}}
+#menu-btn{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:6px;line-height:0}
+#menu-mobile{position:fixed;top:72px;left:14px;right:14px;z-index:145;background:rgba(4,12,17,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:8px;display:none;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+#menu-mobile.aberto{display:flex}
+#menu-mobile a{padding:14px 18px;font-size:15px;font-weight:600;border-radius:14px}
+#menu-mobile a:active,#menu-mobile a:hover{background:rgba(255,255,255,.08)}
+#menu-mobile .mm-entrar{margin-top:4px;border-top:1px solid rgba(255,255,255,.12);border-radius:0 0 14px 14px;color:var(--beige)}
+@media(max-width:960px){.nav-links,.nav-entrar{display:none}#menu-btn{display:block}.nav-dir{gap:10px}}
 .nav-cta{background:var(--red);font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:100px;transition:transform .2s,background .2s;white-space:nowrap}
 .nav-cta:hover{background:var(--red-h);transform:translateY(-2px)}
 
@@ -448,11 +453,21 @@ footer{background:var(--blue);color:#fff;text-align:center;padding:46px 20px 120
     <a href="suporte.html">Suporte</a>
   </div>
   <div class="nav-dir">
-    <a class="nav-precos" href="#escolha">Preços</a>
     <a class="nav-entrar" href="https://app.useatlasapp.com/auth">Entrar</a>
     <a class="nav-cta" href="https://app.useatlasapp.com/comece">Testar 7 dias grátis</a>
+    <button id="menu-btn" aria-label="Abrir menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
   </div>
 </nav>
+<div id="menu-mobile">
+  <a href="#escolha">Preços</a>
+  <a href="funcionalidades.html">Funcionalidades</a>
+  <a href="#faq">FAQ</a>
+  <a href="/blog">Blog</a>
+  <a href="suporte.html">Suporte</a>
+  <a class="mm-entrar" href="https://app.useatlasapp.com/auth">Entrar na minha conta</a>
+</div>
 
 <!-- ════ BASE · 0m ════ -->
 <section id="base">
@@ -931,6 +946,19 @@ ScrollTrigger.create({trigger:'#cume',start:'top 55%',once:true,onEnter:()=>{
   let rt; window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(anim){anim.cancel();anim=null}start()},200)});
   if(stage){stage.addEventListener('mouseenter',()=>anim&&anim.pause());stage.addEventListener('mouseleave',()=>anim&&anim.play())}
 })();
+
+/* ═══ menu hambúrguer (mobile) ═══ */
+const mBtn=document.getElementById('menu-btn'), mMenu=document.getElementById('menu-mobile');
+if(mBtn&&mMenu){
+  mBtn.addEventListener('click',()=>{
+    const aberto=mMenu.classList.toggle('aberto');
+    mBtn.setAttribute('aria-expanded',aberto);
+  });
+  mMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mMenu.classList.remove('aberto')));
+  document.addEventListener('click',e=>{
+    if(!mMenu.contains(e.target)&&!mBtn.contains(e.target)) mMenu.classList.remove('aberto');
+  });
+}
 
 /* ═══ 7. sticky mobile ═══ */
 const sticky=document.getElementById('sticky');
