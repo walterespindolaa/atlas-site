@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- OpenAI Pixel -->
+    <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"HD6MUJiovjqtKwhc4gZh6R",debug:true});</script>
+    <!-- End OpenAI Pixel -->
+
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -224,6 +229,37 @@
             </div>
         </div>
     </footer>
+
+
+<!-- OpenAI Pixel · evento de clique nos CTAs de comecar/assinar -->
+<script>
+(function(){
+  // Renomeie abaixo para bater com o evento de conversao criado no painel da OpenAI
+  var OAI_EVENT = "start_trial_click";
+  function isCta(a){
+    if(!a) return false;
+    var h = a.getAttribute("href") || "";
+    if(h.indexOf("app.useatlasapp.com/comece") > -1) return true;
+    if(h.indexOf("app.useatlasapp.com/comprar/") > -1) return true;
+    if(h.indexOf("app.useatlasapp.com/auth") > -1){
+      var t = (a.textContent || "").trim().toLowerCase();
+      return !/entrar|login/.test(t); // "Entrar"/"Login" e acesso, nao conversao
+    }
+    return false;
+  }
+  document.addEventListener("click", function(e){
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if(!isCta(a)) return;
+    if(a.getAttribute("data-oai-sent")) return;
+    a.setAttribute("data-oai-sent","1");
+    try{
+      if(typeof window.oaiq === "function"){
+        window.oaiq("measure", OAI_EVENT, { type:"customer_action", amount:0, currency:"BRL" });
+      }
+    }catch(err){}
+  }, true);
+})();
+</script>
 
 </body>
 </html>
