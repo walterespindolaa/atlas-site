@@ -430,7 +430,7 @@
                 <div class="flex-shrink-0 flex justify-end items-center gap-3">
                     <a href="https://app.useatlasapp.com/auth" class="text-white font-medium text-[14px] lg:text-[16px] hover:text-blue-200 transition-colors hidden md:block">Entrar</a>
                     
-                    <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 text-white/90 focus:outline-none cursor-pointer z-[100] relative">
+                    <button id="mobile-menu-btn" aria-label="Abrir menu" class="md:hidden flex items-center justify-center p-2 text-white/90 focus:outline-none cursor-pointer z-[100] relative">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                     </button>
                 </div>
@@ -1554,7 +1554,7 @@
 
 <!-- Menu Mobile Overlay -->
 <div id="mobile-menu-overlay" class="fixed inset-0 bg-atlas-blue z-[100] transform translate-y-[-100%] transition-transform duration-300 ease-in-out flex flex-col items-center justify-center">
-    <button id="mobile-menu-close" class="absolute top-6 right-6 text-white p-2">
+    <button id="mobile-menu-close" aria-label="Fechar menu" class="absolute top-6 right-6 text-white p-2">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
     <nav class="flex flex-col gap-6 text-white font-bold text-2xl text-center">
